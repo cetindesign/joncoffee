@@ -102,14 +102,14 @@ export function ChamberlainHeader() {
               Öne Çıkanlar
             </a>
             <a
-              href="#ozeller"
+              href="#karakterler"
               onClick={(e) => {
                 e.preventDefault();
-                handleScrollTo('ozeller');
+                handleScrollTo('karakterler');
               }}
               className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
             >
-              İmza Lezzetler
+              Focused & Surprised
             </a>
             <a
               href="#menu"
@@ -120,16 +120,6 @@ export function ChamberlainHeader() {
               className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
             >
               Kafe Menüsü
-            </a>
-            <a
-              href="#karakterler"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('karakterler');
-              }}
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
-            >
-              Focused & Surprised
             </a>
             <a
               href="#konum"
@@ -194,14 +184,14 @@ export function ChamberlainHeader() {
               <ArrowRight className="w-4 h-4 text-gray-400" />
             </a>
             <a
-              href="#ozeller"
+              href="#karakterler"
               onClick={(e) => {
                 e.preventDefault();
-                handleScrollTo('ozeller');
+                handleScrollTo('karakterler');
               }}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>İmza Lezzetler (JÖN Sunrise)</span>
+              <span>Focused & Surprised</span>
               <ArrowRight className="w-4 h-4 text-gray-400" />
             </a>
             <a
@@ -213,17 +203,6 @@ export function ChamberlainHeader() {
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Tüm Kafe Menüsü</span>
-              <ArrowRight className="w-4 h-4 text-gray-400" />
-            </a>
-            <a
-              href="#karakterler"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('karakterler');
-              }}
-              className="py-1 flex items-center justify-between cursor-pointer"
-            >
-              <span>Focused & Surprised</span>
               <ArrowRight className="w-4 h-4 text-gray-400" />
             </a>
             <a

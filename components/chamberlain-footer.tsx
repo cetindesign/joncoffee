@@ -34,10 +34,10 @@ export function ChamberlainFooter() {
   };
 
   return (
-    <footer className="bg-[#102341] text-white pt-12 sm:pt-20 pb-8 sm:pb-12 px-3.5 sm:px-6 lg:px-8">
+    <footer className="bg-[#102341] text-white pt-12 sm:pt-20 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-16">
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
@@ -71,15 +71,15 @@ export function ChamberlainFooter() {
                 className="inline-flex items-center gap-2 text-xs font-semibold text-gray-300 hover:text-white transition-colors"
               >
                 <InstagramIcon className="w-4 h-4" />
-                <span>{STORE_INFO.socials.instagramHandle}</span>
+                <span>{STORE_INFO.socials.instagramHandle} Takip Et</span>
               </a>
             </div>
           </div>
 
-          {/* Col 2: Kahveler */}
+          {/* Col 2: Hızlı Erişim */}
           <div className="space-y-3">
             <h4 className="font-bold text-xs uppercase tracking-widest text-gray-400">
-              KAHVELERİMİZ
+              KEŞFET
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-300">
               <li>
@@ -91,54 +91,9 @@ export function ChamberlainFooter() {
                   }}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Focused Espresso Blend
+                  Öne Çıkan Kahveler
                 </a>
               </li>
-              <li>
-                <a
-                  href="#ozeller"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('ozeller');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  JÖN Sunrise İmza İçecek
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#blends"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('blends');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  16 Saat Demleme Cold Brew
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#menu"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('menu');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Tüm Kafe Menüsü
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 3: Hikaye & Kafemiz */}
-          <div className="space-y-3">
-            <h4 className="font-bold text-xs uppercase tracking-widest text-gray-400">
-              HİKAYE & KAFEMİZ
-            </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-gray-300">
               <li>
                 <a
                   href="#karakterler"
@@ -153,6 +108,18 @@ export function ChamberlainFooter() {
               </li>
               <li>
                 <a
+                  href="#menu"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('menu');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
+                  Tüm Kafe Menüsü
+                </a>
+              </li>
+              <li>
+                <a
                   href="#konum"
                   onClick={(e) => {
                     e.preventDefault();
@@ -160,37 +127,13 @@ export function ChamberlainFooter() {
                   }}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
-                  İzmir Hatay Kafe
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#sss"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('sss');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Sıkça Sorulan Sorular
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#kahve-testi"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('kahve-testi');
-                  }}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  Kahve Seçim Testi
+                  Konum & Yol Tarifi
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Saatler & Metro */}
+          {/* Col 3: Çalışma Saatleri */}
           <div className="space-y-3">
             <h4 className="font-bold text-xs uppercase tracking-widest text-gray-400">
               ÇALIŞMA SAATLERİ
