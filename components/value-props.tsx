@@ -1,68 +1,66 @@
 'use client';
 
-import { Coffee, Flame, PawPrint, Heart, Sparkles, ShieldCheck } from 'lucide-react';
+import { Coffee, Flame, PawPrint, Heart, ShieldCheck } from 'lucide-react';
 
 const PROPS = [
   {
-    icon: <Coffee className="w-8 h-8 text-[#102341]" />,
+    icon: <Coffee className="w-6 h-6 sm:w-7 sm:h-7 text-[#102341]" />,
     title: '%100 Nitelikli Arabica',
-    description: 'Etik üreticilerden doğrudan temin edilen, yüksek rakım single origin ve özel harman çekirdekler.',
+    description: 'Etik üreticilerden doğrudan temin edilen, yüksek rakım single origin çekirdekler.',
   },
   {
-    icon: <Flame className="w-8 h-8 text-[#102341]" />,
+    icon: <Flame className="w-6 h-6 sm:w-7 sm:h-7 text-[#102341]" />,
     title: 'Haftalık Taze Kavrum',
-    description: 'Her çekirdeğin gövde ve aroma profilini en üst düzeye çıkaran hassas mikro parti kavurma.',
+    description: 'Aroma profilini en üst düzeye çıkaran hassas mikro parti kavurma.',
   },
   {
-    icon: <PawPrint className="w-8 h-8 text-[#102341]" />,
+    icon: <PawPrint className="w-6 h-6 sm:w-7 sm:h-7 text-[#102341]" />,
     title: '%100 Pet Friendly',
-    description: 'Tüylü dostlarınız mekanımızın baş misafiridir; taze su kaplarımız ve ödül mamalarımız daima hazır.',
+    description: 'Tüylü dostlarınız mekanımızın baş misafiridir; taze su kaplarımız daima hazır.',
   },
   {
-    icon: <Heart className="w-8 h-8 text-[#102341]" />,
-    title: 'İzmir Hatay Mahalle Ruhu',
-    description: 'Samimi bir karşılama, laptopla rahat çalışma imkanı ve tanıdık sıcak bir atmosfer.',
+    icon: <Heart className="w-6 h-6 sm:w-7 sm:h-7 text-[#102341]" />,
+    title: 'İzmir Hatay Ruhu',
+    description: 'Samimi bir karşılama, laptopla rahat çalışma ve tanıdık sıcak bir mahalle ortamı.',
   },
 ];
 
 export function ValueProps() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
-      <div className="max-w-7xl mx-auto space-y-12">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
+    <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
+        <div className="text-center max-w-xl mx-auto space-y-1">
+          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
             Değerlerimiz & Zanaatimiz
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-[#102341] tracking-tight font-display uppercase">
+          <h2 className="text-2xl sm:text-4xl font-black text-[#102341] tracking-tight font-display uppercase">
             NEDEN JÖN COFFEE?
           </h2>
-          <p className="text-sm sm:text-base font-medium text-gray-600">
-            Özenle seçilmiş çekirdeklerden masanıza uzanan samimi ve dürüst kahve deneyimi.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* 2x2 Grid on Mobile, 4-Col on Desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {PROPS.map((prop, idx) => (
             <div
               key={idx}
-              className="p-8 rounded-3xl bg-[#f8fafc] border border-gray-100 flex flex-col justify-between space-y-4 hover:bg-white hover:border-gray-200 hover:shadow-sm transition-all"
+              className="p-4 sm:p-7 rounded-2xl sm:rounded-3xl bg-[#f8fafc] border border-gray-100 flex flex-col justify-between space-y-3 hover:bg-white hover:border-gray-200 hover:shadow-xs transition-all"
             >
-              <div className="w-14 h-14 rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-xs">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-xs">
                 {prop.icon}
               </div>
 
-              <div className="space-y-2">
-                <h3 className="text-lg font-extrabold text-[#102341] font-display">
+              <div className="space-y-1">
+                <h3 className="text-xs sm:text-base font-extrabold text-[#102341] font-display leading-snug">
                   {prop.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
+                <p className="text-[11px] sm:text-xs text-gray-500 leading-relaxed font-medium line-clamp-3">
                   {prop.description}
                 </p>
               </div>
 
-              <div className="pt-2 flex items-center gap-1.5 text-[11px] font-bold text-[#102341]">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#fab80b]" />
-                <span>Jön Kalite Standardı</span>
+              <div className="pt-1 flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-[#102341]">
+                <ShieldCheck className="w-3 h-3 text-[#fab80b]" />
+                <span>Jön Standardı</span>
               </div>
             </div>
           ))}
