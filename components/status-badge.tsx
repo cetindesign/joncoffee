@@ -17,9 +17,8 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
 
   useEffect(() => {
     function checkOpenStatus() {
-      // Use local Istanbul time
       const now = new Date();
-      const day = now.getDay(); // 0 = Sunday, 1 = Monday...
+      const day = now.getDay();
       const currentHours = now.getHours();
       const currentMinutes = now.getMinutes();
       const currentTimeInMinutes = currentHours * 60 + currentMinutes;
@@ -45,8 +44,8 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
       if (isOpenNow) {
         setStatus({
           isOpen: true,
-          text: 'Şu An Açık',
-          subtext: `Kapanış: ${todayConfig.close}`,
+          text: 'Açık',
+          subtext: `${todayConfig.close}'a kadar`,
         });
       } else {
         const nextOpenDay = STORE_INFO.hours.find(
@@ -54,8 +53,8 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
         );
         setStatus({
           isOpen: false,
-          text: 'Şu An Kapalı',
-          subtext: `Açılış: Yarın ${nextOpenDay?.open || '08:30'}`,
+          text: 'Kapalı',
+          subtext: `Yarın ${nextOpenDay?.open || '08:30'}`,
         });
       }
     }
@@ -66,13 +65,7 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
   }, []);
 
   return (
-    <div
-      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
-        status.isOpen
-          ? 'bg-emerald-500/10 text-emerald-700 border border-emerald-500/30'
-          : 'bg-amber-500/10 text-amber-800 border border-amber-500/30'
-      }`}
-    >
+    <div className="inline-flex items-center gap-2 text-xs font-semibold select-none">
       <span className="relative flex h-2 w-2">
         <span
           className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
@@ -85,15 +78,13 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
           }`}
         />
       </span>
-      <span className="font-bold">{status.text}</span>
+      <span className="font-bold text-[#102341] tracking-wide">{status.text}</span>
       {showDetails && (
-        <>
-          <span className="text-jon-text-muted/40">•</span>
-          <span className="text-jon-text-muted flex items-center gap-1 font-medium">
-            <Clock className="w-3 h-3 inline" />
-            {status.subtext}
-          </span>
-        </>
+        <span className="text-gray-500 font-medium flex items-center gap-1">
+          <span>&bull;</span>
+          <Clock className="w-3 h-3 text-gray-400" />
+          <span>{status.subtext}</span>
+        </span>
       )}
     </div>
   );
