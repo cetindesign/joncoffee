@@ -8,14 +8,14 @@ import { assetPath } from '@/lib/assets';
 import { Menu, X, MapPin, ArrowRight } from 'lucide-react';
 
 const MARQUEE_ITEMS = [
-  '✦ %100 SPECIALTY GRADE ARABICA',
-  'İZMİR HATAY METROYA 2 DK',
-  'AYNI İYİ KAHVE, YEPYENİ HİSLER',
-  '%100 PET FRIENDLY',
-  'FOCUSED & SURPRISED',
-  'HAFTALIK TAZE KAVRUM',
-  '16 SAAT SOĞUK DEMLEME COLD BREW',
-  'JÖN SUNRISE İMZA REÇETE',
+  '★ %100 SPECIALTY GRADE ARABICA',
+  '★ İZMİR HATAY METROYA 2 DK',
+  '★ AYNI İYİ KAHVE, YEPYENİ HİSLER',
+  '★ %100 PET FRIENDLY',
+  '★ FOCUSED & SURPRISED',
+  '★ HAFTALIK TAZE KAVRUM',
+  '★ 16 SAAT SOĞUK DEMLEME COLD BREW',
+  '★ JÖN SUNRISE İMZA REÇETE',
 ];
 
 export function ChamberlainHeader() {
@@ -30,16 +30,16 @@ export function ChamberlainHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-      {/* Continuous 60fps Marquee Ticker */}
-      <div className="bg-[#102341] text-white py-2 overflow-hidden select-none border-b border-[#1b3561]">
-        <div className="animate-continuous-marquee flex items-center gap-8 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+    <header className="sticky top-0 z-50 bg-[#faf8f2] border-b border-[#0038a8]/15">
+      {/* Continuous 60fps Marquee Ticker (Solid Cobalt Blue) */}
+      <div className="bg-[#0038a8] text-white py-2 overflow-hidden select-none border-b border-[#0038a8]/20">
+        <div className="animate-continuous-marquee flex items-center gap-8 text-[11px] sm:text-xs font-black tracking-widest uppercase font-display">
           {/* Loop 1 */}
           <div className="flex items-center gap-8 shrink-0">
             {MARQUEE_ITEMS.map((item, idx) => (
               <span key={idx} className="flex items-center gap-3 shrink-0">
                 <span>{item}</span>
-                <span className="text-[#fab80b] opacity-70">✦</span>
+                <span className="text-[#fab80b]">★</span>
               </span>
             ))}
           </div>
@@ -49,7 +49,7 @@ export function ChamberlainHeader() {
             {MARQUEE_ITEMS.map((item, idx) => (
               <span key={`clone-${idx}`} className="flex items-center gap-3 shrink-0">
                 <span>{item}</span>
-                <span className="text-[#fab80b] opacity-70">✦</span>
+                <span className="text-[#fab80b]">★</span>
               </span>
             ))}
           </div>
@@ -62,7 +62,7 @@ export function ChamberlainHeader() {
         <div className="flex items-center lg:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 -ml-2 text-[#102341] focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+            className="p-2 -ml-2 text-[#0038a8] focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
             aria-label="Menüyü aç"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -75,7 +75,7 @@ export function ChamberlainHeader() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-2.5 text-left cursor-pointer"
           >
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-full overflow-hidden border border-gray-200 bg-white">
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-full overflow-hidden border-2 border-[#0038a8] bg-white">
               <Image
                 src={assetPath('/assets/jon-badge-circle.png')}
                 alt="Jön Coffees Co."
@@ -84,8 +84,8 @@ export function ChamberlainHeader() {
                 priority
               />
             </div>
-            <span className="font-extrabold text-lg sm:text-2xl tracking-tighter text-[#102341] uppercase leading-none font-display">
-              JÖN COFFEES
+            <span className="font-extrabold text-lg sm:text-2xl tracking-tighter text-[#0038a8] uppercase leading-none font-display">
+              JÖN COFFEES CO.
             </span>
           </button>
 
@@ -97,7 +97,7 @@ export function ChamberlainHeader() {
                 e.preventDefault();
                 handleScrollTo('blends');
               }}
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
+              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Öne Çıkanlar
             </a>
@@ -107,7 +107,7 @@ export function ChamberlainHeader() {
                 e.preventDefault();
                 handleScrollTo('karakterler');
               }}
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
+              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Focused & Surprised
             </a>
@@ -117,7 +117,7 @@ export function ChamberlainHeader() {
                 e.preventDefault();
                 handleScrollTo('menu');
               }}
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
+              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Kafe Menüsü
             </a>
@@ -127,7 +127,7 @@ export function ChamberlainHeader() {
                 e.preventDefault();
                 handleScrollTo('konum');
               }}
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
+              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Konum & Saatler
             </a>
@@ -136,8 +136,8 @@ export function ChamberlainHeader() {
 
         {/* Right Action */}
         <div className="flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-3">
-            <StatusBadge />
+          <div className="hidden lg:flex items-center gap-4">
+            <StatusBadge showDetails />
             <a
               href={STORE_INFO.location.googleMapsUrl}
               target="_blank"
@@ -154,7 +154,7 @@ export function ChamberlainHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Konum ve Yol Tarifi"
-            className="lg:hidden p-2 -mr-2 text-[#102341] min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="lg:hidden p-2 -mr-2 text-[#0038a8] min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <MapPin className="w-5 h-5" />
           </a>
@@ -163,15 +163,15 @@ export function ChamberlainHeader() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 px-6 py-6 space-y-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
-          <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-            <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+        <div className="lg:hidden bg-[#faf8f2] border-t border-[#0038a8]/20 px-6 py-6 space-y-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+          <div className="flex items-center justify-between pb-3 border-b border-[#0038a8]/15">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0038a8]/70">
               İzmir Hatay Kafemiz
             </span>
             <StatusBadge showDetails />
           </div>
 
-          <div className="flex flex-col gap-4 font-bold text-lg text-[#102341]">
+          <div className="flex flex-col gap-4 font-extrabold text-lg text-[#0038a8] font-display uppercase">
             <a
               href="#blends"
               onClick={(e) => {
@@ -181,7 +181,7 @@ export function ChamberlainHeader() {
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Öne Çıkan Kahveler</span>
-              <ArrowRight className="w-4 h-4 text-gray-400" />
+              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
               href="#karakterler"
@@ -192,7 +192,7 @@ export function ChamberlainHeader() {
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Focused & Surprised</span>
-              <ArrowRight className="w-4 h-4 text-gray-400" />
+              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
               href="#menu"
@@ -203,7 +203,7 @@ export function ChamberlainHeader() {
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Tüm Kafe Menüsü</span>
-              <ArrowRight className="w-4 h-4 text-gray-400" />
+              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
               href="#konum"
@@ -214,11 +214,11 @@ export function ChamberlainHeader() {
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Konum & Çalışma Saatleri</span>
-              <ArrowRight className="w-4 h-4 text-gray-400" />
+              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
           </div>
 
-          <div className="pt-2 border-t border-gray-100 space-y-2">
+          <div className="pt-2 border-t border-[#0038a8]/15 space-y-2">
             <a
               href={STORE_INFO.location.googleMapsUrl}
               target="_blank"

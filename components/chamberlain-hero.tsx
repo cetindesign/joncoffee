@@ -13,23 +13,23 @@ export function ChamberlainHero() {
   };
 
   return (
-    <section className="relative bg-[#e3ecf1] border-b border-gray-200 overflow-hidden">
+    <section className="relative bg-[#e6eff8] border-b border-[#0038a8]/20 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[540px] sm:min-h-[600px] items-center">
         {/* Left Column: Typography & Story */}
         <div className="lg:col-span-6 flex flex-col justify-center px-4 sm:px-8 lg:px-12 py-12 sm:py-16 space-y-6 text-center lg:text-left">
           <div className="inline-flex items-center justify-center lg:justify-start gap-2">
-            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-[#102341]/80">
-              İzmir Hatay &bull; %100 Specialty Arabica
+            <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8] bg-white px-3 py-1 rounded-full border border-[#0038a8]/20 shadow-2xs font-display">
+              ★ İZMİR HATAY &bull; %100 SPECIALTY ARABICA ★
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#102341] tracking-tight font-display uppercase leading-[1.05]">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#0038a8] tracking-tight font-display uppercase leading-[1.05]">
             AYNI İYİ KAHVE. <br />
-            <span className="text-[#102341]/70">YEPYENİ HİSLER.</span>
+            <span className="text-[#0038a8]/75">YEPYENİ HİSLER.</span>
           </h1>
 
           <p className="text-sm sm:text-base text-gray-700 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
-            İster işine odaklanan bir <strong className="text-[#102341]">Focused</strong>, ister yeni tatlar peşindeki bir <strong className="text-[#102341]">Surprised</strong> ol. Nitelikli çekirdekler ve samimi mahalle kahveciliği.
+            İster işine odaklanan bir <strong className="text-[#0038a8]">Focused</strong>, ister yeni tatlar peşindeki bir <strong className="text-[#0038a8]">Surprised</strong> ol. Nitelikli çekirdekler ve samimi mahalle kahveciliği.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
@@ -48,12 +48,12 @@ export function ChamberlainHero() {
               rel="noopener noreferrer"
               className="btn-chamberlain-secondary w-full sm:w-auto text-xs sm:text-sm py-4 px-6"
             >
-              <MapPin className="w-4 h-4 text-[#102341]" />
+              <MapPin className="w-4 h-4 text-[#0038a8]" />
               <span>Yol Tarifi Al</span>
             </a>
           </div>
 
-          <div className="pt-2 flex items-center justify-center lg:justify-start gap-2 text-xs text-gray-600 font-medium">
+          <div className="pt-2 flex items-center justify-center lg:justify-start gap-2 text-xs text-[#0038a8] font-bold">
             <div className="flex text-[#fab80b]">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-3.5 h-3.5 fill-[#fab80b]" />
@@ -63,7 +63,7 @@ export function ChamberlainHero() {
           </div>
         </div>
 
-        {/* Right Column: Pure Full-Bleed Atmosphere Photo (NO FLOATING GLASS BOXES) */}
+        {/* Right Column: Pure Atmosphere Photo */}
         <div className="lg:col-span-6 h-full min-h-[340px] sm:min-h-[460px] lg:min-h-[600px] relative">
           <Image
             src={assetPath('/assets/hero-coffee-lifestyle.jpg')}

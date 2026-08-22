@@ -32,13 +32,13 @@ export function FloatingAction() {
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-sm md:hidden"
         >
-          <div className="bg-white/95 backdrop-blur-md rounded-full border border-gray-200 p-1.5 shadow-xl flex items-center justify-between gap-2">
+          <div className="bg-[#faf8f2]/95 backdrop-blur-md rounded-full border border-[#0038a8]/25 p-1.5 shadow-xl flex items-center justify-between gap-2">
             <a
               href="#menu"
               onClick={scrollToMenu}
-              className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-gray-100 text-xs font-bold text-[#102341] active:scale-95 transition-transform duration-200 select-none cursor-pointer"
+              className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-white text-xs font-black text-[#0038a8] border border-[#0038a8]/20 active:scale-95 transition-transform duration-200 select-none cursor-pointer font-display uppercase tracking-wider"
             >
-              <Coffee className="w-4 h-4" />
+              <Coffee className="w-4 h-4 text-[#0038a8]" />
               <span>Menü</span>
             </a>
 
@@ -46,7 +46,7 @@ export function FloatingAction() {
               href={STORE_INFO.location.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-[#102341] text-white text-xs font-bold active:scale-95 transition-transform duration-200 shadow-xs select-none"
+              className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-[#0038a8] text-white text-xs font-black active:scale-95 transition-transform duration-200 shadow-xs select-none font-display uppercase tracking-wider"
             >
               <MapPin className="w-4 h-4" />
               <span>Yol Tarifi</span>

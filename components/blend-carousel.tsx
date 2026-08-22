@@ -23,7 +23,7 @@ const PRODUCTS: BlendProduct[] = [
     id: 'blend-focused-espresso',
     name: 'Focused Espresso Blend',
     subName: 'Single Origin Colombia & Ethiopia (250g)',
-    badge: 'EN ÇOK TERCİH EDİLEN',
+    badge: '★ EN ÇOK TERCİH EDİLEN ★',
     bgPedestal: 'bg-[#d8e7f5]',
     roastLevel: 'Orta - Yoğun Kavrum',
     roastDots: 4,
@@ -35,7 +35,7 @@ const PRODUCTS: BlendProduct[] = [
     id: 'blend-jon-sunrise',
     name: 'JÖN Sunrise (İmza İçecek)',
     subName: 'Taze Portakal Suyu + Soğuk Double Espresso',
-    badge: 'İMZA REÇETE',
+    badge: '★ İMZA REÇETE ★',
     bgPedestal: 'bg-[#fee9d7]',
     roastLevel: 'Ferahlatıcı & Katmanlı',
     roastDots: 2,
@@ -47,7 +47,7 @@ const PRODUCTS: BlendProduct[] = [
     id: 'blend-cold-brew-bottle',
     name: '16 Saat Demleme Cold Brew',
     subName: 'Özel Seçki Yavaş Soğuk Damlatma (Şişe)',
-    badge: '16H DEMLEME',
+    badge: '★ 16H SOĞUK DEMLEME ★',
     bgPedestal: 'bg-[#e2f3ec]',
     roastLevel: 'Yumuşak & İpeksi İçim',
     roastDots: 3,
@@ -59,7 +59,7 @@ const PRODUCTS: BlendProduct[] = [
     id: 'blend-affogato-gelato',
     name: 'Affogato Al Caffe',
     subName: 'Vanilyalı İtalyan Gelato + Sıcak Espresso',
-    badge: 'TATLI DOKUNUŞ',
+    badge: '★ TATLI DOKUNUŞ ★',
     bgPedestal: 'bg-[#fdf2d0]',
     roastLevel: 'Sıcak & Soğuk Füzyon',
     roastDots: 3,
@@ -86,15 +86,15 @@ export function BlendCarousel() {
   };
 
   return (
-    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200 overflow-hidden">
+    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Section Header with Desktop Arrow Controls */}
-        <div className="flex items-end justify-between gap-4 pb-4 border-b border-gray-200">
+        <div className="flex items-end justify-between gap-4 pb-4 border-b border-[#0038a8]/20">
           <div className="space-y-1">
-            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
-              Koleksiyon & Reçeteler
+            <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
+              ★ Koleksiyon & Reçeteler
             </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#102341] tracking-tight font-display uppercase">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
               ÖNE ÇIKAN KAHVELERİMİZ
             </h2>
           </div>
@@ -103,14 +103,14 @@ export function BlendCarousel() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => scroll('left')}
-              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-[#102341] hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+              className="w-9 h-9 rounded-full border border-[#0038a8]/30 flex items-center justify-center text-[#0038a8] hover:bg-[#faf8f2] active:scale-95 transition-all cursor-pointer"
               aria-label="Önceki"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={() => scroll('right')}
-              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-[#102341] hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+              className="w-9 h-9 rounded-full border border-[#0038a8]/30 flex items-center justify-center text-[#0038a8] hover:bg-[#faf8f2] active:scale-95 transition-all cursor-pointer"
               aria-label="Sonraki"
             >
               <ChevronRight className="w-4 h-4" />
@@ -118,7 +118,7 @@ export function BlendCarousel() {
           </div>
         </div>
 
-        {/* Horizontal Snap Carousel with Clean Margin & Padding */}
+        {/* Horizontal Snap Carousel */}
         <div
           ref={scrollContainerRef}
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 scroll-smooth scroll-pl-1"
@@ -132,29 +132,29 @@ export function BlendCarousel() {
             >
               <div>
                 {/* Product Photo on Pastel Canvas */}
-                <div className={`relative w-full aspect-square ${prod.bgPedestal} rounded-2xl overflow-hidden mb-4`}>
+                <div className={`relative w-full aspect-square ${prod.bgPedestal} rounded-2xl overflow-hidden mb-4 border border-[#0038a8]/10`}>
                   <Image
                     src={assetPath(prod.image)}
                     alt={prod.name}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-400"
                   />
-                  <div className="absolute top-3 left-3 bg-[#102341] text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider uppercase">
+                  <div className="absolute top-3 left-3 bg-[#0038a8] text-white text-[9px] font-black px-2.5 py-0.5 rounded-full tracking-wider uppercase font-display">
                     {prod.badge}
                   </div>
                 </div>
 
                 {/* Typography */}
                 <div className="space-y-1.5 mb-3">
-                  <h3 className="font-extrabold text-base text-[#102341] leading-snug font-display group-hover:text-[#1b3561] transition-colors">
+                  <h3 className="font-extrabold text-base text-[#0038a8] leading-snug font-display group-hover:opacity-80 transition-opacity">
                     {prod.name}
                   </h3>
 
-                  <p className="text-xs text-gray-500 font-medium line-clamp-1">
+                  <p className="text-xs text-gray-600 font-medium line-clamp-1">
                     {prod.subName}
                   </p>
 
-                  <p className="text-[11px] font-semibold text-gray-700 pt-0.5">
+                  <p className="text-[11px] font-bold text-gray-700 pt-0.5">
                     Notalar: {prod.flavorNotes.join(' • ')}
                   </p>
 
@@ -165,7 +165,7 @@ export function BlendCarousel() {
                         <span
                           key={dot}
                           className={`w-1.5 h-1.5 rounded-full ${
-                            dot <= prod.roastDots ? 'bg-[#102341]' : 'bg-gray-300'
+                            dot <= prod.roastDots ? 'bg-[#0038a8]' : 'bg-gray-300'
                           }`}
                         />
                       ))}
@@ -175,7 +175,7 @@ export function BlendCarousel() {
               </div>
 
               {/* Action */}
-              <div className="pt-2 flex items-center justify-between text-xs font-bold text-[#102341] group-hover:translate-x-1 transition-transform">
+              <div className="pt-2 flex items-center justify-between text-xs font-black text-[#0038a8] group-hover:translate-x-1 transition-transform uppercase tracking-wider font-display">
                 <span>Reçeteyi İncele</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </div>

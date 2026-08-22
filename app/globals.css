@@ -1,23 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-chamberlain-navy: #102341;
-  --color-chamberlain-navy-hover: #1b3561;
-  --color-chamberlain-blue: #e3ecf1;
-  --color-chamberlain-blue-dark: #0d1e38;
-  --color-chamberlain-cream: #fbf9f4;
-  --color-chamberlain-gray-light: #f4f6f8;
-  --color-chamberlain-border: #e5e7eb;
-  --color-chamberlain-yellow: #fab80b;
-  --color-chamberlain-accent-orange: #f97316;
+  --color-jon-cobalt: #0038a8;
+  --color-jon-cobalt-hover: #072a78;
+  --color-jon-cobalt-dark: #051c52;
+  --color-jon-cream: #faf8f2;
+  --color-jon-cream-paper: #f4efe4;
+  --color-jon-yellow: #fab80b;
 
   --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 :root {
-  --background: #fbf9f4;
-  --foreground: #102341;
+  --background: #faf8f2;
+  --foreground: #0038a8;
 }
 
 html {
@@ -35,30 +32,32 @@ body {
 }
 
 ::selection {
-  background-color: #102341;
+  background-color: #0038a8;
   color: #ffffff;
 }
 
-/* Chamberlain Clean Pill Buttons */
+/* Poster-Grade Pill Buttons */
 .btn-chamberlain-primary {
-  background-color: #102341;
+  background-color: #0038a8;
   color: #ffffff;
   border-radius: 9999px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 0.875rem 1.75rem;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(0, 56, 168, 0.18);
 }
 
 .btn-chamberlain-primary:hover {
-  background-color: #1b3561;
+  background-color: #072a78;
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 56, 168, 0.25);
 }
 
 .btn-chamberlain-primary:active {
@@ -67,15 +66,15 @@ body {
 
 .btn-chamberlain-secondary {
   background-color: #ffffff;
-  color: #102341;
-  border: 1.5px solid #102341;
+  color: #0038a8;
+  border: 1.5px solid #0038a8;
   border-radius: 9999px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.875rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 0.875rem 1.75rem;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -83,22 +82,8 @@ body {
 }
 
 .btn-chamberlain-secondary:hover {
-  background-color: #f4f6f8;
+  background-color: #f4efe4;
   transform: translateY(-1px);
-}
-
-/* Subtle Card Elevation */
-.chamberlain-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 1.5rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.chamberlain-card:hover {
-  border-color: #d1d5db;
-  box-shadow: 0 10px 25px -5px rgba(16, 35, 65, 0.06), 0 8px 10px -6px rgba(16, 35, 65, 0.04);
-  transform: translateY(-2px);
 }
 
 /* Custom Scrollbar */
@@ -107,11 +92,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #fbf9f4;
+  background: #faf8f2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #102341;
+  background: #0038a8;
   border-radius: 9999px;
 }
 
@@ -129,7 +114,7 @@ body {
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: continuous-marquee 32s linear infinite;
+  animation: continuous-marquee 30s linear infinite;
 }
 
 .animate-continuous-marquee:hover {
