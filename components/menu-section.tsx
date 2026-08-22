@@ -22,7 +22,6 @@ import {
 
 type MoodFilter = 'all' | 'focused' | 'surprised';
 
-// Premium editorial spring curve
 const SPRING_TRANSITION = {
   type: 'spring',
   stiffness: 180,
@@ -31,7 +30,7 @@ const SPRING_TRANSITION = {
 } as const;
 
 const EASE_TRANSITION = {
-  duration: 0.45,
+  duration: 0.4,
   ease: [0.16, 1, 0.3, 1],
 } as const;
 
@@ -96,7 +95,6 @@ export function MenuSection() {
         // User cancelled share
       }
     } else {
-      // Clipboard fallback
       try {
         await navigator.clipboard.writeText(shareUrl);
         setCopied(true);
@@ -109,11 +107,9 @@ export function MenuSection() {
 
   const filteredItems = useMemo(() => {
     return MENU_ITEMS.filter((item) => {
-      // Category filter
       if (activeCategory !== 'all' && item.category !== activeCategory) {
         return false;
       }
-      // Mascot Mood filter
       if (activeMood === 'focused') {
         const isFocused = !item.isCold || item.category === 'sicak-kahveler' || item.category === 'klasikler';
         if (!isFocused) return false;
@@ -121,7 +117,6 @@ export function MenuSection() {
         const isSurprised = item.isCold || item.isSignature || item.category === 'soguk-kahveler' || item.category === 'ozeller';
         if (!isSurprised) return false;
       }
-      // Search query
       if (searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const matchName = item.name.toLowerCase().includes(query);
@@ -134,21 +129,21 @@ export function MenuSection() {
   }, [activeCategory, activeMood, searchQuery]);
 
   return (
-    <section id="menu" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#fbf9f4] border-b border-gray-200">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
+    <section id="menu" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#fbf9f4] border-b border-gray-200">
+      <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12">
         {/* Header & Mood Switcher */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-gray-200">
           <div className="space-y-1">
             <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
-              Tüm İçecek Koleksiyonu
+              Koleksiyon & Reçeteler
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#102341] tracking-tight font-display uppercase">
-              JÖN KAFE MENÜSÜ
+              KAFE MENÜSÜ
             </h2>
           </div>
 
           {/* Mascot Mood Switcher Toggle */}
-          <div className="flex items-center gap-1.5 p-1 bg-gray-200/70 rounded-full select-none self-start md:self-auto">
+          <div className="flex items-center gap-1 p-1 bg-gray-200/60 rounded-full select-none self-start md:self-auto">
             <button
               onClick={() => setActiveMood('all')}
               className={`relative px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors duration-300 ${
@@ -203,9 +198,8 @@ export function MenuSection() {
           </div>
         </div>
 
-        {/* Toolbar: Category Pills + Search */}
+        {/* Category Tabs & Search (Clean Horizontal Bar) */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-          {/* Horizontal Category Bar */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none">
             {MENU_CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat.id;
@@ -228,7 +222,6 @@ export function MenuSection() {
             })}
           </div>
 
-          {/* Search Box */}
           <div className="relative shrink-0 sm:w-64">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
@@ -236,7 +229,7 @@ export function MenuSection() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Kahve ara..."
-              className="w-full pl-10 pr-8 py-2 rounded-full bg-white border border-gray-200 text-xs font-medium text-[#102341] placeholder:text-gray-400 focus:outline-none focus:border-[#102341] shadow-xs transition-colors duration-200"
+              className="w-full pl-10 pr-8 py-2 rounded-full bg-white border border-gray-200 text-xs font-medium text-[#102341] placeholder:text-gray-400 focus:outline-none focus:border-[#102341] shadow-xs"
             />
             {searchQuery && (
               <button
@@ -249,80 +242,78 @@ export function MenuSection() {
           </div>
         </div>
 
-        {/* Menu Items Grid with Calm Spring */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        {/* Editorial Typographic List (ZERO CARD BOXES) */}
+        <motion.div layout className="divide-y divide-gray-200/80">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.97 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={EASE_TRANSITION}
                 onClick={() => handleSelectItem(item)}
-                whileTap={{ scale: 0.98 }}
-                className="group cursor-pointer bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition-all duration-300 flex flex-col justify-between"
+                className="group py-4 sm:py-5 flex items-start sm:items-center justify-between gap-4 cursor-pointer hover:bg-black/[0.02] -mx-3 px-3 rounded-xl transition-colors select-none"
               >
-                <div>
-                  <div className="flex items-start justify-between gap-2 mb-1.5">
-                    <h3 className="font-extrabold text-sm sm:text-base text-[#102341] group-hover:text-[#1b3561] transition-colors font-display">
+                <div className="space-y-1 max-w-xl">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="font-extrabold text-base sm:text-lg text-[#102341] font-display group-hover:text-[#1b3561] transition-colors">
                       {item.name}
                     </h3>
+
                     {item.badge ? (
-                      <span className="shrink-0 bg-[#e3ecf1] text-[#102341] text-[9px] font-bold px-2 py-0.5 rounded-full">
+                      <span className="bg-[#e3ecf1] text-[#102341] text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                         {item.badge}
                       </span>
                     ) : item.isPopular ? (
-                      <span className="shrink-0 bg-amber-50 text-amber-900 text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="bg-amber-100/80 text-amber-900 text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
                         <Star className="w-2.5 h-2.5 fill-[#fab80b] text-[#fab80b]" /> Popüler
                       </span>
                     ) : null}
                   </div>
 
-                  <p className="text-[11px] sm:text-xs text-gray-500 line-clamp-2 leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
                     {item.description}
                   </p>
+
+                  <div className="flex flex-wrap items-center gap-2 pt-0.5 text-[11px] text-gray-500 font-semibold">
+                    <span>{item.isCold ? '❄️ Buzlu / Soğuk' : '☕ Sıcak Servis'}</span>
+                    {item.calories && (
+                      <>
+                        <span>&bull;</span>
+                        <span>{item.calories}</span>
+                      </>
+                    )}
+                  </div>
                 </div>
 
-                <div className="pt-2.5 mt-2.5 border-t border-gray-100 flex items-center justify-between">
-                  <div className="flex flex-wrap gap-1">
-                    {item.tags?.slice(0, 2).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[9px] font-semibold text-gray-600 bg-gray-100 px-2 py-0.5 rounded-md"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                <div className="shrink-0 flex items-center gap-1.5 text-xs font-bold text-[#102341] opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all pt-1 sm:pt-0">
+                  <span className="hidden sm:inline">İncele</span>
+                  <div className="w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-2xs group-hover:border-[#102341]">
+                    <ChevronRight className="w-4 h-4" />
                   </div>
-
-                  <span className="text-[10px] font-bold text-[#102341] group-hover:translate-x-0.5 transition-transform duration-200 flex items-center gap-0.5">
-                    Detay <ChevronRight className="w-3 h-3" />
-                  </span>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
 
-        {/* Allergen & Nutritional Transparency Banner */}
-        <div className="p-4 sm:p-6 rounded-3xl bg-white border border-gray-200 shadow-xs space-y-3">
-          <div className="flex items-center gap-2 text-[#102341]">
-            <AlertTriangle className="w-4 h-4 text-amber-500" />
-            <h3 className="font-bold text-xs uppercase tracking-wide">
-              {ALLERGEN_INFO.title}
-            </h3>
+        {/* Minimal Editorial Transparency Footnote (No giant card) */}
+        <div className="pt-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-600 leading-relaxed font-medium">
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5 text-[#102341] font-bold uppercase tracking-wider text-[11px]">
+              <AlertTriangle className="w-3.5 h-3.5 text-amber-600" />
+              <span>Alerjen Bilgilendirmesi</span>
+            </div>
+            <p>{ALLERGEN_INFO.content}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] text-gray-600 leading-relaxed">
-            <div className="p-3 rounded-2xl bg-amber-50/60 border border-amber-100">
-              <strong className="text-amber-950 block mb-0.5">Alerjen Bildirimi:</strong>
-              {ALLERGEN_INFO.content}
-            </div>
-            <div className="p-3 rounded-2xl bg-blue-50/50 border border-blue-100">
-              <strong className="text-[#102341] block mb-0.5">Kalori & Besin Bilgisi:</strong>
-              {ALLERGEN_INFO.calorieDisclaimer}
-            </div>
+
+          <div className="space-y-1">
+            <span className="text-[#102341] font-bold uppercase tracking-wider text-[11px] block">
+              Besin Değerleri & Süt Alternatifleri
+            </span>
+            <p>Tüm içeceklerimizde laktozsuz süt, yulaf sütü ve badem sütü opsiyonları mevcuttur. {ALLERGEN_INFO.calorieDisclaimer}</p>
           </div>
         </div>
       </div>
@@ -331,7 +322,6 @@ export function MenuSection() {
       <AnimatePresence>
         {selectedItem && (
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
-            {/* Backdrop with smooth fade */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -341,7 +331,6 @@ export function MenuSection() {
               className="absolute inset-0 bg-black/40 backdrop-blur-xs"
             />
 
-            {/* Bottom Sheet on Mobile, Centered Modal on Desktop */}
             <motion.div
               initial={{ y: '100%', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -349,7 +338,6 @@ export function MenuSection() {
               transition={SPRING_TRANSITION}
               className="relative z-10 w-full sm:max-w-lg bg-white rounded-t-3xl sm:rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto"
             >
-              {/* Drag Handle Bar for Mobile */}
               <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto sm:hidden -mt-1 mb-2" />
 
               <div className="flex items-start justify-between gap-3">
@@ -380,7 +368,6 @@ export function MenuSection() {
                 {selectedItem.description}
               </p>
 
-              {/* Specs Breakdown */}
               <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-100 space-y-2 text-xs">
                 <div className="flex justify-between">
                   <span className="font-bold text-[#102341]">Kalori:</span>
@@ -407,7 +394,6 @@ export function MenuSection() {
                 ))}
               </div>
 
-              {/* Action Buttons: Native Share + Dismiss */}
               <div className="grid grid-cols-2 gap-2.5 pt-2">
                 <button
                   onClick={() => handleShare(selectedItem)}
