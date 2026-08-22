@@ -1,13 +1,18 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
 
 export function SignatureSpotlight() {
+  const scrollToMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('menu');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section id="ozeller" className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
+    <section id="ozeller" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-16">
         {/* Section Header */}
         <div className="space-y-1">
@@ -64,13 +69,14 @@ export function SignatureSpotlight() {
             </div>
 
             <div className="pt-2">
-              <Link
+              <a
                 href="#menu"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#102341] hover:text-[#1b3561] transition-colors"
+                onClick={scrollToMenu}
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#102341] hover:text-[#1b3561] transition-colors cursor-pointer"
               >
                 <span>Menüde Reçeteyi İncele</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -120,13 +126,14 @@ export function SignatureSpotlight() {
             </div>
 
             <div className="pt-2">
-              <Link
+              <a
                 href="#menu"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#102341] hover:text-[#1b3561] transition-colors"
+                onClick={scrollToMenu}
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#102341] hover:text-[#1b3561] transition-colors cursor-pointer"
               >
                 <span>Menüde Reçeteyi İncele</span>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

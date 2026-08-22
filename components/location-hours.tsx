@@ -15,7 +15,7 @@ export function LocationHours() {
   }, []);
 
   return (
-    <section id="konum" className="py-14 sm:py-24 px-3.5 sm:px-6 lg:px-8 bg-[#fbf9f4] border-b border-gray-200">
+    <section id="konum" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-24 px-3.5 sm:px-6 lg:px-8 bg-[#fbf9f4] border-b border-gray-200">
       <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-2 sm:space-y-3">
           <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">

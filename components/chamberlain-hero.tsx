@@ -1,12 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowRight, MapPin, Star } from 'lucide-react';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 
 export function ChamberlainHero() {
+  const scrollToMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('menu');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="relative bg-[#e3ecf1] border-b border-gray-200 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[580px] sm:min-h-[640px]">
@@ -29,13 +34,14 @@ export function ChamberlainHero() {
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
-            <Link
+            <a
               href="#menu"
-              className="btn-chamberlain-primary w-full sm:w-auto text-xs sm:text-sm py-4 px-8"
+              onClick={scrollToMenu}
+              className="btn-chamberlain-primary w-full sm:w-auto text-xs sm:text-sm py-4 px-8 cursor-pointer"
             >
               <span>Menüyü Keşfet</span>
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
 
             <a
               href={STORE_INFO.location.googleMapsUrl}
@@ -58,33 +64,41 @@ export function ChamberlainHero() {
           </div>
         </div>
 
-        {/* Right Column: Full-Bleed Lifestyle Photography */}
-        <div className="lg:col-span-6 relative min-h-[340px] sm:min-h-[460px] lg:min-h-full overflow-hidden">
-          <Image
-            src={assetPath('/assets/hero-coffee-lifestyle.jpg')}
-            alt="Jön Coffee Atmosphere"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent lg:hidden" />
+        {/* Right Column: Hero Visual Atmosphere */}
+        <div className="lg:col-span-6 relative flex items-center justify-center p-4 sm:p-8 lg:p-12">
+          <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[500px] rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-gray-100">
+            <Image
+              src={assetPath('/assets/hero-coffee-lifestyle.jpg')}
+              alt="Jön Coffee Atmosphere"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-          {/* Floating Mascot Badge on Corner */}
-          <div className="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 bg-white/95 backdrop-blur-sm p-2.5 sm:p-3 rounded-2xl border border-gray-200 shadow-lg flex items-center gap-3">
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border border-gray-100 bg-white">
-              <Image
-                src={assetPath('/assets/jon-badge-circle.png')}
-                alt="Jön Mascot"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="pr-1 text-left">
-              <span className="text-xs font-bold text-[#102341] uppercase block leading-tight">
-                JÖN COFFEES CO.
-              </span>
-              <span className="text-[10px] text-gray-500 font-semibold">
-                Focused & Surprised Ruhu
+            {/* Bottom Floating Badge */}
+            <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 border border-white/40 shadow-lg flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-[#e3ecf1] shrink-0">
+                  <Image
+                    src={assetPath('/assets/jon-badge-circle.png')}
+                    alt="Jön Mascot"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold text-[#102341] uppercase tracking-wide">
+                    İzmir Hatay Kafe
+                  </h4>
+                  <p className="text-[11px] text-gray-500 font-medium">
+                    Haftanın 7 günü taze kavrum
+                  </p>
+                </div>
+              </div>
+
+              <span className="hidden sm:inline-flex text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                Açık &bull; Servis Var
               </span>
             </div>
           </div>

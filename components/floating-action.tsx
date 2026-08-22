@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { STORE_INFO } from '@/data/store-info';
 import { Coffee, MapPin } from 'lucide-react';
@@ -17,6 +16,12 @@ export function FloatingAction() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('menu');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <AnimatePresence>
       {visible && (
@@ -28,13 +33,14 @@ export function FloatingAction() {
           className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-sm md:hidden"
         >
           <div className="bg-white/95 backdrop-blur-md rounded-full border border-gray-200 p-1.5 shadow-xl flex items-center justify-between gap-2">
-            <Link
+            <a
               href="#menu"
-              className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-gray-100 text-xs font-bold text-[#102341] active:scale-95 transition-transform select-none"
+              onClick={scrollToMenu}
+              className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-gray-100 text-xs font-bold text-[#102341] active:scale-95 transition-transform select-none cursor-pointer"
             >
               <Coffee className="w-4 h-4" />
               <span>Menü</span>
-            </Link>
+            </a>
 
             <a
               href={STORE_INFO.location.googleMapsUrl}

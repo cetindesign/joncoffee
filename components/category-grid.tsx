@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
 
@@ -10,29 +9,34 @@ const CATEGORIES = [
     title: 'Soğuk & Cold Brew',
     subtitle: '16H Yavaş Demleme',
     image: '/assets/product-coldbrew.jpg',
-    href: '#menu',
+    targetId: 'menu',
   },
   {
     title: 'Taze Çekirdek',
     subtitle: '%100 Single Origin',
     image: '/assets/product-beans.jpg',
-    href: '#menu',
+    targetId: 'menu',
   },
   {
     title: 'JÖN Sunrise',
     subtitle: 'Portakal + Double Espresso',
     image: '/assets/product-sunrise.jpg',
-    href: '#ozeller',
+    targetId: 'ozeller',
   },
   {
     title: 'Affogato & Tatlı',
     subtitle: 'İtalyan Gelato Füzyonu',
     image: '/assets/product-affogato.jpg',
-    href: '#ozeller',
+    targetId: 'ozeller',
   },
 ];
 
 export function CategoryGrid() {
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#fbf9f4] border-b border-gray-200">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
@@ -48,10 +52,14 @@ export function CategoryGrid() {
         {/* 2x2 Grid on Mobile, 4-Col on Desktop */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {CATEGORIES.map((cat, idx) => (
-            <Link
+            <a
               key={idx}
-              href={cat.href}
-              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-4/5 sm:aspect-4/5 bg-gray-100 flex flex-col justify-end p-3.5 sm:p-6 border border-gray-200 shadow-xs"
+              href={`#${cat.targetId}`}
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo(cat.targetId);
+              }}
+              className="group relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-4/5 sm:aspect-4/5 bg-gray-100 flex flex-col justify-end p-3.5 sm:p-6 border border-gray-200 shadow-xs cursor-pointer"
             >
               <Image
                 src={assetPath(cat.image)}
@@ -74,7 +82,7 @@ export function CategoryGrid() {
                   </div>
                 </div>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
       </div>

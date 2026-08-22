@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 import { ArrowUp } from 'lucide-react';
@@ -27,6 +26,11 @@ function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
 export function ChamberlainFooter() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -79,24 +83,52 @@ export function ChamberlainFooter() {
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-300">
               <li>
-                <Link href="#blends" className="hover:text-white transition-colors">
+                <a
+                  href="#blends"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('blends');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   Focused Espresso Blend
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#blends" className="hover:text-white transition-colors">
+                <a
+                  href="#ozeller"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('ozeller');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   JÖN Sunrise İmza İçecek
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#blends" className="hover:text-white transition-colors">
+                <a
+                  href="#blends"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('blends');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   16 Saat Demleme Cold Brew
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#menu" className="hover:text-white transition-colors">
+                <a
+                  href="#menu"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('menu');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   Tüm Kafe Menüsü
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -108,24 +140,52 @@ export function ChamberlainFooter() {
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-300">
               <li>
-                <Link href="#karakterler" className="hover:text-white transition-colors">
+                <a
+                  href="#karakterler"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('karakterler');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   Focused & Surprised
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#konum" className="hover:text-white transition-colors">
+                <a
+                  href="#konum"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('konum');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   İzmir Hatay Kafe
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#sss" className="hover:text-white transition-colors">
+                <a
+                  href="#sss"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('sss');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   Sıkça Sorulan Sorular
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="#kahve-testi" className="hover:text-white transition-colors">
+                <a
+                  href="#kahve-testi"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('kahve-testi');
+                  }}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   Kahve Seçim Testi
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -158,7 +218,7 @@ export function ChamberlainFooter() {
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors font-medium"
+              className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors font-medium cursor-pointer"
             >
               <span>Yukarı</span>
               <ArrowUp className="w-3.5 h-3.5" />

@@ -1,14 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 import { Coffee, Sparkles, ArrowRight } from 'lucide-react';
 
 export function StorySection() {
+  const scrollToMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('menu');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section id="karakterler" className="py-14 sm:py-20 px-3.5 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
+    <section id="karakterler" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-3.5 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
         {/* Header */}
         <div className="space-y-1">
@@ -26,8 +31,9 @@ export function StorySection() {
         {/* 2-Column Mascot Persona Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
           {/* FOCUSED Card */}
-          <Link
+          <a
             href="#menu"
+            onClick={scrollToMenu}
             className="group bg-[#f8fafc] hover:bg-white hover:shadow-md hover:border-gray-300 transition-all rounded-3xl p-5 sm:p-8 border border-gray-200 flex flex-col justify-between space-y-4 cursor-pointer"
           >
             <div className="space-y-3">
@@ -71,11 +77,12 @@ export function StorySection() {
                 Focused Menüsünü Gör <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </div>
-          </Link>
+          </a>
 
           {/* SURPRISED Card */}
-          <Link
+          <a
             href="#menu"
+            onClick={scrollToMenu}
             className="group bg-[#f8fafc] hover:bg-white hover:shadow-md hover:border-gray-300 transition-all rounded-3xl p-5 sm:p-8 border border-gray-200 flex flex-col justify-between space-y-4 cursor-pointer"
           >
             <div className="space-y-3">
@@ -119,7 +126,7 @@ export function StorySection() {
                 Surprised Menüsünü Gör <ArrowRight className="w-3.5 h-3.5" />
               </span>
             </div>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

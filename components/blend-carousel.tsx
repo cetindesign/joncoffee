@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { Star, ArrowRight } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
 
@@ -70,8 +69,14 @@ const PRODUCTS: BlendProduct[] = [
 ];
 
 export function BlendCarousel() {
+  const scrollToMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('menu');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <section id="blends" className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
+    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
         {/* Section Header */}
         <div className="flex items-end justify-between gap-4 pb-4 border-b border-gray-100">
@@ -92,10 +97,11 @@ export function BlendCarousel() {
         {/* Mobile: Horizontal Snap Carousel | Desktop: 4-Col Grid */}
         <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none">
           {PRODUCTS.map((prod) => (
-            <Link
+            <a
               key={prod.id}
               href="#menu"
-              className="group min-w-[260px] max-w-[280px] sm:min-w-0 sm:max-w-none snap-start shrink-0 bg-white rounded-3xl border border-gray-200 p-4 sm:p-5 flex flex-col justify-between hover:border-gray-300 hover:shadow-md transition-all duration-200"
+              onClick={scrollToMenu}
+              className="group min-w-[260px] max-w-[280px] sm:min-w-0 sm:max-w-none snap-start shrink-0 bg-white rounded-3xl border border-gray-200 p-4 sm:p-5 flex flex-col justify-between hover:border-gray-300 hover:shadow-md transition-all duration-200 cursor-pointer"
             >
               <div>
                 {/* Top Badge & Rating */}
@@ -163,7 +169,7 @@ export function BlendCarousel() {
                 <span>Reçeteyi İncele</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </div>
-            </Link>
+            </a>
           ))}
         </div>
       </div>

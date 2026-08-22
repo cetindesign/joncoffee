@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { StatusBadge } from './status-badge';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
@@ -10,6 +9,14 @@ import { Menu, X, MapPin, ArrowRight } from 'lucide-react';
 
 export function ChamberlainHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleScrollTo = (id: string) => {
+    setMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
@@ -24,7 +31,7 @@ export function ChamberlainHeader() {
         <div className="flex items-center lg:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 -ml-2 text-[#102341] focus:outline-none"
+            className="p-2 -ml-2 text-[#102341] focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Menüyü aç"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -33,7 +40,10 @@ export function ChamberlainHeader() {
 
         {/* Brand Logo & Wordmark */}
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2.5">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-2.5 text-left cursor-pointer"
+          >
             <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-full overflow-hidden border border-gray-200 bg-white">
               <Image
                 src={assetPath('/assets/jon-badge-circle.png')}
@@ -46,40 +56,60 @@ export function ChamberlainHeader() {
             <span className="font-extrabold text-lg sm:text-2xl tracking-tighter text-[#102341] uppercase leading-none font-display">
               JÖN COFFEES
             </span>
-          </Link>
+          </button>
 
           {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center gap-7">
-            <Link
+            <a
               href="#blends"
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('blends');
+              }}
+              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
             >
               Öne Çıkanlar
-            </Link>
-            <Link
+            </a>
+            <a
               href="#ozeller"
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('ozeller');
+              }}
+              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
             >
               İmza Lezzetler
-            </Link>
-            <Link
+            </a>
+            <a
               href="#menu"
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('menu');
+              }}
+              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
             >
               Kafe Menüsü
-            </Link>
-            <Link
+            </a>
+            <a
               href="#karakterler"
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('karakterler');
+              }}
+              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
             >
               Focused & Surprised
-            </Link>
-            <Link
+            </a>
+            <a
               href="#konum"
-              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('konum');
+              }}
+              className="text-sm font-bold text-[#102341] hover:text-[#1b3561] tracking-wide transition-colors cursor-pointer"
             >
               Konum & Saatler
-            </Link>
+            </a>
           </nav>
         </div>
 
@@ -103,7 +133,7 @@ export function ChamberlainHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Konum ve Yol Tarifi"
-            className="lg:hidden p-2 -mr-2 text-[#102341]"
+            className="lg:hidden p-2 -mr-2 text-[#102341] min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <MapPin className="w-5 h-5" />
           </a>
@@ -121,46 +151,61 @@ export function ChamberlainHeader() {
           </div>
 
           <div className="flex flex-col gap-4 font-bold text-lg text-[#102341]">
-            <Link
+            <a
               href="#blends"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1 flex items-center justify-between"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('blends');
+              }}
+              className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Öne Çıkan Kahveler</span>
               <ArrowRight className="w-4 h-4 text-gray-400" />
-            </Link>
-            <Link
+            </a>
+            <a
               href="#ozeller"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1 flex items-center justify-between"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('ozeller');
+              }}
+              className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>İmza Lezzetler (JÖN Sunrise)</span>
               <ArrowRight className="w-4 h-4 text-gray-400" />
-            </Link>
-            <Link
+            </a>
+            <a
               href="#menu"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1 flex items-center justify-between"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('menu');
+              }}
+              className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Tüm Kafe Menüsü</span>
               <ArrowRight className="w-4 h-4 text-gray-400" />
-            </Link>
-            <Link
+            </a>
+            <a
               href="#karakterler"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1 flex items-center justify-between"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('karakterler');
+              }}
+              className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Focused & Surprised</span>
               <ArrowRight className="w-4 h-4 text-gray-400" />
-            </Link>
-            <Link
+            </a>
+            <a
               href="#konum"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1 flex items-center justify-between"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('konum');
+              }}
+              className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Konum & Çalışma Saatleri</span>
               <ArrowRight className="w-4 h-4 text-gray-400" />
-            </Link>
+            </a>
           </div>
 
           <div className="pt-2 border-t border-gray-100 space-y-2">

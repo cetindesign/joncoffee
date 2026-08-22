@@ -13,21 +13,21 @@ export function FaqSection() {
   };
 
   return (
-    <section id="sss" className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
-      <div className="max-w-4xl mx-auto space-y-12">
-        <div className="text-center max-w-xl mx-auto space-y-3">
+    <section id="sss" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
+      <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12">
+        <div className="text-center max-w-xl mx-auto space-y-2 sm:space-y-3">
           <span className="text-xs font-bold uppercase tracking-widest text-gray-500">
             Yardım & Merak Edilenler
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-[#102341] tracking-tight font-display uppercase">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#102341] tracking-tight font-display uppercase">
             SIKÇA SORULAN SORULAR
           </h2>
-          <p className="text-sm sm:text-base font-medium text-gray-600">
-            Ziyaretiniz ve siparişleriniz öncesinde aklınıza takılabilecek yanıtlar.
+          <p className="text-xs sm:text-base font-medium text-gray-600">
+            Ziyaretiniz öncesinde aklınıza takılabilecek yanıtlar.
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {STORE_INFO.faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -37,11 +37,11 @@ export function FaqSection() {
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 font-bold text-base text-[#102341] hover:text-[#1b3561] transition-colors"
+                  className="w-full text-left p-4 sm:p-6 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[#102341] hover:text-[#1b3561] transition-colors cursor-pointer"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
-                    className={`w-5 h-5 shrink-0 text-gray-400 transition-transform duration-200 ${
+                    className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-500 transition-transform duration-200 shrink-0 ${
                       isOpen ? 'rotate-180 text-[#102341]' : ''
                     }`}
                   />
@@ -55,7 +55,7 @@ export function FaqSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div className="px-6 pb-6 pt-1 text-sm text-gray-600 leading-relaxed font-medium border-t border-gray-100 bg-white">
+                      <div className="p-4 sm:p-6 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed font-medium border-t border-gray-100">
                         {faq.a}
                       </div>
                     </motion.div>
