@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { STORE_INFO } from '@/data/store-info';
 import { StatusBadge } from './status-badge';
+import { assetPath } from '@/lib/assets';
 import { MapPin, Navigation, Clock, Train, ExternalLink } from 'lucide-react';
 
 export function LocationHours() {
@@ -29,7 +30,7 @@ export function LocationHours() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-          {/* Left Column: Address & Photo (7 cols) */}
+          {/* Left Column: Address & Photo */}
           <div className="lg:col-span-7 space-y-5">
             <div className="bg-white rounded-3xl p-5 sm:p-8 border border-gray-200 shadow-xs space-y-4 sm:space-y-6">
               <div className="flex items-center justify-between">
@@ -84,7 +85,7 @@ export function LocationHours() {
             {/* Atmosphere Photo */}
             <div className="relative rounded-3xl overflow-hidden border border-gray-200 shadow-xs h-60 sm:h-80 w-full">
               <Image
-                src="/assets/jon-table-atmosphere.jpg"
+                src={assetPath('/assets/jon-table-atmosphere.jpg')}
                 alt="Jön Coffee Atmosphere"
                 fill
                 className="object-cover"
@@ -95,7 +96,7 @@ export function LocationHours() {
             </div>
           </div>
 
-          {/* Right Column: Weekly Hours (5 cols) */}
+          {/* Right Column: Weekly Hours */}
           <div className="lg:col-span-5">
             <div className="bg-white rounded-3xl p-5 sm:p-8 border border-gray-200 shadow-xs space-y-5">
               <div className="flex items-center justify-between border-b border-gray-100 pb-3">

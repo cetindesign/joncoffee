@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import { assetPath } from '@/lib/assets';
 
 const CATEGORIES = [
   {
@@ -53,7 +54,7 @@ export function CategoryGrid() {
             >
               {/* Background Image */}
               <Image
-                src={cat.image}
+                src={assetPath(cat.image)}
                 alt={cat.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"

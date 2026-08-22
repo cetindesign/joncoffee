@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { StatusBadge } from './status-badge';
 import { STORE_INFO } from '@/data/store-info';
+import { assetPath } from '@/lib/assets';
 import { Menu, X, MapPin, ArrowRight } from 'lucide-react';
 
 export function ChamberlainHeader() {
@@ -12,7 +13,7 @@ export function ChamberlainHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-      {/* Top Announcement Bar - Clean & Single Line */}
+      {/* Top Announcement Bar */}
       <div className="bg-[#102341] text-white py-1.5 text-center text-[10px] sm:text-xs font-semibold tracking-wider uppercase select-none">
         <span>✦ İZMİR HATAY &bull; %100 SPECIALTY ARABICA &bull; METROYA 2 DK ✦</span>
       </div>
@@ -30,12 +31,12 @@ export function ChamberlainHeader() {
           </button>
         </div>
 
-        {/* Brand Logo & Wordmark (Center on Mobile, Left on Desktop) */}
+        {/* Brand Logo & Wordmark */}
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-full overflow-hidden border border-gray-200 bg-white">
               <Image
-                src="/assets/jon-badge-circle.png"
+                src={assetPath('/assets/jon-badge-circle.png')}
                 alt="Jön Coffees Co."
                 fill
                 className="object-contain p-0.5"
@@ -82,7 +83,7 @@ export function ChamberlainHeader() {
           </nav>
         </div>
 
-        {/* Right Action (Desktop: Status + Button, Mobile: Clean Location Icon) */}
+        {/* Right Action */}
         <div className="flex items-center gap-3">
           <div className="hidden lg:flex items-center gap-3">
             <StatusBadge />
@@ -97,7 +98,6 @@ export function ChamberlainHeader() {
             </a>
           </div>
 
-          {/* Mobile Right: Map Icon */}
           <a
             href={STORE_INFO.location.googleMapsUrl}
             target="_blank"

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { STORE_INFO } from '@/data/store-info';
+import { assetPath } from '@/lib/assets';
 import { ArrowUp } from 'lucide-react';
 
 function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -33,12 +34,12 @@ export function ChamberlainFooter() {
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-16">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
-          {/* Brand Info (2 cols on lg) */}
+          {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5">
                 <Image
-                  src="/assets/jon-badge-circle.png"
+                  src={assetPath('/assets/jon-badge-circle.png')}
                   alt="Jön Coffee Logo"
                   fill
                   className="object-contain"

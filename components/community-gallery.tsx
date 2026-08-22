@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { STORE_INFO } from '@/data/store-info';
+import { assetPath } from '@/lib/assets';
 
 function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
@@ -73,7 +74,7 @@ export function CommunityGallery() {
               className="group relative rounded-3xl overflow-hidden aspect-square bg-gray-100 border border-gray-200 shadow-xs"
             >
               <Image
-                src={item.image}
+                src={assetPath(item.image)}
                 alt={item.tag}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"

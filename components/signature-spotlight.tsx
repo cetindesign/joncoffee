@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { MapPin, ArrowRight, Sparkles } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 import { STORE_INFO } from '@/data/store-info';
+import { assetPath } from '@/lib/assets';
 
 export function SignatureSpotlight() {
   return (
@@ -24,21 +25,20 @@ export function SignatureSpotlight() {
 
         {/* Feature 1: JÖN SUNRISE */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-[#fbf9f4] rounded-3xl p-6 sm:p-12 border border-gray-200 shadow-xs">
-          {/* Visual Container with Real Photo & Mascot Badge (6 cols) */}
+          {/* Visual Container */}
           <div className="lg:col-span-6 relative w-full aspect-square sm:aspect-4/3 rounded-3xl overflow-hidden shadow-sm">
             <Image
-              src="/assets/product-sunrise.jpg"
+              src={assetPath('/assets/product-sunrise.jpg')}
               alt="Jön Sunrise Drink"
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
             />
-            {/* Mascot Floating Tag */}
             <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-xs px-3.5 py-1.5 rounded-full text-xs font-bold text-[#102341] shadow-md flex items-center gap-1.5">
               <span>🍊 Surprised İmza Reçetesi</span>
             </div>
           </div>
 
-          {/* Text & Action (6 cols) */}
+          {/* Text & Action */}
           <div className="lg:col-span-6 space-y-5">
             <div className="space-y-1.5">
               <span className="text-xs font-bold uppercase tracking-widest text-amber-700">
@@ -91,10 +91,10 @@ export function SignatureSpotlight() {
 
         {/* Feature 2: AFFOGATO AL CAFFE */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-[#fbf9f4] rounded-3xl p-6 sm:p-12 border border-gray-200 shadow-xs">
-          {/* Visual Container (6 cols - right on lg) */}
+          {/* Visual Container */}
           <div className="lg:col-span-6 lg:order-2 relative w-full aspect-square sm:aspect-4/3 rounded-3xl overflow-hidden shadow-sm">
             <Image
-              src="/assets/product-affogato.jpg"
+              src={assetPath('/assets/product-affogato.jpg')}
               alt="Affogato al Caffe"
               fill
               className="object-cover hover:scale-105 transition-transform duration-500"
@@ -104,7 +104,7 @@ export function SignatureSpotlight() {
             </div>
           </div>
 
-          {/* Text & Action (6 cols) */}
+          {/* Text & Action */}
           <div className="lg:col-span-6 lg:order-1 space-y-5">
             <div className="space-y-1.5">
               <span className="text-xs font-bold uppercase tracking-widest text-amber-900">

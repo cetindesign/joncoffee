@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Star, ArrowRight } from 'lucide-react';
+import { assetPath } from '@/lib/assets';
 
 interface BlendProduct {
   id: string;
@@ -93,7 +94,7 @@ export function BlendCarousel() {
           </div>
         </div>
 
-        {/* 4-Card Chamberlain Product Grid with Authentic Photography */}
+        {/* 4-Card Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {PRODUCTS.map((prod) => (
             <div
@@ -116,7 +117,7 @@ export function BlendCarousel() {
                 {/* Product Photo Container */}
                 <div className={`relative w-full aspect-square ${prod.bgPedestal} rounded-2xl overflow-hidden mb-5`}>
                   <Image
-                    src={prod.image}
+                    src={assetPath(prod.image)}
                     alt={prod.name}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"

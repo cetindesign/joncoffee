@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { STORE_INFO } from '@/data/store-info';
+import { assetPath } from '@/lib/assets';
 import { Coffee, Sparkles } from 'lucide-react';
 
 export function StorySection() {
@@ -36,7 +37,7 @@ export function StorySection() {
               <div className="flex items-center gap-4 sm:gap-6 pt-1">
                 <div className="relative w-20 h-20 sm:w-28 sm:h-28 shrink-0 rounded-2xl bg-white border border-gray-200 p-2 shadow-xs">
                   <Image
-                    src="/assets/mascot-focused.png"
+                    src={assetPath('/assets/mascot-focused.png')}
                     alt="Focused Mascot"
                     fill
                     className="object-contain"
@@ -81,7 +82,7 @@ export function StorySection() {
               <div className="flex items-center gap-4 sm:gap-6 pt-1">
                 <div className="relative w-20 h-20 sm:w-28 sm:h-28 shrink-0 rounded-2xl bg-white border border-gray-200 p-2 shadow-xs">
                   <Image
-                    src="/assets/mascot-surprised.png"
+                    src={assetPath('/assets/mascot-surprised.png')}
                     alt="Surprised Mascot"
                     fill
                     className="object-contain"
