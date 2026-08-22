@@ -15,11 +15,11 @@ export function ChamberlainHero() {
   };
 
   return (
-    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-12 sm:py-20 border-b border-[#0038a8]/15 overflow-hidden select-none">
-      <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center space-y-6 sm:space-y-8">
+    <section className="relative min-h-[88dvh] sm:min-h-[92vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-b border-[#0038a8]/15 overflow-hidden select-none">
+      <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center space-y-6 sm:space-y-8">
         {/* Top Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: -12 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8] font-display"
@@ -29,28 +29,28 @@ export function ChamberlainHero() {
           <span>%100 SPECIALTY GRADE ARABICA ★</span>
         </motion.div>
 
-        {/* Centerpiece: Massive Full-Bleed Mascot Emblem (NO RECTANGULAR CARDS) */}
+        {/* Centerpiece: Screen-Proportional Mascot Emblem */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-72 h-72 sm:w-96 sm:h-96 lg:w-[440px] lg:h-[440px] shrink-0"
+          className="relative w-[88vw] h-[88vw] max-w-[380px] max-h-[380px] sm:max-w-[500px] sm:max-h-[500px] lg:max-w-[580px] lg:max-h-[580px] shrink-0"
         >
           <Image
             src={assetPath('/assets/jon-emblem-duo.png')}
             alt="Jön Coffees Co. - Focused & Surprised"
             fill
-            className="object-contain drop-shadow-xl hover:scale-103 transition-transform duration-400 cursor-pointer"
+            className="object-contain drop-shadow-2xl hover:scale-102 transition-transform duration-400 cursor-pointer"
             priority
           />
         </motion.div>
 
-        {/* Brand Motto Typography */}
+        {/* Brand Motto */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-2 max-w-xl mx-auto"
+          className="space-y-1.5 max-w-xl mx-auto"
         >
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#0038a8] tracking-tight font-display uppercase leading-tight">
             AYNI İYİ KAHVE. <br />
@@ -58,16 +58,16 @@ export function ChamberlainHero() {
           </h1>
 
           <p className="text-xs sm:text-base text-gray-600 font-medium leading-relaxed">
-            İster işine odaklanan bir <strong>Focused</strong>, ister yeni tatlar peşindeki bir <strong>Surprised</strong> ol. Mahallenin nitelikli kahve durağı.
+            İster işine odaklanan bir <strong>Focused</strong>, ister yeni tatlar peşindeki bir <strong>Surprised</strong> ol.
           </p>
         </motion.div>
 
-        {/* Full Screen Dual-Mood Gateways */}
+        {/* Dual-Mood Gateways */}
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md mx-auto space-y-3 pt-2"
+          className="w-full max-w-md mx-auto space-y-3 pt-1"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <button
