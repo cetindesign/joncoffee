@@ -1,7 +1,8 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
-import { Star, ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
 
 interface BlendProduct {
@@ -69,6 +70,15 @@ const PRODUCTS: BlendProduct[] = [
 ];
 
 export function BlendCarousel() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === 'left' ? -320 : 320;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   const scrollToMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     const el = document.getElementById('menu');
@@ -76,9 +86,9 @@ export function BlendCarousel() {
   };
 
   return (
-    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
-        {/* Section Header */}
+    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200 overflow-hidden">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
+        {/* Section Header with Desktop Arrow Controls */}
         <div className="flex items-end justify-between gap-4 pb-4 border-b border-gray-200">
           <div className="space-y-1">
             <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
@@ -89,24 +99,39 @@ export function BlendCarousel() {
             </h2>
           </div>
 
-          <span className="hidden sm:inline-block text-xs font-bold text-[#102341] uppercase tracking-wider">
-            ✦ %100 SPECIALTY ARABICA
-          </span>
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scroll('left')}
+              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-[#102341] hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+              aria-label="Önceki"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => scroll('right')}
+              className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-[#102341] hover:bg-gray-50 active:scale-95 transition-all cursor-pointer"
+              aria-label="Sonraki"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* 4 Products (ZERO OUTER CARDS - OPEN EDITORIAL GRID) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 divide-y sm:divide-y-0 lg:divide-x divide-gray-200/80">
-          {PRODUCTS.map((prod, idx) => (
+        {/* Horizontal Snap Carousel */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
+        >
+          {PRODUCTS.map((prod) => (
             <a
               key={prod.id}
               href="#menu"
               onClick={scrollToMenu}
-              className={`group flex flex-col justify-between cursor-pointer select-none ${
-                idx > 0 ? 'pt-6 sm:pt-0 lg:pl-8' : ''
-              }`}
+              className="shrink-0 w-[76vw] sm:w-[300px] lg:w-[280px] snap-start group flex flex-col justify-between cursor-pointer select-none"
             >
               <div>
-                {/* Product Photo Container (Floating on Pastel Canvas, NO outer card) */}
+                {/* Product Photo on Pastel Canvas */}
                 <div className={`relative w-full aspect-square ${prod.bgPedestal} rounded-2xl overflow-hidden mb-4`}>
                   <Image
                     src={assetPath(prod.image)}
@@ -119,24 +144,20 @@ export function BlendCarousel() {
                   </div>
                 </div>
 
-                {/* Info */}
-                <div className="space-y-1.5 mb-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className="font-extrabold text-base text-[#102341] leading-snug font-display group-hover:text-[#1b3561] transition-colors">
-                      {prod.name}
-                    </h3>
-                  </div>
+                {/* Typography */}
+                <div className="space-y-1.5 mb-3">
+                  <h3 className="font-extrabold text-base text-[#102341] leading-snug font-display group-hover:text-[#1b3561] transition-colors">
+                    {prod.name}
+                  </h3>
 
                   <p className="text-xs text-gray-500 font-medium line-clamp-1">
                     {prod.subName}
                   </p>
 
-                  {/* Flavor Notes */}
-                  <p className="text-[11px] font-semibold text-gray-700 pt-1">
+                  <p className="text-[11px] font-semibold text-gray-700 pt-0.5">
                     Notalar: {prod.flavorNotes.join(' • ')}
                   </p>
 
-                  {/* Roast Meter */}
                   <div className="pt-2 flex items-center justify-between text-[11px] font-semibold text-gray-500">
                     <span>{prod.roastLevel}</span>
                     <div className="flex gap-1">
@@ -153,7 +174,7 @@ export function BlendCarousel() {
                 </div>
               </div>
 
-              {/* Discreet Text Link */}
+              {/* Action */}
               <div className="pt-2 flex items-center justify-between text-xs font-bold text-[#102341] group-hover:translate-x-1 transition-transform">
                 <span>Reçeteyi İncele</span>
                 <ArrowRight className="w-3.5 h-3.5" />
