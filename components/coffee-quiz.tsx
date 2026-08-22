@@ -112,7 +112,7 @@ export function CoffeeQuiz() {
 
       try {
         confetti({
-          particleCount: 50,
+          particleCount: 45,
           spread: 60,
           origin: { y: 0.7 },
           colors: ['#102341', '#fab80b', '#206b99', '#f8d486'],
@@ -155,10 +155,10 @@ export function CoffeeQuiz() {
             {!result ? (
               <motion.div
                 key={currentStep}
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.2 }}
+                exit={{ opacity: 0, x: -16 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-6"
               >
                 {/* Progress Bar */}
@@ -168,7 +168,7 @@ export function CoffeeQuiz() {
                     {QUESTIONS.map((_, idx) => (
                       <span
                         key={idx}
-                        className={`h-1.5 rounded-full transition-all ${
+                        className={`h-1.5 rounded-full transition-all duration-300 ${
                           idx === currentStep
                             ? 'w-6 bg-[#102341]'
                             : idx < currentStep
@@ -189,13 +189,13 @@ export function CoffeeQuiz() {
                     <button
                       key={idx}
                       onClick={() => handleSelect(opt.type)}
-                      className="p-5 rounded-2xl bg-white border border-gray-200 text-left hover:border-[#102341] hover:shadow-md active:scale-98 transition-all flex flex-col justify-between space-y-3 group cursor-pointer"
+                      className="p-5 rounded-2xl bg-white border border-gray-200 text-left hover:border-[#102341] hover:shadow-md active:scale-98 transition-all duration-250 flex flex-col justify-between space-y-3 group cursor-pointer"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-2xl p-2 rounded-xl bg-gray-50 group-hover:bg-amber-50 transition-colors">
+                        <span className="text-2xl p-2 rounded-xl bg-gray-50 group-hover:bg-amber-50 transition-colors duration-250">
                           {opt.icon}
                         </span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 group-hover:text-[#102341]">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 group-hover:text-[#102341] transition-colors duration-200">
                           Seç &rarr;
                         </span>
                       </div>
@@ -215,9 +215,9 @@ export function CoffeeQuiz() {
             ) : (
               <motion.div
                 key="result"
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center space-y-5"
               >
                 <span className="inline-block px-3 py-1 rounded-full bg-[#102341] text-white text-xs font-bold uppercase tracking-wider">
@@ -259,7 +259,7 @@ export function CoffeeQuiz() {
 
                   <button
                     onClick={handleReset}
-                    className="text-xs font-bold text-gray-400 hover:text-[#102341] flex items-center justify-center gap-1 py-2 px-3 cursor-pointer"
+                    className="text-xs font-bold text-gray-400 hover:text-[#102341] flex items-center justify-center gap-1 py-2 px-3 cursor-pointer transition-colors duration-200"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Tekrar Çöz</span>

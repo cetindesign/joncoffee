@@ -20,6 +20,19 @@ import {
 
 type MoodFilter = 'all' | 'focused' | 'surprised';
 
+// Premium editorial spring curve
+const SPRING_TRANSITION = {
+  type: 'spring',
+  stiffness: 180,
+  damping: 24,
+  mass: 0.8,
+} as const;
+
+const EASE_TRANSITION = {
+  duration: 0.45,
+  ease: [0.16, 1, 0.3, 1],
+} as const;
+
 export function MenuSection() {
   const [activeMood, setActiveMood] = useState<MoodFilter>('all');
   const [activeCategory, setActiveCategory] = useState('all');
@@ -62,7 +75,7 @@ export function MenuSection() {
   }, [activeCategory, activeMood, searchQuery]);
 
   return (
-    <section id="menu" className="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#fbf9f4] border-b border-gray-200">
+    <section id="menu" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#fbf9f4] border-b border-gray-200">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
         {/* Header & Mood Switcher */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -79,7 +92,7 @@ export function MenuSection() {
           <div className="flex items-center gap-1.5 p-1 bg-gray-200/70 rounded-full select-none self-start md:self-auto">
             <button
               onClick={() => setActiveMood('all')}
-              className={`relative px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors ${
+              className={`relative px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors duration-300 ${
                 activeMood === 'all' ? 'text-[#102341]' : 'text-gray-600 hover:text-[#102341]'
               }`}
             >
@@ -87,7 +100,7 @@ export function MenuSection() {
                 <motion.div
                   layoutId="activeMoodPill"
                   className="absolute inset-0 bg-white rounded-full shadow-xs"
-                  transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                  transition={SPRING_TRANSITION}
                 />
               )}
               <span className="relative z-10">Tüm Menü</span>
@@ -95,7 +108,7 @@ export function MenuSection() {
 
             <button
               onClick={() => setActiveMood('focused')}
-              className={`relative flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold transition-colors ${
+              className={`relative flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold transition-colors duration-300 ${
                 activeMood === 'focused' ? 'text-[#102341]' : 'text-gray-600 hover:text-[#102341]'
               }`}
             >
@@ -103,7 +116,7 @@ export function MenuSection() {
                 <motion.div
                   layoutId="activeMoodPill"
                   className="absolute inset-0 bg-white rounded-full shadow-xs"
-                  transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                  transition={SPRING_TRANSITION}
                 />
               )}
               <span className="relative z-10 flex items-center gap-1">
@@ -113,7 +126,7 @@ export function MenuSection() {
 
             <button
               onClick={() => setActiveMood('surprised')}
-              className={`relative flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold transition-colors ${
+              className={`relative flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold transition-colors duration-300 ${
                 activeMood === 'surprised' ? 'text-[#102341]' : 'text-gray-600 hover:text-[#102341]'
               }`}
             >
@@ -121,7 +134,7 @@ export function MenuSection() {
                 <motion.div
                   layoutId="activeMoodPill"
                   className="absolute inset-0 bg-white rounded-full shadow-xs"
-                  transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                  transition={SPRING_TRANSITION}
                 />
               )}
               <span className="relative z-10 flex items-center gap-1">
@@ -144,7 +157,7 @@ export function MenuSection() {
                     setActiveCategory(cat.id);
                     setSearchQuery('');
                   }}
-                  className={`relative px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all select-none ${
+                  className={`relative px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300 select-none ${
                     isActive
                       ? 'bg-[#102341] text-white shadow-xs'
                       : 'bg-white text-gray-700 border border-gray-200 hover:border-gray-300'
@@ -164,7 +177,7 @@ export function MenuSection() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Kahve ara..."
-              className="w-full pl-10 pr-8 py-2 rounded-full bg-white border border-gray-200 text-xs font-medium text-[#102341] placeholder:text-gray-400 focus:outline-none focus:border-[#102341] shadow-xs"
+              className="w-full pl-10 pr-8 py-2 rounded-full bg-white border border-gray-200 text-xs font-medium text-[#102341] placeholder:text-gray-400 focus:outline-none focus:border-[#102341] shadow-xs transition-colors duration-200"
             />
             {searchQuery && (
               <button
@@ -177,20 +190,20 @@ export function MenuSection() {
           </div>
         </div>
 
-        {/* Menu Items Grid with Motion Stagger */}
+        {/* Menu Items Grid with Calm Spring */}
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => (
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0, scale: 0.96 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.2 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={EASE_TRANSITION}
                 onClick={() => setSelectedItem(item)}
                 whileTap={{ scale: 0.98 }}
-                className="group cursor-pointer bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition-all flex flex-col justify-between"
+                className="group cursor-pointer bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-1.5">
@@ -225,7 +238,7 @@ export function MenuSection() {
                     ))}
                   </div>
 
-                  <span className="text-[10px] font-bold text-[#102341] group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                  <span className="text-[10px] font-bold text-[#102341] group-hover:translate-x-0.5 transition-transform duration-200 flex items-center gap-0.5">
                     Detay <ChevronRight className="w-3 h-3" />
                   </span>
                 </div>
@@ -259,11 +272,12 @@ export function MenuSection() {
       <AnimatePresence>
         {selectedItem && (
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
-            {/* Backdrop */}
+            {/* Backdrop with smooth fade */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
               onClick={() => setSelectedItem(null)}
               className="absolute inset-0 bg-black/40 backdrop-blur-xs"
             />
@@ -273,7 +287,7 @@ export function MenuSection() {
               initial={{ y: '100%', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: '100%', opacity: 0 }}
-              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+              transition={SPRING_TRANSITION}
               className="relative z-10 w-full sm:max-w-lg bg-white rounded-t-3xl sm:rounded-3xl border border-gray-200 p-6 sm:p-8 shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto"
             >
               {/* Drag Handle Bar for Mobile */}

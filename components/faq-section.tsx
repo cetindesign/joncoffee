@@ -33,15 +33,15 @@ export function FaqSection() {
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-gray-200 bg-[#f8fafc] overflow-hidden transition-all"
+                className="rounded-2xl border border-gray-200 bg-[#f8fafc] overflow-hidden transition-all duration-300"
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full text-left p-4 sm:p-6 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[#102341] hover:text-[#1b3561] transition-colors cursor-pointer"
+                  className="w-full text-left p-4 sm:p-6 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-[#102341] hover:text-[#1b3561] transition-colors duration-200 cursor-pointer"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown
-                    className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-500 transition-transform duration-200 shrink-0 ${
+                    className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-500 transition-transform duration-300 shrink-0 ${
                       isOpen ? 'rotate-180 text-[#102341]' : ''
                     }`}
                   />
@@ -53,7 +53,7 @@ export function FaqSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                     >
                       <div className="p-4 sm:p-6 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed font-medium border-t border-gray-100">
                         {faq.a}
