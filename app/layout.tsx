@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Bricolage_Grotesque } from "next/font/google";
+import { MENU_ITEMS } from "@/data/menu";
+import { STORE_INFO } from "@/data/store-info";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -17,20 +19,21 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0b3294",
+  themeColor: "#102341",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://joncoffee.com"),
+  metadataBase: new URL("https://cetindesign.github.io/joncoffee/"),
   title: {
     default: "Jön Coffee | İzmir Hatay'ın Yeni Nesil Mahalle Kahvecisi",
     template: "%s | Jön Coffee İzmir",
   },
   description:
-    "İzmir Hatay'da nitelikli espresso, taze soğuk kahveler, imza lezzet JÖN Sunrise ve samimi mahalle atmosferi. Focused & Surprised kahve deneyimini keşfedin.",
+    "İzmir Hatay'da nitelikli espresso, 16 saatlik soğuk demlemeler, imza lezzet JÖN Sunrise ve samimi mahalle atmosferi. %100 Specialty Grade Arabica çekirdekler.",
   keywords: [
     "Jön Coffee",
     "Jön Kahve",
@@ -38,67 +41,70 @@ export const metadata: Metadata = {
     "İzmir 3. Nesil Kahve",
     "Hatay Nitelikli Kahve",
     "İzmir Coffee Shop",
-    "Jön Coffees Co",
-    "Cold Brew İzmir",
+    "Jön Sunrise",
+    "Focused Surprised Kahve",
+    "İzmir Pet Friendly Kafe",
     "İzmirspor Metro Kahve",
-    "Hatay Metro Kahveci",
-    "Pet Friendly Cafe İzmir",
   ],
   authors: [{ name: "Jön Coffees Co." }],
   creator: "Jön Coffees Co.",
+  publisher: "Jön Coffees Co.",
+  formatDetection: {
+    email: false,
+    address: true,
+    telephone: true,
+  },
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    url: "https://joncoffee.com",
+    url: "https://cetindesign.github.io/joncoffee/",
+    siteName: "Jön Coffees Co.",
     title: "Jön Coffee | İzmir Hatay'ın Yeni Nesil Mahalle Kahvecisi",
     description:
-      "İzmir Hatay'da nitelikli kahve, imza lezzet JÖN Sunrise ve samimi mahalle atmosferi. Focused & Surprised ruhunu keşfet.",
-    siteName: "Jön Coffee Co.",
+      "Aynı iyi kahve, yepyeni hisler. İzmir Hatay'da nitelikli çekirdekler, samimi çalışma alanı ve pet-friendly ortam.",
     images: [
       {
-        url: "/assets/jon-logo-badge.png",
-        width: 1024,
-        height: 682,
-        alt: "Jön Coffees Co. İzmir Hatay",
+        url: "https://cetindesign.github.io/joncoffee/assets/hero-coffee-lifestyle.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Jön Coffee İzmir Hatay Ambiyansı",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jön Coffee | İzmir Hatay",
-    description: "İzmir Hatay'ın Yeni Nesil Mahalle Kahvecisi. Focused & Surprised.",
-    images: ["/assets/jon-logo-badge.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    description:
+      "İzmir Hatay'da %100 nitelikli Arabica, imza lezzet JÖN Sunrise ve samimi mahalle kahveciliği.",
+    images: ["https://cetindesign.github.io/joncoffee/assets/hero-coffee-lifestyle.jpg"],
   },
   icons: {
-    icon: "/assets/jon-badge-circle.png",
-    apple: "/assets/jon-badge-circle.png",
+    icon: "/joncoffee/assets/jon-badge-circle.png",
+    apple: "/joncoffee/assets/jon-badge-circle.png",
   },
 };
 
+// Deep Rich JSON-LD Schema (Restaurant/Cafe with hasMenu & openingHours)
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CafeOrCoffeeShop",
-  name: "Jön Coffees Co.",
-  image: "https://joncoffee.com/assets/jon-logo-badge.png",
-  description:
-    "İzmir Hatay'ın yeni nesil mahalle kahvecisi. Nitelikli çekirdekler, imza lezzet JÖN Sunrise ve sıcak atmosfer.",
+  name: "Jön Coffee Co.",
+  alternateName: "Jön Kahve",
+  image: "https://cetindesign.github.io/joncoffee/assets/hero-coffee-lifestyle.jpg",
+  logo: "https://cetindesign.github.io/joncoffee/assets/jon-badge-circle.png",
+  "@id": "https://cetindesign.github.io/joncoffee/#cafe",
+  url: "https://cetindesign.github.io/joncoffee/",
+  telephone: "+902320000000",
+  priceRange: "₺₺",
+  currenciesAccepted: "TRY",
+  paymentAccepted: "Cash, Credit Card, Contactless",
+  servesCuisine: "Specialty Coffee, Artisanal Beverages, Desserts",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "İnönü Caddesi Yakını, Hatay",
-    addressLocality: "Konak",
-    addressRegion: "İzmir",
-    postalCode: "35290",
+    streetAddress: STORE_INFO.location.addressText,
+    addressLocality: STORE_INFO.location.district,
+    addressRegion: STORE_INFO.location.city,
+    postalCode: "35360",
     addressCountry: "TR",
   },
   geo: {
@@ -106,36 +112,54 @@ const jsonLd = {
     latitude: 38.4065,
     longitude: 27.1125,
   },
-  url: "https://joncoffee.com",
-  servesCuisine: "Specialty Coffee, Beverages, Desserts",
-  priceRange: "₺₺",
-  openingHoursSpecification: [
+  openingHoursSpecification: STORE_INFO.hours.map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][
+      h.dayIndex === 0 ? 6 : h.dayIndex - 1
+    ],
+    opens: h.open,
+    closes: h.close,
+  })),
+  amenityFeature: [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-      opens: "08:30",
-      closes: "23:30",
+      "@type": "LocationFeatureSpecification",
+      name: "Pet Friendly",
+      value: true,
     },
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Friday"],
-      opens: "08:30",
-      closes: "00:00",
+      "@type": "LocationFeatureSpecification",
+      name: "Free High-Speed Wi-Fi",
+      value: true,
     },
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Saturday"],
-      opens: "09:00",
-      closes: "00:00",
+      "@type": "LocationFeatureSpecification",
+      name: "Laptop Friendly Workspaces",
+      value: true,
     },
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Sunday"],
-      opens: "09:30",
-      closes: "23:00",
+      "@type": "LocationFeatureSpecification",
+      name: "Near Metro (Hatay & İzmirspor)",
+      value: true,
     },
   ],
-  sameAs: ["https://instagram.com/joncoffees"],
+  hasMenu: {
+    "@type": "Menu",
+    name: "Jön Coffee Kafe Menüsü",
+    hasMenuSection: [
+      {
+        "@type": "MenuSection",
+        name: "İmza ve Öne Çıkanlar",
+        hasMenuItem: MENU_ITEMS.slice(0, 10).map((item) => ({
+          "@type": "MenuItem",
+          name: item.name,
+          description: item.description,
+          suitableForDiet: "https://schema.org/VegetarianDiet",
+          nutrition: item.calories ? { "@type": "NutritionInformation", calories: item.calories } : undefined,
+        })),
+      },
+    ],
+  },
+  sameAs: [STORE_INFO.socials.instagram],
 };
 
 export default function RootLayout({
@@ -154,7 +178,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#fbf9f4] text-[#102341] font-sans selection:bg-[#102341] selection:text-white">
+      <body className="min-h-screen flex flex-col bg-[#fbf9f4] text-[#102341] font-sans selection:bg-[#102341] selection:text-white antialiased">
         {children}
       </body>
     </html>
