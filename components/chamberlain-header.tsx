@@ -7,6 +7,17 @@ import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 import { Menu, X, MapPin, ArrowRight } from 'lucide-react';
 
+const MARQUEE_ITEMS = [
+  '✦ %100 SPECIALTY GRADE ARABICA',
+  'İZMİR HATAY METROYA 2 DK',
+  'AYNI İYİ KAHVE, YEPYENİ HİSLER',
+  '%100 PET FRIENDLY',
+  'FOCUSED & SURPRISED',
+  'HAFTALIK TAZE KAVRUM',
+  '16 SAAT SOĞUK DEMLEME COLD BREW',
+  'JÖN SUNRISE İMZA REÇETE',
+];
+
 export function ChamberlainHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -20,9 +31,29 @@ export function ChamberlainHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-      {/* Top Announcement Bar */}
-      <div className="bg-[#102341] text-white py-1.5 text-center text-[10px] sm:text-xs font-semibold tracking-wider uppercase select-none">
-        <span>✦ İZMİR HATAY &bull; %100 SPECIALTY ARABICA &bull; METROYA 2 DK ✦</span>
+      {/* Continuous 60fps Marquee Ticker */}
+      <div className="bg-[#102341] text-white py-2 overflow-hidden select-none border-b border-[#1b3561]">
+        <div className="animate-continuous-marquee flex items-center gap-8 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+          {/* Loop 1 */}
+          <div className="flex items-center gap-8 shrink-0">
+            {MARQUEE_ITEMS.map((item, idx) => (
+              <span key={idx} className="flex items-center gap-3 shrink-0">
+                <span>{item}</span>
+                <span className="text-[#fab80b] opacity-70">✦</span>
+              </span>
+            ))}
+          </div>
+
+          {/* Loop 2 (Seamless clone) */}
+          <div className="flex items-center gap-8 shrink-0" aria-hidden="true">
+            {MARQUEE_ITEMS.map((item, idx) => (
+              <span key={`clone-${idx}`} className="flex items-center gap-3 shrink-0">
+                <span>{item}</span>
+                <span className="text-[#fab80b] opacity-70">✦</span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Main Navigation Bar */}
@@ -31,7 +62,7 @@ export function ChamberlainHeader() {
         <div className="flex items-center lg:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 -ml-2 text-[#102341] focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 -ml-2 text-[#102341] focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
             aria-label="Menüyü aç"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
