@@ -1,26 +1,130 @@
 @import "tailwindcss";
 
+@theme {
+  --color-chamberlain-navy: #102341;
+  --color-chamberlain-navy-hover: #1b3561;
+  --color-chamberlain-blue: #e3ecf1;
+  --color-chamberlain-blue-dark: #0d1e38;
+  --color-chamberlain-cream: #fbf9f4;
+  --color-chamberlain-gray-light: #f4f6f8;
+  --color-chamberlain-border: #e5e7eb;
+  --color-chamberlain-yellow: #fab80b;
+  --color-chamberlain-accent-orange: #f97316;
+
+  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbf9f4;
+  --foreground: #102341;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #102341;
+  color: #ffffff;
+}
+
+/* Chamberlain Clean Pill Buttons */
+.btn-chamberlain-primary {
+  background-color: #102341;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-chamberlain-primary:hover {
+  background-color: #1b3561;
+  transform: translateY(-1px);
+}
+
+.btn-chamberlain-primary:active {
+  transform: translateY(0);
+}
+
+.btn-chamberlain-secondary {
+  background-color: #ffffff;
+  color: #102341;
+  border: 1.5px solid #102341;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-chamberlain-secondary:hover {
+  background-color: #f4f6f8;
+  transform: translateY(-1px);
+}
+
+/* Subtle Card Elevation (No comic borders) */
+.chamberlain-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chamberlain-card:hover {
+  border-color: #d1d5db;
+  box-shadow: 0 10px 25px -5px rgba(16, 35, 65, 0.06), 0 8px 10px -6px rgba(16, 35, 65, 0.04);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fbf9f4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #102341;
+  border-radius: 9999px;
+}
+
+/* Marquee Ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
