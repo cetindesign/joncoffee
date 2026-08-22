@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://joncoffee.com/sitemap.xml
