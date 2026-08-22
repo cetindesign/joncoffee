@@ -15,21 +15,9 @@ export function ChamberlainHero() {
   };
 
   return (
-    <section className="relative min-h-[90dvh] sm:min-h-[94vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-b border-[#0038a8]/15 overflow-hidden select-none">
+    <section className="relative min-h-[85dvh] sm:min-h-[90vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-b border-[#0038a8]/15 overflow-hidden select-none">
       <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center space-y-6 sm:space-y-8">
-        {/* Top Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8] font-display"
-        >
-          <span>★ İZMİR HATAY</span>
-          <span className="text-[#0038a8]/40">&bull;</span>
-          <span>%100 SPECIALTY GRADE ARABICA ★</span>
-        </motion.div>
-
-        {/* Centerpiece: Ultra-Large Screen-Proportional Emblem */}
+        {/* Centerpiece: Screen-Proportional Mascot Emblem */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -45,17 +33,20 @@ export function ChamberlainHero() {
           />
         </motion.div>
 
-        {/* Pure Single Slogan (No explanatory paragraphs) */}
+        {/* Quality Seal Title (No top duplicates) */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-1 max-w-xl mx-auto"
+          className="space-y-1.5 max-w-xl mx-auto"
         >
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#0038a8] tracking-tight font-display uppercase leading-tight">
-            BİR YANIMIZ ODAK, <br />
-            <span className="text-[#0038a8]/70">BİR YANIMIZ MERAK.</span>
+            100% SPECIALTY GRADE ARABICA
           </h1>
+
+          <p className="text-xs sm:text-sm font-bold text-gray-600 tracking-wide uppercase font-display">
+            İzmir Hatay &bull; Günlük Taze Kavrum & Nitelikli Demlemeler
+          </p>
         </motion.div>
 
         {/* Dual-Mood Action Gateways */}
