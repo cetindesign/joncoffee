@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   MENU_CATEGORIES,
@@ -16,6 +16,8 @@ import {
   ChevronRight,
   Coffee,
   Sparkles,
+  Share2,
+  Check,
 } from 'lucide-react';
 
 type MoodFilter = 'all' | 'focused' | 'surprised';
@@ -38,15 +40,72 @@ export function MenuSection() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  // Deep Link listener on Mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const itemId = params.get('item');
+    if (itemId) {
+      const match = MENU_ITEMS.find((m) => m.id === itemId);
+      if (match) {
+        setSelectedItem(match);
+        const el = document.getElementById('menu');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
+
+  const handleSelectItem = useCallback((item: MenuItem | null) => {
+    setSelectedItem(item);
+    setCopied(false);
+    if (typeof window !== 'undefined') {
+      if (item) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('item', item.id);
+        window.history.replaceState(null, '', url.toString());
+      } else {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('item');
+        window.history.replaceState(null, '', url.toString());
+      }
+    }
+  }, []);
 
   // Close Bottom Sheet on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedItem(null);
+      if (e.key === 'Escape') handleSelectItem(null);
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [handleSelectItem]);
+
+  const handleShare = async (item: MenuItem) => {
+    const shareUrl = `${window.location.origin}${window.location.pathname}?item=${item.id}#menu`;
+    const shareData = {
+      title: `${item.name} | Jön Coffee İzmir`,
+      text: `${item.name} - ${item.description}`,
+      url: shareUrl,
+    };
+
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        // User cancelled share
+      }
+    } else {
+      // Clipboard fallback
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      } catch {
+        // Clipboard error
+      }
+    }
+  };
 
   const filteredItems = useMemo(() => {
     return MENU_ITEMS.filter((item) => {
@@ -201,7 +260,7 @@ export function MenuSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={EASE_TRANSITION}
-                onClick={() => setSelectedItem(item)}
+                onClick={() => handleSelectItem(item)}
                 whileTap={{ scale: 0.98 }}
                 className="group cursor-pointer bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 hover:border-gray-300 hover:shadow-sm transition-all duration-300 flex flex-col justify-between"
               >
@@ -278,7 +337,7 @@ export function MenuSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
-              onClick={() => setSelectedItem(null)}
+              onClick={() => handleSelectItem(null)}
               className="absolute inset-0 bg-black/40 backdrop-blur-xs"
             />
 
@@ -309,8 +368,8 @@ export function MenuSection() {
                 </div>
 
                 <button
-                  onClick={() => setSelectedItem(null)}
-                  className="p-2 -mr-1 rounded-full text-gray-400 hover:text-[#102341] hover:bg-gray-100 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  onClick={() => handleSelectItem(null)}
+                  className="p-2 -mr-1 rounded-full text-gray-400 hover:text-[#102341] hover:bg-gray-100 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
                   aria-label="Kapat"
                 >
                   <X className="w-5 h-5" />
@@ -348,10 +407,28 @@ export function MenuSection() {
                 ))}
               </div>
 
-              <div className="pt-2">
+              {/* Action Buttons: Native Share + Dismiss */}
+              <div className="grid grid-cols-2 gap-2.5 pt-2">
                 <button
-                  onClick={() => setSelectedItem(null)}
-                  className="btn-chamberlain-primary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px]"
+                  onClick={() => handleShare(selectedItem)}
+                  className="btn-chamberlain-secondary py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-600" />
+                      <span className="text-emerald-700">Kopyalandı!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="w-4 h-4 text-[#102341]" />
+                      <span>Arkadaşına Gönder</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => handleSelectItem(null)}
+                  className="btn-chamberlain-primary py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
                 >
                   Kapat
                 </button>
