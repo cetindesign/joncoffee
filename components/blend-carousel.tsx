@@ -76,10 +76,10 @@ export function BlendCarousel() {
   };
 
   return (
-    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
+    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200">
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
         {/* Section Header */}
-        <div className="flex items-end justify-between gap-4 pb-4 border-b border-gray-100">
+        <div className="flex items-end justify-between gap-4 pb-4 border-b border-gray-200">
           <div className="space-y-1">
             <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-gray-400">
               Koleksiyon & Reçeteler
@@ -89,73 +89,62 @@ export function BlendCarousel() {
             </h2>
           </div>
 
-          <span className="hidden sm:inline-block text-xs font-bold text-[#102341] uppercase tracking-wider bg-gray-100 px-3.5 py-1.5 rounded-full">
+          <span className="hidden sm:inline-block text-xs font-bold text-[#102341] uppercase tracking-wider">
             ✦ %100 SPECIALTY ARABICA
           </span>
         </div>
 
-        {/* Mobile: Horizontal Snap Carousel | Desktop: 4-Col Grid */}
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-4 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none">
-          {PRODUCTS.map((prod) => (
+        {/* 4 Products (ZERO OUTER CARDS - OPEN EDITORIAL GRID) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 divide-y sm:divide-y-0 lg:divide-x divide-gray-200/80">
+          {PRODUCTS.map((prod, idx) => (
             <a
               key={prod.id}
               href="#menu"
               onClick={scrollToMenu}
-              className="group min-w-[260px] max-w-[280px] sm:min-w-0 sm:max-w-none snap-start shrink-0 bg-white rounded-3xl border border-gray-200 p-4 sm:p-5 flex flex-col justify-between hover:border-gray-300 hover:shadow-md transition-all duration-200 cursor-pointer"
+              className={`group flex flex-col justify-between cursor-pointer select-none ${
+                idx > 0 ? 'pt-6 sm:pt-0 lg:pl-8' : ''
+              }`}
             >
               <div>
-                {/* Top Badge & Rating */}
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-wider uppercase bg-[#e3ecf1] text-[#102341] px-2.5 py-0.5 rounded-full">
-                    {prod.badge}
-                  </span>
-
-                  <div className="flex items-center gap-1 text-[11px] text-gray-500 font-semibold">
-                    <Star className="w-3 h-3 fill-[#fab80b] text-[#fab80b]" />
-                    <span>4.9 ({prod.reviewsCount})</span>
-                  </div>
-                </div>
-
-                {/* Product Photo Container */}
+                {/* Product Photo Container (Floating on Pastel Canvas, NO outer card) */}
                 <div className={`relative w-full aspect-square ${prod.bgPedestal} rounded-2xl overflow-hidden mb-4`}>
                   <Image
                     src={assetPath(prod.image)}
                     alt={prod.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-cover group-hover:scale-105 transition-transform duration-400"
                   />
+                  <div className="absolute top-3 left-3 bg-[#102341] text-white text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wider uppercase">
+                    {prod.badge}
+                  </div>
                 </div>
 
                 {/* Info */}
-                <div className="space-y-1 mb-4">
-                  <h3 className="font-extrabold text-base text-[#102341] leading-snug font-display group-hover:text-[#1b3561] transition-colors">
-                    {prod.name}
-                  </h3>
-                  <p className="text-[11px] sm:text-xs text-gray-500 font-medium line-clamp-1">
+                <div className="space-y-1.5 mb-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-extrabold text-base text-[#102341] leading-snug font-display group-hover:text-[#1b3561] transition-colors">
+                      {prod.name}
+                    </h3>
+                  </div>
+
+                  <p className="text-xs text-gray-500 font-medium line-clamp-1">
                     {prod.subName}
                   </p>
 
                   {/* Flavor Notes */}
-                  <div className="flex flex-wrap gap-1 pt-1.5">
-                    {prod.flavorNotes.map((note) => (
-                      <span
-                        key={note}
-                        className="text-[9px] font-semibold text-gray-600 bg-gray-100 px-2 py-0.5 rounded-md"
-                      >
-                        {note}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-[11px] font-semibold text-gray-700 pt-1">
+                    Notalar: {prod.flavorNotes.join(' • ')}
+                  </p>
 
                   {/* Roast Meter */}
-                  <div className="pt-2 flex items-center justify-between text-[10px] sm:text-[11px] font-semibold text-gray-500">
+                  <div className="pt-2 flex items-center justify-between text-[11px] font-semibold text-gray-500">
                     <span>{prod.roastLevel}</span>
                     <div className="flex gap-1">
                       {[1, 2, 3, 4, 5].map((dot) => (
                         <span
                           key={dot}
                           className={`w-1.5 h-1.5 rounded-full ${
-                            dot <= prod.roastDots ? 'bg-[#102341]' : 'bg-gray-200'
+                            dot <= prod.roastDots ? 'bg-[#102341]' : 'bg-gray-300'
                           }`}
                         />
                       ))}
@@ -165,7 +154,7 @@ export function BlendCarousel() {
               </div>
 
               {/* Discreet Text Link */}
-              <div className="pt-2.5 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-[#102341] group-hover:translate-x-0.5 transition-transform">
+              <div className="pt-2 flex items-center justify-between text-xs font-bold text-[#102341] group-hover:translate-x-1 transition-transform">
                 <span>Reçeteyi İncele</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </div>
