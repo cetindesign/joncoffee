@@ -1,0 +1,24 @@
+{
+  "name": "Jön Coffee İzmir | Specialty Coffee & Vitrine",
+  "short_name": "Jön Coffee",
+  "description": "İzmir Hatay %100 Specialty Grade Arabica Kahveci Vitrini",
+  "start_url": "/joncoffee/",
+  "display": "standalone",
+  "background_color": "#fbf9f4",
+  "theme_color": "#102341",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/joncoffee/assets/jon-badge-circle.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/joncoffee/assets/jon-badge-circle.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

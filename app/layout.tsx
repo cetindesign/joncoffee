@@ -28,6 +28,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cetindesign.github.io/joncoffee/"),
+  manifest: "/joncoffee/manifest.webmanifest",
   title: {
     default: "Jön Coffee | İzmir Hatay'ın Yeni Nesil Mahalle Kahvecisi",
     template: "%s | Jön Coffee İzmir",
@@ -53,6 +54,11 @@ export const metadata: Metadata = {
     email: false,
     address: true,
     telephone: true,
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Jön Coffee",
   },
   openGraph: {
     type: "website",
@@ -173,6 +179,11 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} ${bricolageGrotesque.variable} scroll-smooth`}
     >
       <head>
+        <link rel="manifest" href="/joncoffee/manifest.webmanifest" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Jön Coffee" />
+        <link rel="apple-touch-icon" href="/joncoffee/assets/jon-badge-circle.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
