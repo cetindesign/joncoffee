@@ -118,17 +118,17 @@ export function BlendCarousel() {
           </div>
         </div>
 
-        {/* Horizontal Snap Carousel */}
+        {/* Horizontal Snap Carousel with Clean Margin & Padding */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 scroll-smooth"
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 scroll-smooth scroll-pl-1"
         >
           {PRODUCTS.map((prod) => (
             <a
               key={prod.id}
               href="#menu"
               onClick={scrollToMenu}
-              className="shrink-0 w-[76vw] sm:w-[300px] lg:w-[280px] snap-start group flex flex-col justify-between cursor-pointer select-none"
+              className="shrink-0 w-[72vw] sm:w-[280px] lg:w-[270px] snap-start group flex flex-col justify-between cursor-pointer select-none"
             >
               <div>
                 {/* Product Photo on Pastel Canvas */}
