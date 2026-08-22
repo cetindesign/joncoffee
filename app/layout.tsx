@@ -118,14 +118,16 @@ const jsonLd = {
     latitude: 38.4065,
     longitude: 27.1125,
   },
-  openingHoursSpecification: STORE_INFO.hours.map((h) => ({
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][
-      h.dayIndex === 0 ? 6 : h.dayIndex - 1
-    ],
-    opens: h.open,
-    closes: h.close,
-  })),
+  openingHoursSpecification: STORE_INFO.hours
+    .filter((h) => h.isOpen)
+    .map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][
+        h.dayIndex === 0 ? 6 : h.dayIndex - 1
+      ],
+      opens: h.open,
+      closes: h.close,
+    })),
   amenityFeature: [
     {
       "@type": "LocationFeatureSpecification",

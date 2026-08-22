@@ -139,9 +139,8 @@ export function ChamberlainFooter() {
               ÇALIŞMA SAATLERİ
             </h4>
             <div className="space-y-1 text-xs sm:text-sm text-gray-300 font-medium">
-              <p>Hafta İçi: 08:30 - 23:30</p>
-              <p>Cuma - Cmt: 08:30 - 00:00</p>
-              <p>Pazar: 09:30 - 23:00</p>
+              <p>Pzt - Cmt: 09:00 - 20:30</p>
+              <p className="text-amber-400 font-semibold">Pazar: Kapalı</p>
             </div>
             <p className="text-[10px] sm:text-[11px] text-gray-400 pt-1">
               Hatay & İzmirspor Metrolarına 2 dk.

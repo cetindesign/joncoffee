@@ -12,29 +12,34 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
   }>({
     isOpen: true,
     text: 'Açık',
-    subtext: 'Bugün 23:30’a kadar',
+    subtext: 'Bugün 20:30’a kadar',
   });
 
   useEffect(() => {
     function checkOpenStatus() {
       const now = new Date();
-      const day = now.getDay();
+      const day = now.getDay(); // 0 = Sunday, 1 = Monday...
       const currentHours = now.getHours();
       const currentMinutes = now.getMinutes();
       const currentTimeInMinutes = currentHours * 60 + currentMinutes;
 
       const todayConfig = STORE_INFO.hours.find((h) => h.dayIndex === day);
 
-      if (!todayConfig) {
-        setStatus({ isOpen: false, text: 'Kapalı', subtext: 'Yarın 08:30’da açık' });
+      if (!todayConfig || !todayConfig.isOpen) {
+        // Sunday or closed day -> Opens Monday 09:00
+        const nextOpenDay = STORE_INFO.hours.find((h) => h.isOpen);
+        setStatus({
+          isOpen: false,
+          text: 'Kapalı',
+          subtext: `${day === 0 ? 'Pazartesi' : 'Yarın'} ${nextOpenDay?.open || '09:00'}`,
+        });
         return;
       }
 
       const [openHour, openMin] = todayConfig.open.split(':').map(Number);
       const openTimeInMinutes = openHour * 60 + openMin;
 
-      let [closeHour, closeMin] = todayConfig.close.split(':').map(Number);
-      if (closeHour === 0) closeHour = 24;
+      const [closeHour, closeMin] = todayConfig.close.split(':').map(Number);
       const closeTimeInMinutes = closeHour * 60 + closeMin;
 
       const isOpenNow =
@@ -48,13 +53,16 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
           subtext: `${todayConfig.close}'a kadar`,
         });
       } else {
-        const nextOpenDay = STORE_INFO.hours.find(
-          (h) => h.dayIndex === (day + 1) % 7
-        );
+        const nextDayIndex = (day + 1) % 7;
+        const nextDayConfig = STORE_INFO.hours.find((h) => h.dayIndex === nextDayIndex);
+        const opensWhen = nextDayConfig?.isOpen
+          ? `Yarın ${nextDayConfig.open}`
+          : 'Pazartesi 09:00';
+
         setStatus({
           isOpen: false,
           text: 'Kapalı',
-          subtext: `Yarın ${nextOpenDay?.open || '08:30'}`,
+          subtext: opensWhen,
         });
       }
     }

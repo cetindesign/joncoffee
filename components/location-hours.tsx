@@ -85,7 +85,7 @@ export function LocationHours() {
               </h3>
             </div>
 
-            {/* Clean Typographic Hours Rows (NO GRAY PILL BOXES) */}
+            {/* Clean Typographic Hours Rows */}
             <div className="divide-y divide-gray-100 text-xs sm:text-sm">
               {STORE_INFO.hours.map((item) => {
                 const isToday = item.dayIndex === currentDayIndex;
@@ -106,7 +106,7 @@ export function LocationHours() {
                     </div>
 
                     <span className="font-mono text-xs tracking-tight text-right">
-                      {item.open} - {item.close}
+                      {item.isOpen ? `${item.open} - ${item.close}` : 'Kapalı'}
                     </span>
                   </div>
                 );
@@ -115,8 +115,9 @@ export function LocationHours() {
 
             {/* Note */}
             <div className="pt-4 border-t border-gray-200 space-y-1 text-xs text-gray-500 font-medium">
-              <p>&bull; Cuma ve Cumartesi günleri gece servisi 00:00&apos;a kadar devam eder.</p>
-              <p>&bull; Evcil hayvan dostu terasımız gün boyu açıktır.</p>
+              <p>&bull; Pazar günleri kapalıyız.</p>
+              <p>&bull; Pazartesi - Cumartesi arası 09:00 - 20:30 hizmet vermekteyiz.</p>
+              <p>&bull; Evcil hayvan dostu terasımız çalışma saatleri boyunca açıktır.</p>
             </div>
           </div>
         </div>
