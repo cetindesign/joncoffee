@@ -15,7 +15,7 @@ export function ChamberlainHero() {
   };
 
   return (
-    <section className="relative min-h-[88dvh] sm:min-h-[92vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-b border-[#0038a8]/15 overflow-hidden select-none">
+    <section className="relative min-h-[90dvh] sm:min-h-[94vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-b border-[#0038a8]/15 overflow-hidden select-none">
       <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center space-y-6 sm:space-y-8">
         {/* Top Eyebrow */}
         <motion.div
@@ -29,12 +29,12 @@ export function ChamberlainHero() {
           <span>%100 SPECIALTY GRADE ARABICA ★</span>
         </motion.div>
 
-        {/* Centerpiece: Screen-Proportional Mascot Emblem */}
+        {/* Centerpiece: Ultra-Large Screen-Proportional Emblem */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-[88vw] h-[88vw] max-w-[380px] max-h-[380px] sm:max-w-[500px] sm:max-h-[500px] lg:max-w-[580px] lg:max-h-[580px] shrink-0"
+          className="relative w-[92vw] h-[92vw] max-w-[420px] max-h-[420px] sm:max-w-[540px] sm:max-h-[540px] lg:max-w-[640px] lg:max-h-[640px] shrink-0"
         >
           <Image
             src={assetPath('/assets/jon-emblem-duo.png')}
@@ -45,24 +45,20 @@ export function ChamberlainHero() {
           />
         </motion.div>
 
-        {/* Brand Motto */}
+        {/* Pure Single Slogan (No explanatory paragraphs) */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-1.5 max-w-xl mx-auto"
+          className="space-y-1 max-w-xl mx-auto"
         >
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#0038a8] tracking-tight font-display uppercase leading-tight">
-            AYNI İYİ KAHVE. <br />
-            <span className="text-[#0038a8]/70">YEPYENİ HİSLER.</span>
+            BİR YANIMIZ ODAK, <br />
+            <span className="text-[#0038a8]/70">BİR YANIMIZ MERAK.</span>
           </h1>
-
-          <p className="text-xs sm:text-base text-gray-600 font-medium leading-relaxed">
-            İster işine odaklanan bir <strong>Focused</strong>, ister yeni tatlar peşindeki bir <strong>Surprised</strong> ol.
-          </p>
         </motion.div>
 
-        {/* Dual-Mood Gateways */}
+        {/* Dual-Mood Action Gateways */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,7 +85,7 @@ export function ChamberlainHero() {
             </button>
           </div>
 
-          {/* Quick Location & Metro Strip */}
+          {/* Quick Location Strip */}
           <div className="pt-2 flex items-center justify-center gap-3 text-xs font-bold text-[#0038a8]/75">
             <a
               href={STORE_INFO.location.googleMapsUrl}
