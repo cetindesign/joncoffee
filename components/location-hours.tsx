@@ -94,7 +94,7 @@ export function LocationHours() {
             <div className="pt-3 border-t border-[#0038a8]/15 space-y-1 text-xs text-gray-600 font-medium">
               <p>&bull; Pazar günleri kapalıyız.</p>
               <p>&bull; Pazartesi - Cumartesi arası 09:00 - 20:30 hizmet vermekteyiz.</p>
-              <p>&bull; Evcil hayvan dostu terasımız çalışma saatleri boyunca açıktır.</p>
+              <p>&bull; Evcil hayvan dostu bahçemiz çalışma saatleri boyunca açıktır.</p>
             </div>
           </div>
         </div>

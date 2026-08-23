@@ -24,7 +24,7 @@ export function StorySection() {
           <div className="lg:col-span-5 relative w-full h-72 sm:h-96 lg:h-[440px] rounded-3xl overflow-hidden border-2 border-[#0038a8]/20 shadow-sm">
             <Image
               src={assetPath('/assets/hero-coffee-lifestyle.jpg')}
-              alt="Jön Coffee Kafe ve Teras Atmosferi"
+              alt="Jön Coffee Kafe ve Bahçe Atmosferi"
               fill
               className="object-cover"
             />
@@ -66,7 +66,7 @@ export function StorySection() {
                     Pet-Friendly & Rahat Çalışma Alanı
                   </h3>
                   <p className="text-xs text-gray-600 font-medium leading-relaxed">
-                    Evcil hayvanınızla rahatça oturabileceğiniz açık teras, yüksek hızlı Wi-Fi ve laptopla çalışanlar için bol prizli masa düzeni.
+                    Evcil hayvanınızla rahatça oturabileceğiniz açık bahçemiz, yüksek hızlı Wi-Fi ve laptopla çalışanlar için bol prizli masa düzeni.
                   </p>
                 </div>
               </div>
