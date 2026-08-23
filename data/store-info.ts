@@ -36,9 +36,9 @@ export const STORE_INFO = {
     { day: "Cumartesi", dayIndex: 6, open: "09:00", close: "20:30", isOpen: true },
   ] as StoreHours[],
   contact: {
-    phone: "+90 232 000 00 00",
+    phone: "+90 532 000 00 00",
     email: "merhaba@joncoffee.com",
-    whatsapp: "https://wa.me/902320000000",
+    whatsapp: "https://wa.me/905320000000",
   },
   socials: {
     instagram: "https://instagram.com/joncoffee",

@@ -1,11 +1,23 @@
 'use client';
 
+import { useState } from 'react';
 import { STORE_INFO } from '@/data/store-info';
 import { StatusBadge } from './status-badge';
-import { Compass } from 'lucide-react';
+import { Compass, Copy, Check, MapPin } from 'lucide-react';
 
 export function LocationHours() {
   const currentDayIndex = new Date().getDay();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyAddress = async () => {
+    try {
+      await navigator.clipboard.writeText(STORE_INFO.location.fullAddress);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Clipboard fallback
+    }
+  };
 
   return (
     <section id="konum" className="scroll-mt-28 sm:scroll-mt-32 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15">
@@ -28,13 +40,45 @@ export function LocationHours() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Col: Address & Embedded Google Maps (7 cols) */}
           <div className="lg:col-span-7 space-y-5">
-            <div className="space-y-2">
-              <p className="text-base sm:text-lg font-black text-[#0038a8] font-display">
-                {STORE_INFO.location.addressText}
-              </p>
-              <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">
-                İzmir Metrosu <strong>Hatay İstasyonu</strong>&apos;nda inerek sadece 2 dakikalık düzayak yürüyüşle kafemize ulaşabilirsiniz.
-              </p>
+            <div className="space-y-3">
+              <div>
+                <p className="text-base sm:text-lg font-black text-[#0038a8] font-display">
+                  {STORE_INFO.location.addressText}
+                </p>
+                <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed pt-1">
+                  İzmir Metrosu <strong>Hatay İstasyonu</strong>&apos;nda inerek sadece 2 dakikalık düzayak yürüyüşle kafemize ulaşabilirsiniz.
+                </p>
+              </div>
+
+              {/* 1-Tap Action Bar */}
+              <div className="flex flex-wrap items-center gap-2.5">
+                <button
+                  onClick={handleCopyAddress}
+                  className="btn-chamberlain-secondary py-2 px-3.5 text-xs font-bold justify-center cursor-pointer"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span className="text-emerald-700">Adres Kopyalandı!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 text-[#0038a8]" />
+                      <span>Adresi Kopyala</span>
+                    </>
+                  )}
+                </button>
+
+                <a
+                  href={STORE_INFO.location.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-chamberlain-primary py-2 px-3.5 text-xs justify-center cursor-pointer"
+                >
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Haritada Aç</span>
+                </a>
+              </div>
             </div>
 
             {/* Embedded Live Google Maps (Interactive & Responsive) */}

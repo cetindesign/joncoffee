@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { ArrowRight, ChevronLeft, ChevronRight, X, Sparkles, Check, Flame, MessageCircle } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
@@ -145,13 +145,60 @@ export function BlendCarousel() {
     }
   };
 
-  const openBeanModal = (bean: RetailBeanProduct) => {
+  const openBeanModal = useCallback((bean: RetailBeanProduct) => {
     setSelectedBean(bean);
-  };
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('bean', bean.id);
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, []);
 
-  const closeBeanModal = () => {
+  const closeBeanModal = useCallback(() => {
     setSelectedBean(null);
-  };
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('bean');
+      window.history.replaceState(null, '', url.toString());
+    }
+  }, []);
+
+  // Escape key listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeBeanModal();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [closeBeanModal]);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedBean) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedBean]);
+
+  // Deep Link listener
+  useEffect(() => {
+    const checkDeepLink = () => {
+      const params = new URLSearchParams(window.location.search);
+      const beanId = params.get('bean');
+      if (beanId) {
+        const match = RETAIL_BEANS.find((b) => b.id === beanId);
+        if (match) setSelectedBean(match);
+      }
+    };
+
+    checkDeepLink();
+    window.addEventListener('popstate', checkDeepLink);
+    return () => window.removeEventListener('popstate', checkDeepLink);
+  }, []);
 
   return (
     <section id="blends" className="scroll-mt-28 sm:scroll-mt-32 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15 overflow-hidden">

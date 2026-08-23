@@ -96,6 +96,18 @@ export function MenuSection() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleSelectItem]);
 
+  // Lock body scroll when Bottom Sheet is open
+  useEffect(() => {
+    if (selectedItem) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedItem]);
+
   const handleShare = async (item: MenuItem) => {
     const shareUrl = `${window.location.origin}${window.location.pathname}?item=${item.id}#menu`;
     const shareData = {
@@ -194,66 +206,95 @@ export function MenuSection() {
         {/* Poster Style Editorial Typographic List with Dot Leaders */}
         <div className="min-h-[440px]">
           <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory + searchQuery}
-              initial={{ opacity: 0, y: 3 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -3 }}
-              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-              className="divide-y divide-[#0038a8]/15"
-            >
-              {filteredItems.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => handleSelectItem(item)}
-                  className="group py-4 sm:py-5 flex items-start sm:items-center justify-between gap-4 cursor-pointer hover:bg-[#0038a8]/5 -mx-3 px-3 rounded-xl transition-colors select-none"
-                >
-                  <div className="space-y-1 max-w-xl flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="font-extrabold text-base sm:text-lg text-[#0038a8] font-display group-hover:opacity-85 transition-opacity">
-                        {item.name}
-                      </h3>
+            {filteredItems.length > 0 ? (
+              <motion.div
+                key={activeCategory + searchQuery}
+                initial={{ opacity: 0, y: 3 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -3 }}
+                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                className="divide-y divide-[#0038a8]/15"
+              >
+                {filteredItems.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => handleSelectItem(item)}
+                    className="group py-4 sm:py-5 flex items-start sm:items-center justify-between gap-4 cursor-pointer hover:bg-[#0038a8]/5 -mx-3 px-3 rounded-xl transition-colors select-none"
+                  >
+                    <div className="space-y-1 max-w-xl flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-extrabold text-base sm:text-lg text-[#0038a8] font-display group-hover:opacity-85 transition-opacity">
+                          {item.name}
+                        </h3>
 
-                      {/* Dot Leader */}
-                      <span className="hidden md:inline-block text-[#0038a8]/25 font-mono text-xs tracking-widest select-none">
-                        ........................................
-                      </span>
+                        {/* Dot Leader */}
+                        <span className="hidden md:inline-block text-[#0038a8]/25 font-mono text-xs tracking-widest select-none">
+                          ........................................
+                        </span>
 
-                      {item.badge ? (
-                        <span className="bg-[#0038a8] text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider font-display">
-                          ★ {item.badge}
-                        </span>
-                      ) : item.isPopular ? (
-                        <span className="bg-[#fab80b] text-[#0038a8] text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 uppercase tracking-wider font-display">
-                          <Star className="w-2.5 h-2.5 fill-[#0038a8] text-[#0038a8]" /> Popüler
-                        </span>
-                      ) : null}
+                        {item.badge ? (
+                          <span className="bg-[#0038a8] text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider font-display">
+                            ★ {item.badge}
+                          </span>
+                        ) : item.isPopular ? (
+                          <span className="bg-[#fab80b] text-[#0038a8] text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 uppercase tracking-wider font-display">
+                            <Star className="w-2.5 h-2.5 fill-[#0038a8] text-[#0038a8]" /> Popüler
+                          </span>
+                        ) : null}
+                      </div>
+
+                      <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
+                        {item.description}
+                      </p>
+
+                      <div className="flex flex-wrap items-center gap-2 pt-0.5 text-[11px] text-[#0038a8]/80 font-bold">
+                        <span>{item.isCold ? '❄️ Buzlu / Soğuk' : '☕ Sıcak Servis'}</span>
+                        {item.calories && (
+                          <>
+                            <span>&bull;</span>
+                            <span>{item.calories}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
-                      {item.description}
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-2 pt-0.5 text-[11px] text-[#0038a8]/80 font-bold">
-                      <span>{item.isCold ? '❄️ Buzlu / Soğuk' : '☕ Sıcak Servis'}</span>
-                      {item.calories && (
-                        <>
-                          <span>&bull;</span>
-                          <span>{item.calories}</span>
-                        </>
-                      )}
+                    <div className="shrink-0 flex items-center gap-1.5 text-xs font-black text-[#0038a8] group-hover:translate-x-1 transition-all pt-1 sm:pt-0 font-display uppercase">
+                      <span className="hidden sm:inline">Reçete</span>
+                      <div className="w-7 h-7 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center shadow-2xs group-hover:border-[#0038a8]">
+                        <ChevronRight className="w-4 h-4 text-[#0038a8]" />
+                      </div>
                     </div>
                   </div>
-
-                  <div className="shrink-0 flex items-center gap-1.5 text-xs font-black text-[#0038a8] group-hover:translate-x-1 transition-all pt-1 sm:pt-0 font-display uppercase">
-                    <span className="hidden sm:inline">Reçete</span>
-                    <div className="w-7 h-7 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center shadow-2xs group-hover:border-[#0038a8]">
-                      <ChevronRight className="w-4 h-4 text-[#0038a8]" />
-                    </div>
-                  </div>
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="empty-state"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="py-14 px-6 text-center space-y-4 flex flex-col items-center justify-center rounded-3xl bg-[#0038a8]/5 border border-dashed border-[#0038a8]/20 my-4"
+              >
+                <div className="w-12 h-12 rounded-full bg-[#0038a8]/10 text-[#0038a8] flex items-center justify-center">
+                  <Search className="w-5 h-5" />
                 </div>
-              ))}
-            </motion.div>
+                <div className="space-y-1">
+                  <h4 className="font-black text-base text-[#0038a8] font-display uppercase tracking-tight">
+                    Aradığınız Kriterde Kahve Bulunamadı
+                  </h4>
+                  <p className="text-xs text-gray-600 font-medium max-w-sm">
+                    &quot;{searchQuery}&quot; için eşleşen bir reçete veya içecek bulunamadı. Farklı bir arama deneyebilir veya kategorilerden seçebilirsiniz.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="btn-chamberlain-primary py-2.5 px-5 text-xs uppercase tracking-wider font-display cursor-pointer"
+                >
+                  Aramayı Temizle & Menüye Dön
+                </button>
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
 
