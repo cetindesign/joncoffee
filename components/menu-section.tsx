@@ -361,10 +361,10 @@ export function MenuSection() {
                 ))}
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 pt-2">
+              <div className="flex flex-col gap-2.5 pt-2">
                 <button
                   onClick={() => handleShare(selectedItem)}
-                  className="btn-chamberlain-secondary py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
+                  className="btn-chamberlain-secondary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
                 >
                   {copied ? (
                     <>
@@ -381,7 +381,7 @@ export function MenuSection() {
 
                 <button
                   onClick={() => handleSelectItem(null)}
-                  className="btn-chamberlain-primary py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
+                  className="btn-chamberlain-primary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
                 >
                   Kapat
                 </button>
