@@ -2,7 +2,7 @@
 
 import { STORE_INFO } from '@/data/store-info';
 import { StatusBadge } from './status-badge';
-import { Compass, MapPin } from 'lucide-react';
+import { Compass } from 'lucide-react';
 
 export function LocationHours() {
   const currentDayIndex = new Date().getDay();
@@ -17,7 +17,7 @@ export function LocationHours() {
               ★ Ziyaret & Ulaşım
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
-              İZMİR HATAY KAFEMİZ
+              AÇIK ADRES & METRO
             </h2>
           </div>
 
@@ -29,10 +29,6 @@ export function LocationHours() {
           {/* Left Col: Address & Embedded Google Maps (7 cols) */}
           <div className="lg:col-span-7 space-y-5">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#0038a8]/70 font-display">
-                <MapPin className="w-3.5 h-3.5 text-[#0038a8]" />
-                <span>AÇIK ADRES & METRO</span>
-              </div>
               <p className="text-base sm:text-lg font-black text-[#0038a8] font-display">
                 {STORE_INFO.location.addressText}
               </p>
