@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Coffee, MapPin, ArrowRight } from 'lucide-react';
+import { Coffee, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 
@@ -68,7 +68,7 @@ export function ChamberlainHero() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md mx-auto space-y-2"
+          className="w-full max-w-md mx-auto space-y-3"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
             <a
@@ -92,9 +92,21 @@ export function ChamberlainHero() {
             </a>
           </div>
 
-          {/* Micro Location note: strictly Hatay Metro 2 dk */}
-          <div className="pt-0.5 flex items-center justify-center text-[10px] sm:text-xs font-bold text-[#0038a8]/75">
-            <span>Hatay Metrosu&apos;na 2 dk &bull; Pzt-Cmt 09:00 - 20:30 &bull; Pazar Kapalı</span>
+          {/* Stacked Legible Micro Info (Alt Alta ve Okunaklı Parçalı Düzen) */}
+          <div className="pt-2 flex flex-col items-center justify-center space-y-1 text-xs">
+            <div className="flex items-center gap-1.5 font-bold text-[#0038a8]">
+              <MapPin className="w-3.5 h-3.5 text-[#0038a8]" />
+              <span>Hatay Metrosu&apos;na 2 dk yürüme mesafesinde</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-[11px] sm:text-xs text-gray-600 font-medium">
+              <span className="flex items-center gap-1">
+                <Clock className="w-3 h-3 text-gray-400" />
+                <span>Pzt - Cmt: <strong className="text-[#0038a8]">09:00 - 20:30</strong></span>
+              </span>
+              <span>&bull;</span>
+              <span className="text-amber-800 font-bold">Pazar: Kapalı</span>
+            </div>
           </div>
         </motion.div>
       </div>
