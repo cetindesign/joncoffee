@@ -85,20 +85,20 @@ export function ChamberlainFooter() {
             <ul className="space-y-2 text-xs sm:text-sm text-white/90 font-medium">
               <li>
                 <a
-                  href="#blends"
-                  onClick={(e) => handleNavClick(e, 'blends')}
-                  className="hover:text-[#fab80b] transition-colors cursor-pointer"
-                >
-                  Paket Kahveler
-                </a>
-              </li>
-              <li>
-                <a
                   href="#menu"
                   onClick={(e) => handleNavClick(e, 'menu')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
                   Menü
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#blends"
+                  onClick={(e) => handleNavClick(e, 'blends')}
+                  className="hover:text-[#fab80b] transition-colors cursor-pointer"
+                >
+                  Paket Kahveler
                 </a>
               </li>
               <li>

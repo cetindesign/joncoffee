@@ -1,8 +1,8 @@
 import { ChamberlainHeader } from '@/components/chamberlain-header';
 import { ChamberlainHero } from '@/components/chamberlain-hero';
+import { MenuSection } from '@/components/menu-section';
 import { BlendCarousel } from '@/components/blend-carousel';
 import { StorySection } from '@/components/story-section';
-import { MenuSection } from '@/components/menu-section';
 import { LocationHours } from '@/components/location-hours';
 import { ChamberlainFooter } from '@/components/chamberlain-footer';
 import { FloatingAction } from '@/components/floating-action';
@@ -16,16 +16,16 @@ export default function Home() {
       {/* 2. Hero: Brand Promise & Direct Action */}
       <ChamberlainHero />
 
-      {/* 3. Showcase: 4 Key Drinks & Roasts */}
-      <BlendCarousel />
-
-      {/* 4. Philosophy: Focused & Surprised Mascot Characters */}
-      <StorySection />
-
-      {/* 5. Full Cafe Menu & Bottom Sheet */}
+      {/* 3. Full Cafe Menu & Bottom Sheet */}
       <MenuSection />
 
-      {/* 6. Visit: İzmir Hatay Location, Metro & Weekly Hours */}
+      {/* 4. Retail Packaged Coffee Showcase (250g / 1kg) */}
+      <BlendCarousel />
+
+      {/* 5. Neighborhood Culture & Craft Standards */}
+      <StorySection />
+
+      {/* 6. Location & Working Hours */}
       <LocationHours />
 
       {/* 7. Footer */}

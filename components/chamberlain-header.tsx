@@ -121,18 +121,18 @@ export function ChamberlainHeader() {
           {/* Desktop Nav Links with precise smooth scroll */}
           <nav className="hidden lg:flex items-center gap-7">
             <a
-              href="#blends"
-              onClick={(e) => handleNavClick(e, 'blends')}
-              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
-            >
-              Paket Kahveler
-            </a>
-            <a
               href="#menu"
               onClick={(e) => handleNavClick(e, 'menu')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Menü
+            </a>
+            <a
+              href="#blends"
+              onClick={(e) => handleNavClick(e, 'blends')}
+              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
+            >
+              Paket Kahveler
             </a>
             <a
               href="#karakterler"
@@ -185,19 +185,19 @@ export function ChamberlainHeader() {
 
           <div className="flex flex-col gap-4 font-extrabold text-lg text-[#0038a8] font-display uppercase">
             <a
-              href="#blends"
-              onClick={(e) => handleNavClick(e, 'blends')}
-              className="py-1 flex items-center justify-between cursor-pointer"
-            >
-              <span>Paket Kahveler (250g)</span>
-              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
-            </a>
-            <a
               href="#menu"
               onClick={(e) => handleNavClick(e, 'menu')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Menü</span>
+              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
+            </a>
+            <a
+              href="#blends"
+              onClick={(e) => handleNavClick(e, 'blends')}
+              className="py-1 flex items-center justify-between cursor-pointer"
+            >
+              <span>Paket Kahveler (250g)</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
