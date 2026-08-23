@@ -133,7 +133,7 @@ export function ChamberlainHeader() {
               }}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
-              Kafe Menüsü
+              Menü
             </a>
             <a
               href="#karakterler"
@@ -215,7 +215,7 @@ export function ChamberlainHeader() {
               }}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Kafe Menüsü</span>
+              <span>Menü</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a

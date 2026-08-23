@@ -20,12 +20,6 @@ export interface MenuCategory {
 
 export const MENU_CATEGORIES: MenuCategory[] = [
   {
-    id: 'all',
-    title: 'Tüm Menü',
-    subtitle: 'Jön Coffees lezzetlerinin tamamı',
-    iconName: 'Sparkles',
-  },
-  {
     id: 'ozeller',
     title: 'Jön Özeller ✦',
     subtitle: 'İmza lezzetler & tatlı dokunuşlar',

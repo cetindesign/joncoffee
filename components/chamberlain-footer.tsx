@@ -103,7 +103,7 @@ export function ChamberlainFooter() {
                   }}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Kafe Menüsü
+                  Menü
                 </a>
               </li>
               <li>

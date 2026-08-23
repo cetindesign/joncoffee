@@ -31,7 +31,7 @@ const EASE_TRANSITION = {
 } as const;
 
 export function MenuSection() {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('ozeller');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [copied, setCopied] = useState(false);
@@ -123,9 +123,6 @@ export function MenuSection() {
 
   const filteredItems = useMemo(() => {
     return MENU_ITEMS.filter((item) => {
-      if (activeCategory !== 'all' && item.category !== activeCategory) {
-        return false;
-      }
       if (searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const matchName = item.name.toLowerCase().includes(query);
@@ -133,7 +130,7 @@ export function MenuSection() {
         const matchTags = item.tags?.some((t) => t.toLowerCase().includes(query));
         return matchName || matchDesc || matchTags;
       }
-      return true;
+      return item.category === activeCategory;
     });
   }, [activeCategory, searchQuery]);
 
@@ -143,10 +140,10 @@ export function MenuSection() {
         {/* Header */}
         <div className="pb-4 border-b border-[#0038a8]/20 space-y-1">
           <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
-            ★ Fiziksel Menü Seçkisi
+            ★ Seçki & Reçeteler
           </span>
           <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
-            KAFE MENÜSÜ
+            MENÜ
           </h2>
         </div>
 
