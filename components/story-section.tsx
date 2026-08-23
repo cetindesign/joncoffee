@@ -18,9 +18,9 @@ export function StorySection() {
         {/* Section Header */}
         <div className="space-y-1 pb-3 border-b border-[#0038a8]/20">
           <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
-            ★ Mahalle Kültürü & Standartlarımız
+            ★ MAHALLE KÜLTÜRÜ ★
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#0038a8] tracking-tight font-display uppercase">
             İZMİR HATAY&apos;IN YENİ NESİL KAHVE DURAĞI
           </h2>
         </div>
