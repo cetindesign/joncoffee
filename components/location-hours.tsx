@@ -1,17 +1,15 @@
 'use client';
 
-import Image from 'next/image';
 import { STORE_INFO } from '@/data/store-info';
-import { assetPath } from '@/lib/assets';
 import { StatusBadge } from './status-badge';
-import { MapPin, Navigation, Compass } from 'lucide-react';
+import { Compass, MapPin } from 'lucide-react';
 
 export function LocationHours() {
   const currentDayIndex = new Date().getDay();
 
   return (
     <section id="konum" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15">
-      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+      <div className="max-w-7xl mx-auto space-y-10 sm:space-y-14">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-[#0038a8]/20">
           <div className="space-y-1">
@@ -27,14 +25,15 @@ export function LocationHours() {
         </div>
 
         {/* 2-Column Store Guide */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Col: Location & Metro (7 cols) */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="space-y-3">
-              <span className="text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
-                ★ Açık Adres & Metro
-              </span>
-              <p className="text-lg sm:text-xl font-black text-[#0038a8] font-display">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Col: Address & Embedded Google Maps (7 cols) */}
+          <div className="lg:col-span-7 space-y-5">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#0038a8]/70 font-display">
+                <MapPin className="w-3.5 h-3.5 text-[#0038a8]" />
+                <span>AÇIK ADRES & METRO</span>
+              </div>
+              <p className="text-base sm:text-lg font-black text-[#0038a8] font-display">
                 {STORE_INFO.location.addressText}
               </p>
               <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">
@@ -42,42 +41,24 @@ export function LocationHours() {
               </p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={STORE_INFO.location.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-chamberlain-primary py-3.5 px-6 text-xs"
-              >
-                <MapPin className="w-4 h-4" />
-                <span>Google Haritalar</span>
-              </a>
-
-              <a
-                href={STORE_INFO.location.appleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-chamberlain-secondary py-3.5 px-6 text-xs"
-              >
-                <Navigation className="w-4 h-4 text-[#0038a8]" />
-                <span>Apple Haritalar</span>
-              </a>
-            </div>
-
-            {/* Atmosphere Photo */}
-            <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-[#0038a8]/15">
-              <Image
-                src={assetPath('/assets/location-facade.jpg')}
-                alt="Jön Coffee İzmir Hatay Girişi"
-                fill
-                className="object-cover"
+            {/* Embedded Live Google Maps (Interactive & Responsive) */}
+            <div className="relative w-full h-72 sm:h-96 rounded-2xl overflow-hidden border-2 border-[#0038a8]/20 shadow-sm bg-[#faf8f2]">
+              <iframe
+                title="Jön Coffee İzmir Hatay Google Harita Konumu"
+                src={STORE_INFO.location.googleMapsEmbedUrl}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full"
               />
             </div>
           </div>
 
           {/* Right Col: Weekly Hours Table (5 cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-5">
             <div className="flex items-center gap-2 pb-2 border-b border-[#0038a8]/20">
               <Compass className="w-4 h-4 text-[#0038a8]" />
               <h3 className="font-black text-xs uppercase tracking-widest text-[#0038a8] font-display">
@@ -114,7 +95,7 @@ export function LocationHours() {
             </div>
 
             {/* Note */}
-            <div className="pt-4 border-t border-[#0038a8]/15 space-y-1 text-xs text-gray-600 font-medium">
+            <div className="pt-3 border-t border-[#0038a8]/15 space-y-1 text-xs text-gray-600 font-medium">
               <p>&bull; Pazar günleri kapalıyız.</p>
               <p>&bull; Pazartesi - Cumartesi arası 09:00 - 20:30 hizmet vermekteyiz.</p>
               <p>&bull; Evcil hayvan dostu terasımız çalışma saatleri boyunca açıktır.</p>
