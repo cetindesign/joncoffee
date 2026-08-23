@@ -1,17 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { Coffee, Heart, MapPin, ArrowRight } from 'lucide-react';
+import { Coffee, Heart, MapPin } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
-import { STORE_INFO } from '@/data/store-info';
 
 export function StorySection() {
-  const scrollToMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const el = document.getElementById('menu');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section id="karakterler" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#faf8f2] border-b border-[#0038a8]/15">
       <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
@@ -92,28 +85,6 @@ export function StorySection() {
                   </p>
                 </div>
               </div>
-            </div>
-
-            {/* Direct Link */}
-            <div className="pt-2 flex items-center gap-4">
-              <a
-                href="#menu"
-                onClick={scrollToMenu}
-                className="btn-chamberlain-primary py-3.5 px-6 text-xs"
-              >
-                <span>Tüm Menüyü İncele</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-
-              <a
-                href={STORE_INFO.location.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-chamberlain-secondary py-3.5 px-5 text-xs"
-              >
-                <MapPin className="w-4 h-4 text-[#0038a8]" />
-                <span>Haritada Gör</span>
-              </a>
             </div>
           </div>
         </div>
