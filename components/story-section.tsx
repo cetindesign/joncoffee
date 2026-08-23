@@ -7,7 +7,6 @@ import { ChevronLeft, ChevronRight, Sparkles, Coffee, Navigation } from 'lucide-
 
 const COMMITMENTS = [
   {
-    index: '01 / 03',
     tag: 'NİTELİKLİ SEÇKİ',
     icon: Coffee,
     heroMetric: '86+ SCAA',
@@ -17,7 +16,6 @@ const COMMITMENTS = [
     chips: ['SCA Sertifikalı', 'Haftalık Taze Kavrum', '16H Soğuk Demleme'],
   },
   {
-    index: '02 / 03',
     tag: 'YAŞAYAN ALAN',
     icon: Sparkles,
     heroMetric: '%100 PET',
@@ -27,7 +25,6 @@ const COMMITMENTS = [
     chips: ['Pet-Friendly Bahçe', 'Yüksek Hızlı Wi-Fi', 'Prizli Masalar'],
   },
   {
-    index: '03 / 03',
     tag: 'MERKEZİ KONUM',
     icon: Navigation,
     heroMetric: '120 METRE',
@@ -44,26 +41,45 @@ export function StorySection() {
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
-    const { scrollLeft, clientWidth } = scrollRef.current;
-    if (clientWidth === 0) return;
-    const index = Math.round(scrollLeft / clientWidth);
-    setActiveIndex(Math.max(0, Math.min(index, COMMITMENTS.length - 1)));
+    const container = scrollRef.current;
+    const children = Array.from(container.children) as HTMLElement[];
+    const scrollLeft = container.scrollLeft;
+
+    let closestIdx = 0;
+    let minDiff = Infinity;
+
+    children.forEach((child, idx) => {
+      const childOffset = child.offsetLeft - container.offsetLeft;
+      const diff = Math.abs(childOffset - scrollLeft);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = idx;
+      }
+    });
+
+    setActiveIndex(closestIdx);
   };
 
   const scrollToIndex = (index: number) => {
     if (!scrollRef.current) return;
-    const targetLeft = index * scrollRef.current.clientWidth;
-    scrollRef.current.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    const container = scrollRef.current;
+    const children = Array.from(container.children) as HTMLElement[];
+    const targetChild = children[index];
+
+    if (targetChild) {
+      const targetLeft = targetChild.offsetLeft - container.offsetLeft;
+      container.scrollTo({ left: targetLeft, behavior: 'smooth' });
+    }
     setActiveIndex(index);
   };
 
   const nextSlide = () => {
-    const next = (activeIndex + 1) % COMMITMENTS.length;
+    const next = activeIndex < COMMITMENTS.length - 1 ? activeIndex + 1 : 0;
     scrollToIndex(next);
   };
 
   const prevSlide = () => {
-    const prev = (activeIndex - 1 + COMMITMENTS.length) % COMMITMENTS.length;
+    const prev = activeIndex > 0 ? activeIndex - 1 : COMMITMENTS.length - 1;
     scrollToIndex(prev);
   };
 
@@ -116,7 +132,7 @@ export function StorySection() {
                       key={idx}
                       className="relative w-full shrink-0 snap-center p-6 sm:p-8 rounded-3xl bg-[#faf7ee] border-2 border-[#0038a8] shadow-xs space-y-4 select-none overflow-hidden"
                     >
-                      {/* Top Header Row */}
+                      {/* Top Header Row (without numbers) */}
                       <div className="flex items-center justify-between gap-2 border-b border-[#0038a8]/15 pb-3">
                         <div className="flex items-center gap-2">
                           <div className="w-7 h-7 rounded-lg bg-[#0038a8] text-white flex items-center justify-center shrink-0">
@@ -127,8 +143,8 @@ export function StorySection() {
                           </span>
                         </div>
 
-                        <span className="font-mono text-xs font-bold text-[#0038a8]/70 bg-[#0038a8]/5 px-2.5 py-1 rounded-md border border-[#0038a8]/10">
-                          {item.index}
+                        <span className="text-[10px] font-black text-[#0038a8]/60 uppercase tracking-widest font-display">
+                          ★ JÖN STANDART
                         </span>
                       </div>
 
@@ -197,15 +213,15 @@ export function StorySection() {
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={prevSlide}
-                    aria-label="Önceki standart"
-                    className="w-8 h-8 rounded-full border-2 border-[#0038a8] flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer"
+                    aria-label="Önceki kart"
+                    className="w-8 h-8 rounded-full border-2 border-[#0038a8] flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white active:scale-95 transition-all cursor-pointer"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button
                     onClick={nextSlide}
-                    aria-label="Sonraki standart"
-                    className="w-8 h-8 rounded-full border-2 border-[#0038a8] flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer"
+                    aria-label="Sonraki kart"
+                    className="w-8 h-8 rounded-full border-2 border-[#0038a8] flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white active:scale-95 transition-all cursor-pointer"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
