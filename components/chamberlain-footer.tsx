@@ -26,13 +26,12 @@ function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
 
 export function ChamberlainFooter() {
   const scrollToTop = () => {
-    smoothScrollTo('top', 0, 650);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    smoothScrollTo('top');
   };
 
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    smoothScrollTo(id, 112, 650);
+    smoothScrollTo(id);
   };
 
   return (

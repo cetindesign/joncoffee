@@ -18,12 +18,12 @@ export function ChamberlainHero() {
 
   const scrollToMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    smoothScrollTo('menu', 112, 650);
+    smoothScrollTo('menu');
   };
 
   const scrollToLocation = (e: React.MouseEvent) => {
     e.preventDefault();
-    smoothScrollTo('konum', 112, 650);
+    smoothScrollTo('konum');
   };
 
   return (

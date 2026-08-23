@@ -37,14 +37,13 @@ export function ChamberlainHeader() {
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    smoothScrollTo(id, 112, 650);
+    smoothScrollTo(id);
   };
 
   const handleTopClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    smoothScrollTo('top', 0, 650);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    smoothScrollTo('top');
   };
 
   return (
