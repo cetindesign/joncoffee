@@ -1,12 +1,21 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Coffee, MapPin, ArrowRight } from 'lucide-react';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 
 export function ChamberlainHero() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+
+  // As user scrolls the first 240px, the center emblem glides smoothly up toward the header
+  const emblemY = useTransform(scrollY, [0, 240], [0, -60]);
+  const emblemScale = useTransform(scrollY, [0, 240], [1, 0.82]);
+  const emblemOpacity = useTransform(scrollY, [0, 260], [1, 0.15]);
+
   const scrollToMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     const el = document.getElementById('menu');
@@ -16,20 +25,24 @@ export function ChamberlainHero() {
   };
 
   return (
-    <section className="relative min-h-[calc(100dvh-5rem)] sm:min-h-[85vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-3 sm:py-12 border-b border-[#0038a8]/15 overflow-hidden select-none">
+    <section
+      ref={heroRef}
+      className="relative min-h-[calc(100dvh-5rem)] sm:min-h-[90vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-4 sm:py-14 border-b border-[#0038a8]/15 overflow-hidden select-none"
+    >
       <div className="max-w-4xl mx-auto w-full flex flex-col items-center justify-center text-center my-auto space-y-[clamp(0.75rem,2.5vh,1.75rem)]">
-        {/* Centerpiece: Viewport-Adaptive Clamp Emblem (Fluid across all screen ratios) */}
+        {/* Centerpiece: Large Viewport-Adaptive Emblem that glides up on scroll */}
         <motion.div
+          style={{ y: emblemY, scale: emblemScale, opacity: emblemOpacity }}
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-[clamp(180px,46vmin,460px)] h-[clamp(180px,46vmin,460px)] shrink-0"
+          className="relative w-[clamp(260px,62vmin,560px)] h-[clamp(260px,62vmin,560px)] shrink-0 will-change-transform"
         >
           <Image
             src={assetPath('/assets/jon-emblem-duo.png')}
             alt="Jön Coffees Co."
             fill
-            className="object-contain drop-shadow-xl hover:scale-102 transition-transform duration-400 cursor-pointer"
+            className="object-contain drop-shadow-2xl hover:scale-102 transition-transform duration-400 cursor-pointer"
             priority
           />
         </motion.div>
@@ -41,7 +54,7 @@ export function ChamberlainHero() {
           transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-1 max-w-xl mx-auto"
         >
-          <h1 className="text-[clamp(1.15rem,3.8vw,2.75rem)] font-black text-[#0038a8] tracking-tight font-display uppercase leading-tight">
+          <h1 className="text-[clamp(1.2rem,3.8vw,2.75rem)] font-black text-[#0038a8] tracking-tight font-display uppercase leading-tight">
             100% SPECIALTY GRADE ARABICA
           </h1>
 
@@ -50,7 +63,7 @@ export function ChamberlainHero() {
           </p>
         </motion.div>
 
-        {/* Action Strip: Safe-area resilient */}
+        {/* Action Strip */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}

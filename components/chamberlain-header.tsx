@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { StatusBadge } from './status-badge';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
@@ -19,6 +20,18 @@ const MARQUEE_ITEMS = [
 
 export function ChamberlainHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Dock logo into header once user scrolls past the top hero threshold
+      setIsScrolled(window.scrollY > 90);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleScrollTo = (id: string) => {
     setMobileMenuOpen(false);
@@ -68,13 +81,24 @@ export function ChamberlainHeader() {
           </button>
         </div>
 
-        {/* Brand Logo & Wordmark */}
+        {/* Brand Logo & Wordmark (Logo smoothly docks on scroll) */}
         <div className="flex items-center gap-8">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-2.5 text-left cursor-pointer"
+            className="flex items-center text-left cursor-pointer group"
           >
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-full overflow-hidden border-2 border-[#0038a8] bg-white">
+            {/* Morphing Docked Logo: Hidden at top (scrollY=0), glides in on scroll */}
+            <motion.div
+              initial={false}
+              animate={{
+                width: isScrolled ? 34 : 0,
+                opacity: isScrolled ? 1 : 0,
+                scale: isScrolled ? 1 : 0.5,
+                marginRight: isScrolled ? 10 : 0,
+              }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="relative h-8 w-8 sm:h-9 sm:w-9 shrink-0 rounded-full overflow-hidden border-2 border-[#0038a8] bg-white pointer-events-none"
+            >
               <Image
                 src={assetPath('/assets/jon-badge-circle.png')}
                 alt="Jön Coffees Co."
@@ -82,7 +106,8 @@ export function ChamberlainHeader() {
                 className="object-contain p-0.5"
                 priority
               />
-            </div>
+            </motion.div>
+
             <span className="font-extrabold text-lg sm:text-2xl tracking-tighter text-[#0038a8] uppercase leading-none font-display">
               JÖN COFFEES CO.
             </span>
