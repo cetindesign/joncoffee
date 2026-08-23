@@ -36,20 +36,6 @@ export function MenuSection() {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [copied, setCopied] = useState(false);
 
-  // Deep Link listener on Mount
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const itemId = params.get('item');
-    if (itemId) {
-      const match = MENU_ITEMS.find((m) => m.id === itemId);
-      if (match) {
-        setSelectedItem(match);
-        const el = document.getElementById('menu');
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, []);
-
   const handleSelectItem = useCallback((item: MenuItem | null) => {
     setSelectedItem(item);
     setCopied(false);
@@ -64,6 +50,41 @@ export function MenuSection() {
         window.history.replaceState(null, '', url.toString());
       }
     }
+  }, []);
+
+  // Deep Link & Custom Event Listener
+  useEffect(() => {
+    const checkDeepLink = () => {
+      const params = new URLSearchParams(window.location.search);
+      const itemId = params.get('item');
+      if (itemId) {
+        const match = MENU_ITEMS.find((m) => m.id === itemId);
+        if (match) {
+          setSelectedItem(match);
+        }
+      }
+    };
+
+    checkDeepLink();
+
+    const handleCustomOpen = (e: Event) => {
+      const customEvt = e as CustomEvent<{ itemId: string }>;
+      const itemId = customEvt.detail?.itemId;
+      if (itemId) {
+        const match = MENU_ITEMS.find((m) => m.id === itemId);
+        if (match) {
+          setSelectedItem(match);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', checkDeepLink);
+    window.addEventListener('open-menu-item', handleCustomOpen);
+
+    return () => {
+      window.removeEventListener('popstate', checkDeepLink);
+      window.removeEventListener('open-menu-item', handleCustomOpen);
+    };
   }, []);
 
   // Close Bottom Sheet on Escape key

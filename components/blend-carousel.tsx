@@ -7,6 +7,7 @@ import { assetPath } from '@/lib/assets';
 
 interface BlendProduct {
   id: string;
+  menuId: string;
   name: string;
   subName: string;
   badge: string;
@@ -21,6 +22,7 @@ interface BlendProduct {
 const PRODUCTS: BlendProduct[] = [
   {
     id: 'blend-house-espresso',
+    menuId: 'espresso',
     name: 'Jön House Blend Espresso',
     subName: 'Single Origin Colombia & Ethiopia (250g)',
     badge: '★ EN ÇOK TERCİH EDİLEN ★',
@@ -33,6 +35,7 @@ const PRODUCTS: BlendProduct[] = [
   },
   {
     id: 'blend-jon-sunrise',
+    menuId: 'jon-sunrise',
     name: 'JÖN Sunrise (İmza İçecek)',
     subName: 'Taze Portakal Suyu + Soğuk Double Espresso',
     badge: '★ İMZA REÇETE ★',
@@ -45,6 +48,7 @@ const PRODUCTS: BlendProduct[] = [
   },
   {
     id: 'blend-cold-brew-bottle',
+    menuId: 'cold-brew',
     name: '16 Saat Demleme Cold Brew',
     subName: 'Özel Seçki Yavaş Soğuk Damlatma (Şişe)',
     badge: '★ 16H SOĞUK DEMLEME ★',
@@ -57,6 +61,7 @@ const PRODUCTS: BlendProduct[] = [
   },
   {
     id: 'blend-affogato-gelato',
+    menuId: 'affogato',
     name: 'Affogato Al Caffe',
     subName: 'Vanilyalı İtalyan Gelato + Sıcak Espresso',
     badge: '★ TATLI DOKUNUŞ ★',
@@ -79,8 +84,14 @@ export function BlendCarousel() {
     }
   };
 
-  const scrollToMenu = (e: React.MouseEvent) => {
+  const handleOpenItem = (e: React.MouseEvent, menuId: string) => {
     e.preventDefault();
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      url.searchParams.set('item', menuId);
+      window.history.replaceState(null, '', url.toString());
+      window.dispatchEvent(new CustomEvent('open-menu-item', { detail: { itemId: menuId } }));
+    }
     const el = document.getElementById('menu');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
@@ -124,11 +135,10 @@ export function BlendCarousel() {
           className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 scroll-smooth scroll-pl-1"
         >
           {PRODUCTS.map((prod) => (
-            <a
+            <button
               key={prod.id}
-              href="#menu"
-              onClick={scrollToMenu}
-              className="shrink-0 w-[72vw] sm:w-[280px] lg:w-[270px] snap-start group flex flex-col justify-between cursor-pointer select-none"
+              onClick={(e) => handleOpenItem(e, prod.menuId)}
+              className="shrink-0 w-[72vw] sm:w-[280px] lg:w-[270px] snap-start group flex flex-col justify-between cursor-pointer select-none text-left"
             >
               <div>
                 {/* Product Photo */}
@@ -179,7 +189,7 @@ export function BlendCarousel() {
                 <span>Reçeteyi İncele</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </div>
-            </a>
+            </button>
           ))}
         </div>
       </div>
