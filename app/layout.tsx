@@ -19,7 +19,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#102341",
+  themeColor: "#0038a8",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: "%s | Jön Coffee İzmir",
   },
   description:
-    "İzmir Hatay'da nitelikli espresso, 16 saatlik soğuk demlemeler, imza lezzet JÖN Sunrise ve samimi mahalle atmosferi. %100 Specialty Grade Arabica çekirdekler.",
+    "İzmir Hatay'da %100 Specialty Grade Arabica espresso, 16 saatlik soğuk demlemeler, imza lezzet JÖN Sunrise ve samimi mahalle atmosferi.",
   keywords: [
     "Jön Coffee",
     "Jön Kahve",
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     "Hatay Nitelikli Kahve",
     "İzmir Coffee Shop",
     "Jön Sunrise",
-    "Focused Surprised Kahve",
+    "Specialty Coffee İzmir",
     "İzmir Pet Friendly Kafe",
-    "İzmirspor Metro Kahve",
+    "Hatay Metro Kahve",
   ],
   authors: [{ name: "Jön Coffees Co." }],
   creator: "Jön Coffees Co.",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     siteName: "Jön Coffees Co.",
     title: "Jön Coffee | İzmir Hatay'ın Yeni Nesil Mahalle Kahvecisi",
     description:
-      "Aynı iyi kahve, yepyeni hisler. İzmir Hatay'da nitelikli çekirdekler, samimi çalışma alanı ve pet-friendly ortam.",
+      "100% Specialty Grade Arabica. İzmir Hatay'da nitelikli çekirdekler, samimi çalışma alanı ve pet-friendly ortam.",
     images: [
       {
         url: "https://cetindesign.github.io/joncoffee/assets/hero-coffee-lifestyle.jpg",
@@ -146,7 +146,7 @@ const jsonLd = {
     },
     {
       "@type": "LocationFeatureSpecification",
-      name: "Near Metro (Hatay & İzmirspor)",
+      name: "Near Metro (Hatay)",
       value: true,
     },
   ],
@@ -191,7 +191,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#fbf9f4] text-[#102341] font-sans selection:bg-[#102341] selection:text-white antialiased">
+      <body className="min-h-screen flex flex-col bg-[#faf8f2] text-[#0038a8] font-sans selection:bg-[#0038a8] selection:text-white antialiased">
         {children}
       </body>
     </html>

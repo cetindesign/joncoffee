@@ -26,9 +26,9 @@ export function LocationHours() {
           <StatusBadge showDetails />
         </div>
 
-        {/* 2-Column Editorial Store Guide */}
+        {/* 2-Column Store Guide */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Col: Location, Metro & Photos (7 cols) */}
+          {/* Left Col: Location & Metro (7 cols) */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-3">
               <span className="text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
@@ -38,11 +38,11 @@ export function LocationHours() {
                 {STORE_INFO.location.addressText}
               </p>
               <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">
-                İzmir Metrosu <strong>Hatay İstasyonu</strong> veya <strong>İzmirspor İstasyonu</strong>&apos;nda inerek sadece 2 dakikalık düzayak yürüyüşle kafemize ulaşabilirsiniz.
+                İzmir Metrosu <strong>Hatay İstasyonu</strong>&apos;nda inerek sadece 2 dakikalık düzayak yürüyüşle kafemize ulaşabilirsiniz.
               </p>
             </div>
 
-            {/* Direct Action Buttons */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href={STORE_INFO.location.googleMapsUrl}
@@ -76,7 +76,7 @@ export function LocationHours() {
             </div>
           </div>
 
-          {/* Right Col: Weekly Hours Typographic Table (5 cols) */}
+          {/* Right Col: Weekly Hours Table (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="flex items-center gap-2 pb-2 border-b border-[#0038a8]/20">
               <Compass className="w-4 h-4 text-[#0038a8]" />
@@ -85,7 +85,7 @@ export function LocationHours() {
               </h3>
             </div>
 
-            {/* Clean Typographic Hours Rows */}
+            {/* Clean Typographic Rows */}
             <div className="divide-y divide-[#0038a8]/10 text-xs sm:text-sm">
               {STORE_INFO.hours.map((item) => {
                 const isToday = item.dayIndex === currentDayIndex;

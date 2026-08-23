@@ -1,88 +1,87 @@
-export interface OperatingHours {
+export interface StoreHours {
   day: string;
-  shortDay: string;
-  dayIndex: number; // 0 = Sunday, 1 = Monday, ...
+  dayIndex: number; // 0 = Sunday, 1 = Monday...
   open: string;
   close: string;
   isOpen: boolean;
 }
 
 export const STORE_INFO = {
-  name: 'Jön Coffees Co.',
-  tagline: "İzmir Hatay'ın Yeni Nesil Mahalle Kahvecisi",
-  subTagline: 'Focused & Surprised ruhuyla, özenle kavrulmuş çekirdekler ve iyi kahve tutkusu.',
+  name: "Jön Coffee Co.",
+  tagline: "100% Specialty Grade Arabica",
+  established: "2024",
   location: {
-    neighborhood: 'Hatay',
-    district: 'Konak / Karabağlar',
-    city: 'İzmir',
-    country: 'Türkiye',
-    addressText: "İnönü Caddesi Yakını, Hatay / İzmir (İzmirspor & Hatay Metro İstasyonlarına Yürüme Mesafesinde)",
-    googleMapsUrl: 'https://maps.google.com/?q=Jon+Coffee+Hatay+Izmir',
-    appleMapsUrl: 'https://maps.apple.com/?q=Jon+Coffee+Hatay+Izmir',
-    coordinates: {
-      lat: 38.4065,
-      lng: 27.1125,
+    city: "İzmir",
+    district: "Hatay",
+    neighborhood: "Murat Reis / İnönü Cd.",
+    addressText: "İnönü Caddesi Yakını, Hatay / İzmir (Hatay Metro İstasyonuna 2 Dk Yürüme Mesafesinde)",
+    fullAddress: "İnönü Cd. No: 123, Hatay, Konak, İzmir, Türkiye",
+    googleMapsUrl: "https://maps.google.com/?q=Hatay+Izmir+Coffee",
+    appleMapsUrl: "https://maps.apple.com/?q=Hatay+Izmir+Coffee",
+    lat: 38.4065,
+    lng: 27.1125,
+    transportation: {
+      metro: "Hatay Metro İstasyonu (2 dk yürüme mesafesinde)",
+      bus: "İnönü Caddesi Otobüs Hatları",
+      parking: "Sokak Üstü Park İmkanı",
     },
   },
   hours: [
-    { day: 'Pazartesi', shortDay: 'Pzt', dayIndex: 1, open: '09:00', close: '20:30', isOpen: true },
-    { day: 'Salı', shortDay: 'Sal', dayIndex: 2, open: '09:00', close: '20:30', isOpen: true },
-    { day: 'Çarşamba', shortDay: 'Çar', dayIndex: 3, open: '09:00', close: '20:30', isOpen: true },
-    { day: 'Perşembe', shortDay: 'Per', dayIndex: 4, open: '09:00', close: '20:30', isOpen: true },
-    { day: 'Cuma', shortDay: 'Cum', dayIndex: 5, open: '09:00', close: '20:30', isOpen: true },
-    { day: 'Cumartesi', shortDay: 'Cmt', dayIndex: 6, open: '09:00', close: '20:30', isOpen: true },
-    { day: 'Pazar', shortDay: 'Paz', dayIndex: 0, open: '', close: '', isOpen: false },
-  ] as OperatingHours[],
+    { day: "Pazar", dayIndex: 0, open: "", close: "", isOpen: false },
+    { day: "Pazartesi", dayIndex: 1, open: "09:00", close: "20:30", isOpen: true },
+    { day: "Salı", dayIndex: 2, open: "09:00", close: "20:30", isOpen: true },
+    { day: "Çarşamba", dayIndex: 3, open: "09:00", close: "20:30", isOpen: true },
+    { day: "Perşembe", dayIndex: 4, open: "09:00", close: "20:30", isOpen: true },
+    { day: "Cuma", dayIndex: 5, open: "09:00", close: "20:30", isOpen: true },
+    { day: "Cumartesi", dayIndex: 6, open: "09:00", close: "20:30", isOpen: true },
+  ] as StoreHours[],
+  contact: {
+    phone: "+90 232 000 00 00",
+    email: "merhaba@joncoffee.com",
+    whatsapp: "https://wa.me/902320000000",
+  },
   socials: {
-    instagram: 'https://instagram.com/joncoffees',
-    instagramHandle: '@joncoffees',
+    instagram: "https://instagram.com/joncoffee",
+    instagramHandle: "@joncoffee",
   },
   features: [
     {
-      icon: 'Coffee',
-      title: '%100 Nitelikli Arabica',
-      description: 'Single origin ve özel harman çekirdekler, ideal profilde taze kavrum.',
+      title: "%100 Specialty Grade Arabica",
+      description: "Haftalık taze kavrulan, tek kökenli ve özel harman çekirdekler.",
+      icon: "coffee",
     },
     {
-      icon: 'Zap',
-      title: 'Hızlı & Kesintisiz Wi-Fi',
-      description: 'Çalışmak ve üretmek isteyen "Focused" zihinler için prizli ve konforlu masalar.',
+      title: "16 Saat Soğuk Demleme",
+      description: "Damla damla süzülen, düşük asiditeli pürüzsüz Cold Brew.",
+      icon: "droplet",
     },
     {
-      icon: 'HeartHandshake',
-      title: 'Samimi Mahalle Kültürü',
-      description: 'Güler yüzlü baristalar ve tanıdık sıcak bir atmosfer.',
+      title: "Pet Friendly",
+      description: "Dostlarınızla rahatça vakit geçirebileceğiniz samimi ortam.",
+      icon: "heart",
     },
     {
-      icon: 'PawPrint',
-      title: 'Pet Friendly',
-      description: 'Tüylü dostlarınız mekanımızın en sevilen misafirleridir.',
+      title: "Hatay Metroya 2 Dk",
+      description: "Merkezi ve düzayak konumuyla kolay ulaşım.",
+      icon: "map-pin",
     },
   ],
   faqs: [
     {
-      q: 'Kahve çekirdekleriniz nereden geliyor?',
-      a: '%100 Specialty Grade (Nitelikli) Arabica çekirdeklerimizi Kolombiya, Etiyopya ve Brezilya’nın saygın çiftliklerinden temin ediyor; profiline uygun derecelerde haftalık taze kavuruyoruz.',
-    },
-    {
-      q: 'Kafede bilgisayarla çalışmak için uygun ortam var mı?',
-      a: 'Evet! Focused masalarımızda prizler ve yüksek hızlı fiber Wi-Fi mevcuttur. İş veya ders için sessiz ve odaklanmaya uygun köşeler sunuyoruz.',
+      q: 'Kafenize metroyla nasıl ulaşabilirim?',
+      a: 'İzmir Metrosu Hatay istasyonundan çıkıp 2 dakikalık düzayak yürüyüşle kafemize ulaşabilirsiniz.',
     },
     {
       q: 'Evcil hayvanımla gelebilir miyim?',
-      a: 'Kesinlikle! Jön Coffee %100 pet-friendly bir mekandır. Can dostlarınızla birlikte hem iç mekanda hem terasımızda keyifle vakit geçirebilirsiniz.',
+      a: 'Evet, Jön Coffee %100 evcil hayvan dostudur (Pet Friendly).',
     },
     {
-      q: 'Bitkisel veya laktozsuz süt alternatifleriniz var mı?',
-      a: 'Evet, tüm kahvelerimizi laktozsuz süt, yulaf sütü veya badem sütü ile hazırlayabiliyoruz.',
+      q: 'Bitkisel süt seçenekleriniz var mı?',
+      a: 'Evet, tüm kahvelerimizde laktozsuz süt, yulaf sütü ve badem sütü opsiyonları sunuyoruz.',
     },
     {
-      q: 'En yakın metro istasyonu hangisi?',
-      a: 'İzmir Metrosu Hatay veya İzmirspor istasyonlarından çıkıp 2-3 dakikalık düzayak yürüyüşle kafemize ulaşabilirsiniz.',
-    },
-    {
-      q: 'Çekirdek kahve satışı yapıyor musunuz?',
-      a: 'Evet, kafemizde taze kavrulmuş paket çekirdeklerimizi satın alabilir; demleme yönteminize göre (V60, French Press, Espresso vb.) ücretsiz çektirebilirsiniz.',
+      q: 'Laptop ile çalışmaya uygun mu?',
+      a: 'Evet, hızlı Wi-Fi bağlantımız ve prizli çalışma alanlarımız mevcuttur.',
     },
   ],
 };

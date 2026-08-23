@@ -20,8 +20,8 @@ interface BlendProduct {
 
 const PRODUCTS: BlendProduct[] = [
   {
-    id: 'blend-focused-espresso',
-    name: 'Focused Espresso Blend',
+    id: 'blend-house-espresso',
+    name: 'Jön House Blend Espresso',
     subName: 'Single Origin Colombia & Ethiopia (250g)',
     badge: '★ EN ÇOK TERCİH EDİLEN ★',
     bgPedestal: 'bg-[#d8e7f5]',
@@ -88,7 +88,7 @@ export function BlendCarousel() {
   return (
     <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
-        {/* Section Header with Desktop Arrow Controls */}
+        {/* Section Header with Desktop Controls */}
         <div className="flex items-end justify-between gap-4 pb-4 border-b border-[#0038a8]/20">
           <div className="space-y-1">
             <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
@@ -131,7 +131,7 @@ export function BlendCarousel() {
               className="shrink-0 w-[72vw] sm:w-[280px] lg:w-[270px] snap-start group flex flex-col justify-between cursor-pointer select-none"
             >
               <div>
-                {/* Product Photo on Pastel Canvas */}
+                {/* Product Photo */}
                 <div className={`relative w-full aspect-square ${prod.bgPedestal} rounded-2xl overflow-hidden mb-4 border border-[#0038a8]/10`}>
                   <Image
                     src={assetPath(prod.image)}

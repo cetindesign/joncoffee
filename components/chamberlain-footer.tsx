@@ -60,7 +60,7 @@ export function ChamberlainFooter() {
             </div>
 
             <p className="text-xs sm:text-sm text-white/85 leading-relaxed max-w-sm font-medium">
-              %100 nitelikli Arabica çekirdekler, Focused & Surprised ruhu ve samimi mahalle kahveciliği deneyimi.
+              %100 nitelikli Arabica çekirdekler, günlük taze kavrumlar ve samimi mahalle kahveciliği deneyimi.
             </p>
 
             <div>
@@ -96,18 +96,6 @@ export function ChamberlainFooter() {
               </li>
               <li>
                 <a
-                  href="#karakterler"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('karakterler');
-                  }}
-                  className="hover:text-[#fab80b] transition-colors cursor-pointer"
-                >
-                  Focused & Surprised
-                </a>
-              </li>
-              <li>
-                <a
                   href="#menu"
                   onClick={(e) => {
                     e.preventDefault();
@@ -115,7 +103,19 @@ export function ChamberlainFooter() {
                   }}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Tüm Kafe Menüsü
+                  Kafe Menüsü
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#karakterler"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleScrollTo('karakterler');
+                  }}
+                  className="hover:text-[#fab80b] transition-colors cursor-pointer"
+                >
+                  Felsefemiz & Hikaye
                 </a>
               </li>
               <li>
@@ -143,7 +143,7 @@ export function ChamberlainFooter() {
               <p className="text-[#fab80b] font-bold">Pazar: Kapalı</p>
             </div>
             <p className="text-[10px] sm:text-[11px] text-white/70 pt-1 font-semibold">
-              Hatay & İzmirspor Metrolarına 2 dk.
+              Hatay Metrosu&apos;na 2 dk yürüyüş mesafesinde.
             </p>
           </div>
         </div>
