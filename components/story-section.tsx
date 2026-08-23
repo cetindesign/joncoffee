@@ -1,8 +1,28 @@
 'use client';
 
 import Image from 'next/image';
-import { Coffee, Heart, MapPin } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
+
+const COMMITMENTS = [
+  {
+    num: '01',
+    title: '%100 SPECIALTY GRADE ARABICA',
+    desc: 'Haftalık taze kavrum tek köken çekirdekler, hassas gramajlı espresso kalibrasyonları ve 16 saatlik soğuk damlatma Cold Brew reçeteleri.',
+    badge: '★ TAZE KAVRUM',
+  },
+  {
+    num: '02',
+    title: 'EVCİL HAYVAN DOSTU BAHÇE & ÇALIŞMA',
+    desc: 'Dostlarınızla rahatça oturabileceğiniz açık bahçemiz, kesintisiz yüksek hızlı Wi-Fi ve laptopla çalışanlar için prizli masa düzeni.',
+    badge: '★ PET FRIENDLY',
+  },
+  {
+    num: '03',
+    title: "HATAY METROSU'NA 2 DK DÜZAYAK",
+    desc: 'İnönü Caddesi paralelinde, metro çıkışından itibaren yokuşsuz ve kolay 120 metre yürüyüş mesafesinde merkezi konum.',
+    badge: '★ METRO 2 DK',
+  },
+];
 
 export function StorySection() {
   return (
@@ -18,10 +38,10 @@ export function StorySection() {
           </h2>
         </div>
 
-        {/* 2-Column Grounded Layout: Atmosphere Photo + 3 Concrete Commitments */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* 2-Column Grounded Layout: Atmosphere Photo + Editorial Numbered Index */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left: Atmosphere Photo (5 cols) */}
-          <div className="lg:col-span-5 relative w-full h-72 sm:h-96 lg:h-[440px] rounded-3xl overflow-hidden border-2 border-[#0038a8]/20 shadow-sm">
+          <div className="lg:col-span-5 relative w-full h-72 sm:h-96 lg:h-[420px] rounded-3xl overflow-hidden border-2 border-[#0038a8]/20 shadow-sm">
             <Image
               src={assetPath('/assets/hero-coffee-lifestyle.jpg')}
               alt="Jön Coffee Kafe ve Bahçe Atmosferi"
@@ -33,58 +53,38 @@ export function StorySection() {
             </div>
           </div>
 
-          {/* Right: 3 Concrete Standards (7 cols) */}
+          {/* Right: Editorial Numbered Index (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">
               Jön Coffee Co., iyi kahveyi samimi mahalle kültürüyle buluşturan bağımsız bir 3. nesil kahvecidir. Gösterişten uzak, kaliteye ve detaylara odaklı bir deneyim sunarız.
             </p>
 
-            {/* 3 Grounded Commitments */}
-            <div className="space-y-4 pt-1">
-              {/* Item 1 */}
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-[#0038a8]/15 shadow-2xs">
-                <div className="w-10 h-10 rounded-xl bg-[#0038a8] text-white flex items-center justify-center shrink-0">
-                  <Coffee className="w-5 h-5" />
-                </div>
-                <div className="space-y-0.5">
-                  <h3 className="font-extrabold text-sm sm:text-base text-[#0038a8] font-display">
-                    %100 Specialty Grade Arabica
-                  </h3>
-                  <p className="text-xs text-gray-600 font-medium leading-relaxed">
-                    Haftalık taze kavrum tek köken çekirdekler, hassas gramajlı espresso kalibrasyonları ve 16 saatlik soğuk damlatma Cold Brew reçeteleri.
-                  </p>
-                </div>
-              </div>
+            {/* Editorial Numbered Rows with Razor-Thin Dividers */}
+            <div className="divide-y divide-[#0038a8]/15 border-y border-[#0038a8]/15">
+              {COMMITMENTS.map((item) => (
+                <div key={item.num} className="py-4.5 sm:py-5 flex items-start gap-4 sm:gap-6 group select-none">
+                  {/* Big Editorial Numeral */}
+                  <span className="font-display font-black text-2xl sm:text-3xl text-[#0038a8]/35 leading-none shrink-0 pt-0.5 group-hover:text-[#0038a8] transition-colors">
+                    {item.num}
+                  </span>
 
-              {/* Item 2 */}
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-[#0038a8]/15 shadow-2xs">
-                <div className="w-10 h-10 rounded-xl bg-[#0038a8] text-white flex items-center justify-center shrink-0">
-                  <Heart className="w-5 h-5 text-[#fab80b]" />
-                </div>
-                <div className="space-y-0.5">
-                  <h3 className="font-extrabold text-sm sm:text-base text-[#0038a8] font-display">
-                    Pet-Friendly & Rahat Çalışma Alanı
-                  </h3>
-                  <p className="text-xs text-gray-600 font-medium leading-relaxed">
-                    Evcil hayvanınızla rahatça oturabileceğiniz açık bahçemiz, yüksek hızlı Wi-Fi ve laptopla çalışanlar için bol prizli masa düzeni.
-                  </p>
-                </div>
-              </div>
+                  {/* Content */}
+                  <div className="space-y-1 flex-1">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h3 className="font-black text-sm sm:text-base text-[#0038a8] font-display uppercase tracking-tight">
+                        {item.title}
+                      </h3>
+                      <span className="text-[9px] font-black bg-[#0038a8]/10 text-[#0038a8] px-2 py-0.5 rounded-full uppercase tracking-wider font-display">
+                        {item.badge}
+                      </span>
+                    </div>
 
-              {/* Item 3 */}
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-[#0038a8]/15 shadow-2xs">
-                <div className="w-10 h-10 rounded-xl bg-[#0038a8] text-white flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5" />
+                    <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
-                <div className="space-y-0.5">
-                  <h3 className="font-extrabold text-sm sm:text-base text-[#0038a8] font-display">
-                    Hatay Metrosu&apos;na 2 Dk Düzayak Ulaşım
-                  </h3>
-                  <p className="text-xs text-gray-600 font-medium leading-relaxed">
-                    İnönü Caddesi paralelinde, metro çıkışından itibaren yokuşsuz ve kolay yürüyüş mesafesinde merkezi mahalle konumu.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
