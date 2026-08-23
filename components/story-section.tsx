@@ -106,8 +106,20 @@ export function StorySection() {
               fill
               className="object-cover"
             />
-            <div className="absolute bottom-3 left-3 bg-[#0038a8] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider font-display">
-              ★ İZMİR HATAY &bull; PET FRIENDLY ★
+            {/* Floating Glassmorphism Status Badge */}
+            <div className="absolute bottom-4 left-4 right-4 sm:right-auto flex items-center gap-2.5 p-2 pr-4 rounded-2xl bg-[#faf8f2]/90 backdrop-blur-md border border-[#0038a8]/25 shadow-lg text-[#0038a8]">
+              <div className="w-8 h-8 rounded-xl bg-[#0038a8] text-white flex items-center justify-center shrink-0 shadow-2xs">
+                <Sparkles className="w-4 h-4 text-[#fab80b]" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#0038a8]/70 leading-none font-display">
+                  İzmir Hatay &bull; Açık Bahçe
+                </span>
+                <span className="text-xs font-black text-[#0038a8] uppercase font-display tracking-tight leading-snug pt-0.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                  Evcil Hayvan Dostu
+                </span>
+              </div>
             </div>
           </div>
 
