@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Image from 'next/image';
-import { ArrowRight, ChevronLeft, ChevronRight, X, Sparkles, Check, Flame, MessageCircle, MapPin } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, X, Sparkles, Check, Flame, MessageCircle } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
 import { STORE_INFO } from '@/data/store-info';
 
@@ -396,28 +396,17 @@ export function BlendCarousel() {
             </div>
 
             {/* Action Bar */}
-            <div className="pt-2 flex flex-col sm:flex-row gap-3">
+            <div className="pt-2">
               <a
                 href={`https://wa.me/${STORE_INFO.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-                  `Merhaba Jön Coffee, paket kahvelerinizden "${selectedBean.name} (${selectedBean.weight})" siparişi vermek veya dükkandan ayırtmak istiyorum.`
+                  `Merhaba Jön Coffee, paket kahvelerinizden "${selectedBean.name} (${selectedBean.weight})" siparişi vermek istiyorum.`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-chamberlain-primary flex-1 py-3.5 px-6 text-xs justify-center cursor-pointer shadow-md"
+                className="btn-chamberlain-primary w-full py-3.5 sm:py-4 px-6 text-xs sm:text-sm justify-center cursor-pointer shadow-md"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>WhatsApp ile Paket Siparişi Ver</span>
-              </a>
-
-              <a
-                href="#konum"
-                onClick={(e) => {
-                  closeBeanModal();
-                }}
-                className="btn-chamberlain-secondary py-3.5 px-6 text-xs justify-center cursor-pointer"
-              >
-                <MapPin className="w-4 h-4 text-[#0038a8]" />
-                <span>Dükkandan Teslim Al</span>
               </a>
             </div>
           </div>
