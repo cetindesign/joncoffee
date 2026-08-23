@@ -179,7 +179,7 @@ export function ChamberlainHeader() {
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#faf8f2] border-t border-[#0038a8]/20 px-6 py-6 space-y-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
-          <div className="flex items-center justify-end pb-3 border-b border-[#0038a8]/15">
+          <div className="flex items-center justify-start pb-3 border-b border-[#0038a8]/15">
             <StatusBadge showDetails />
           </div>
 
