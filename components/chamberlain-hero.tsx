@@ -16,14 +16,14 @@ export function ChamberlainHero() {
   };
 
   return (
-    <section className="relative min-h-[calc(100svh-6rem)] sm:min-h-[85vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-4 sm:py-16 border-b border-[#0038a8]/15 overflow-hidden select-none">
-      <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center space-y-4 sm:space-y-6">
-        {/* Centerpiece: Responsive & Viewport-Constrained Mascot Emblem */}
+    <section className="relative min-h-[calc(100dvh-5rem)] sm:min-h-[85vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-3 sm:py-12 border-b border-[#0038a8]/15 overflow-hidden select-none">
+      <div className="max-w-4xl mx-auto w-full flex flex-col items-center justify-center text-center my-auto space-y-[clamp(0.75rem,2.5vh,1.75rem)]">
+        {/* Centerpiece: Viewport-Adaptive Clamp Emblem (Fluid across all screen ratios) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-[min(70vw,270px)] h-[min(70vw,270px)] sm:w-[380px] sm:h-[380px] lg:w-[460px] lg:h-[460px] shrink-0"
+          className="relative w-[clamp(180px,46vmin,460px)] h-[clamp(180px,46vmin,460px)] shrink-0"
         >
           <Image
             src={assetPath('/assets/jon-emblem-duo.png')}
@@ -36,32 +36,32 @@ export function ChamberlainHero() {
 
         {/* Quality Seal Title */}
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
           className="space-y-1 max-w-xl mx-auto"
         >
-          <h1 className="text-xl sm:text-4xl lg:text-5xl font-black text-[#0038a8] tracking-tight font-display uppercase leading-tight">
+          <h1 className="text-[clamp(1.15rem,3.8vw,2.75rem)] font-black text-[#0038a8] tracking-tight font-display uppercase leading-tight">
             100% SPECIALTY GRADE ARABICA
           </h1>
 
-          <p className="text-[11px] sm:text-sm font-bold text-gray-600 tracking-wide uppercase font-display">
+          <p className="text-[clamp(0.6875rem,1.8vw,0.875rem)] font-bold text-gray-600 tracking-wide uppercase font-display">
             İzmir Hatay &bull; Günlük Taze Kavrum & Nitelikli Demlemeler
           </p>
         </motion.div>
 
-        {/* Action Buttons: Guaranteed above Mobile Safari URL Bar */}
+        {/* Action Strip: Safe-area resilient */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-md mx-auto space-y-2 pt-1"
+          className="w-full max-w-md mx-auto space-y-2"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5">
             <a
               href="#menu"
               onClick={scrollToMenu}
-              className="btn-chamberlain-primary w-full sm:w-auto py-3.5 px-7 text-xs tracking-wider justify-center shadow-md active:scale-97 cursor-pointer group"
+              className="btn-chamberlain-primary w-full sm:w-auto py-3.5 px-6 text-xs tracking-wider justify-center shadow-md active:scale-97 cursor-pointer group"
             >
               <Coffee className="w-4 h-4" />
               <span>Kafe Menüsünü İncele</span>
@@ -79,8 +79,8 @@ export function ChamberlainHero() {
             </a>
           </div>
 
-          {/* Subtext */}
-          <div className="pt-1 flex items-center justify-center text-[10px] sm:text-xs font-bold text-[#0038a8]/75">
+          {/* Micro Location note */}
+          <div className="pt-0.5 flex items-center justify-center text-[10px] sm:text-xs font-bold text-[#0038a8]/75">
             <span>Hatay Metro 2 dk &bull; Pzt-Cmt 09:00 - 20:30 &bull; Pazar Kapalı</span>
           </div>
         </motion.div>
