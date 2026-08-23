@@ -92,8 +92,6 @@ export function BlendCarousel() {
       window.history.replaceState(null, '', url.toString());
       window.dispatchEvent(new CustomEvent('open-menu-item', { detail: { itemId: menuId } }));
     }
-    const el = document.getElementById('menu');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
