@@ -2,12 +2,13 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Coffee, Sparkles, MapPin, ArrowRight } from 'lucide-react';
+import { Coffee, MapPin, ArrowRight } from 'lucide-react';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 
 export function ChamberlainHero() {
-  const scrollToMenuWithMood = (mood: 'focused' | 'surprised' | 'all') => {
+  const scrollToMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
     const el = document.getElementById('menu');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -17,7 +18,7 @@ export function ChamberlainHero() {
   return (
     <section className="relative min-h-[85dvh] sm:min-h-[90vh] flex flex-col justify-center items-center bg-[#faf8f2] px-4 sm:px-6 lg:px-8 py-10 sm:py-16 border-b border-[#0038a8]/15 overflow-hidden select-none">
       <div className="max-w-5xl mx-auto w-full flex flex-col items-center text-center space-y-6 sm:space-y-8">
-        {/* Centerpiece: Screen-Proportional Mascot Emblem */}
+        {/* Centerpiece: Mascot Emblem */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -26,14 +27,14 @@ export function ChamberlainHero() {
         >
           <Image
             src={assetPath('/assets/jon-emblem-duo.png')}
-            alt="Jön Coffees Co. - Focused & Surprised"
+            alt="Jön Coffees Co."
             fill
             className="object-contain drop-shadow-2xl hover:scale-102 transition-transform duration-400 cursor-pointer"
             priority
           />
         </motion.div>
 
-        {/* Quality Seal Title (No top duplicates) */}
+        {/* Quality Seal Title */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,44 +50,38 @@ export function ChamberlainHero() {
           </p>
         </motion.div>
 
-        {/* Dual-Mood Action Gateways */}
+        {/* Single Clear Action Strip */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="w-full max-w-md mx-auto space-y-3 pt-1"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            <button
-              onClick={() => scrollToMenuWithMood('focused')}
-              className="btn-chamberlain-primary py-4 px-5 text-xs tracking-wider justify-center shadow-lg active:scale-97 cursor-pointer group"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="#menu"
+              onClick={scrollToMenu}
+              className="btn-chamberlain-primary w-full sm:w-auto py-4 px-8 text-xs tracking-wider justify-center shadow-lg active:scale-97 cursor-pointer group"
             >
               <Coffee className="w-4 h-4" />
-              <span>Focused Menüsü</span>
+              <span>Kafe Menüsünü İncele</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </button>
+            </a>
 
-            <button
-              onClick={() => scrollToMenuWithMood('surprised')}
-              className="btn-chamberlain-secondary py-4 px-5 text-xs tracking-wider justify-center shadow-sm active:scale-97 cursor-pointer group"
-            >
-              <Sparkles className="w-4 h-4 text-[#0038a8]" />
-              <span>Surprised Menüsü</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </button>
-          </div>
-
-          {/* Quick Location Strip */}
-          <div className="pt-2 flex items-center justify-center gap-3 text-xs font-bold text-[#0038a8]/75">
             <a
               href={STORE_INFO.location.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 hover:underline cursor-pointer"
+              className="btn-chamberlain-secondary w-full sm:w-auto py-4 px-6 text-xs tracking-wider justify-center shadow-sm active:scale-97 cursor-pointer"
             >
-              <MapPin className="w-3.5 h-3.5" />
-              <span>Hatay & İzmirspor Metrolarına 2 dk &bull; 09:00 - 20:30</span>
+              <MapPin className="w-4 h-4 text-[#0038a8]" />
+              <span>Yol Tarifi Al</span>
             </a>
+          </div>
+
+          {/* Location info */}
+          <div className="pt-2 flex items-center justify-center gap-3 text-xs font-bold text-[#0038a8]/75">
+            <span>Hatay & İzmirspor Metrolarına 2 dk &bull; Pzt-Cmt 09:00 - 20:30 &bull; Pazar Kapalı</span>
           </div>
         </motion.div>
       </div>

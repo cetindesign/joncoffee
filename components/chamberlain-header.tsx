@@ -12,7 +12,6 @@ const MARQUEE_ITEMS = [
   '★ İZMİR HATAY METROYA 2 DK',
   '★ AYNI İYİ KAHVE, YEPYENİ HİSLER',
   '★ %100 PET FRIENDLY',
-  '★ FOCUSED & SURPRISED',
   '★ HAFTALIK TAZE KAVRUM',
   '★ 16 SAAT SOĞUK DEMLEME COLD BREW',
   '★ JÖN SUNRISE İMZA REÇETE',
@@ -31,7 +30,7 @@ export function ChamberlainHeader() {
 
   return (
     <header className="sticky top-0 z-50 bg-[#faf8f2] border-b border-[#0038a8]/15">
-      {/* Continuous 60fps Marquee Ticker (Solid Cobalt Blue) */}
+      {/* Continuous 60fps Marquee Ticker */}
       <div className="bg-[#0038a8] text-white py-2 overflow-hidden select-none border-b border-[#0038a8]/20">
         <div className="animate-continuous-marquee flex items-center gap-8 text-[11px] sm:text-xs font-black tracking-widest uppercase font-display">
           {/* Loop 1 */}
@@ -58,7 +57,7 @@ export function ChamberlainHeader() {
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-        {/* Mobile Left: Hamburger Icon */}
+        {/* Mobile Left: Hamburger */}
         <div className="flex items-center lg:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -102,16 +101,6 @@ export function ChamberlainHeader() {
               Öne Çıkanlar
             </a>
             <a
-              href="#karakterler"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('karakterler');
-              }}
-              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
-            >
-              Focused & Surprised
-            </a>
-            <a
               href="#menu"
               onClick={(e) => {
                 e.preventDefault();
@@ -120,6 +109,16 @@ export function ChamberlainHeader() {
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Kafe Menüsü
+            </a>
+            <a
+              href="#karakterler"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('karakterler');
+              }}
+              className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
+            >
+              Hikayemiz
             </a>
             <a
               href="#konum"
@@ -184,17 +183,6 @@ export function ChamberlainHeader() {
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
-              href="#karakterler"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('karakterler');
-              }}
-              className="py-1 flex items-center justify-between cursor-pointer"
-            >
-              <span>Focused & Surprised</span>
-              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
-            </a>
-            <a
               href="#menu"
               onClick={(e) => {
                 e.preventDefault();
@@ -202,7 +190,18 @@ export function ChamberlainHeader() {
               }}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Tüm Kafe Menüsü</span>
+              <span>Kafe Menüsü</span>
+              <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
+            </a>
+            <a
+              href="#karakterler"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollTo('karakterler');
+              }}
+              className="py-1 flex items-center justify-between cursor-pointer"
+            >
+              <span>Hikayemiz</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a

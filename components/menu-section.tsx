@@ -12,16 +12,11 @@ import {
   Search,
   Star,
   X,
-  AlertTriangle,
   ChevronRight,
-  Coffee,
-  Sparkles,
   Share2,
   Check,
   Flame,
 } from 'lucide-react';
-
-type MoodFilter = 'all' | 'focused' | 'surprised';
 
 const SPRING_TRANSITION = {
   type: 'spring',
@@ -36,7 +31,6 @@ const EASE_TRANSITION = {
 } as const;
 
 export function MenuSection() {
-  const [activeMood, setActiveMood] = useState<MoodFilter>('all');
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
@@ -111,13 +105,6 @@ export function MenuSection() {
       if (activeCategory !== 'all' && item.category !== activeCategory) {
         return false;
       }
-      if (activeMood === 'focused') {
-        const isFocused = !item.isCold || item.category === 'sicak-kahveler' || item.category === 'klasikler';
-        if (!isFocused) return false;
-      } else if (activeMood === 'surprised') {
-        const isSurprised = item.isCold || item.isSignature || item.category === 'soguk-kahveler' || item.category === 'ozeller';
-        if (!isSurprised) return false;
-      }
       if (searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const matchName = item.name.toLowerCase().includes(query);
@@ -127,76 +114,19 @@ export function MenuSection() {
       }
       return true;
     });
-  }, [activeCategory, activeMood, searchQuery]);
+  }, [activeCategory, searchQuery]);
 
   return (
     <section id="menu" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#faf8f2] border-b border-[#0038a8]/15">
       <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12">
-        {/* Header & Mood Switcher */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-[#0038a8]/20">
-          <div className="space-y-1">
-            <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
-              ★ Fiziksel Menü Seçkisi
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
-              JÖN KAFE MENÜSÜ
-            </h2>
-          </div>
-
-          {/* Mascot Mood Switcher Toggle */}
-          <div className="flex items-center gap-1 p-1 bg-[#0038a8]/10 rounded-full select-none self-start md:self-auto border border-[#0038a8]/15">
-            <button
-              onClick={() => setActiveMood('all')}
-              className={`relative px-3.5 py-1.5 rounded-full text-xs font-black transition-colors duration-300 font-display uppercase tracking-wide ${
-                activeMood === 'all' ? 'text-white' : 'text-[#0038a8] hover:opacity-80'
-              }`}
-            >
-              {activeMood === 'all' && (
-                <motion.div
-                  layoutId="activeMoodPill"
-                  className="absolute inset-0 bg-[#0038a8] rounded-full shadow-xs"
-                  transition={SPRING_TRANSITION}
-                />
-              )}
-              <span className="relative z-10">Tüm Menü</span>
-            </button>
-
-            <button
-              onClick={() => setActiveMood('focused')}
-              className={`relative flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-black transition-colors duration-300 font-display uppercase tracking-wide ${
-                activeMood === 'focused' ? 'text-white' : 'text-[#0038a8] hover:opacity-80'
-              }`}
-            >
-              {activeMood === 'focused' && (
-                <motion.div
-                  layoutId="activeMoodPill"
-                  className="absolute inset-0 bg-[#0038a8] rounded-full shadow-xs"
-                  transition={SPRING_TRANSITION}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-1">
-                <Coffee className="w-3 h-3" /> Focused
-              </span>
-            </button>
-
-            <button
-              onClick={() => setActiveMood('surprised')}
-              className={`relative flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-black transition-colors duration-300 font-display uppercase tracking-wide ${
-                activeMood === 'surprised' ? 'text-white' : 'text-[#0038a8] hover:opacity-80'
-              }`}
-            >
-              {activeMood === 'surprised' && (
-                <motion.div
-                  layoutId="activeMoodPill"
-                  className="absolute inset-0 bg-[#0038a8] rounded-full shadow-xs"
-                  transition={SPRING_TRANSITION}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-[#fab80b]" /> Surprised
-              </span>
-            </button>
-          </div>
+        {/* Header */}
+        <div className="pb-4 border-b border-[#0038a8]/20 space-y-1">
+          <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
+            ★ Fiziksel Menü Seçkisi
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
+            KAFE MENÜSÜ
+          </h2>
         </div>
 
         {/* Category Star Tabs & Search */}
@@ -211,7 +141,7 @@ export function MenuSection() {
                     setActiveCategory(cat.id);
                     setSearchQuery('');
                   }}
-                  className={`relative px-4 py-2 rounded-full text-xs font-black whitespace-nowrap transition-all duration-200 select-none uppercase tracking-wider font-display ${
+                  className={`relative px-4 py-2 rounded-full text-xs font-black whitespace-nowrap transition-all duration-200 select-none uppercase tracking-wider font-display cursor-pointer ${
                     isActive
                       ? 'bg-[#0038a8] text-white shadow-xs'
                       : 'bg-white text-[#0038a8] border border-[#0038a8]/30 hover:border-[#0038a8]'
@@ -235,7 +165,7 @@ export function MenuSection() {
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0038a8]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#0038a8] cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -263,7 +193,7 @@ export function MenuSection() {
                       {item.name}
                     </h3>
 
-                    {/* Dot Leader for true poster feel */}
+                    {/* Dot Leader */}
                     <span className="hidden md:inline-block text-[#0038a8]/25 font-mono text-xs tracking-widest select-none">
                       ........................................
                     </span>
@@ -333,7 +263,7 @@ export function MenuSection() {
         </div>
       </div>
 
-      {/* Mobile Bottom Sheet / Desktop Centered Card */}
+      {/* Detail Bottom Sheet */}
       <AnimatePresence>
         {selectedItem && (
           <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
