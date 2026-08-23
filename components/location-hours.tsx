@@ -17,7 +17,7 @@ export function LocationHours() {
               ★ Ziyaret & Ulaşım
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
-              AÇIK ADRES & METRO
+              KONUM VE ÇALIŞMA SAATLERİ
             </h2>
           </div>
 
