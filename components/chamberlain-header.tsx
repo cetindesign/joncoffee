@@ -125,7 +125,7 @@ export function ChamberlainHeader() {
               onClick={(e) => handleNavClick(e, 'blends')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
-              Öne Çıkanlar
+              Paket Kahveler
             </a>
             <a
               href="#menu"
@@ -189,7 +189,7 @@ export function ChamberlainHeader() {
               onClick={(e) => handleNavClick(e, 'blends')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Öne Çıkan Kahveler</span>
+              <span>Paket Kahveler (250g)</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a

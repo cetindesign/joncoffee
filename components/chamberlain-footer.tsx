@@ -89,7 +89,7 @@ export function ChamberlainFooter() {
                   onClick={(e) => handleNavClick(e, 'blends')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Öne Çıkan Kahveler
+                  Paket Kahveler
                 </a>
               </li>
               <li>
