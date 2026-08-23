@@ -11,10 +11,10 @@ const COMMITMENTS = [
     tag: 'NİTELİKLİ SEÇKİ',
     icon: Coffee,
     heroMetric: '86+ SCAA',
-    heroSub: 'SPECIALTY GRADE PUANI',
+    heroSub: 'NİTELİKLİ KAHVE BİRLİĞİ DERECESİ',
     title: '%100 SPECIALTY GRADE ARABICA',
-    desc: 'Haftalık taze kavrum tek köken çekirdekler, hassas gramajlı espresso kalibrasyonları ve 16 saatlik soğuk damlatma Cold Brew reçeteleri.',
-    chips: ['Single Origin', 'Haftalık Taze Kavrum', '16H Soğuk Demleme'],
+    desc: 'Dünya Nitelikli Kahve Birliği (Specialty Coffee Association) tadım protokolünde 86+ puan almış tek köken çekirdekler, hassas kalibre espresso ve 16 saatlik soğuk demlemeler.',
+    chips: ['SCA Sertifikalı', 'Haftalık Taze Kavrum', '16H Soğuk Demleme'],
   },
   {
     index: '02 / 03',
