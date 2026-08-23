@@ -135,7 +135,7 @@ export function MenuSection() {
   }, [activeCategory, searchQuery]);
 
   return (
-    <section id="menu" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#faf8f2] border-b border-[#0038a8]/15">
+    <section id="menu" className="scroll-mt-28 sm:scroll-mt-32 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-[#faf8f2] border-b border-[#0038a8]/15">
       <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12">
         {/* Header */}
         <div className="pb-4 border-b border-[#0038a8]/20 space-y-1">

@@ -95,7 +95,7 @@ export function BlendCarousel() {
   };
 
   return (
-    <section id="blends" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15 overflow-hidden">
+    <section id="blends" className="scroll-mt-28 sm:scroll-mt-32 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Section Header with Desktop Controls */}
         <div className="flex items-end justify-between gap-4 pb-4 border-b border-[#0038a8]/20">

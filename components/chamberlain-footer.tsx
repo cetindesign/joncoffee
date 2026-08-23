@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 import { ArrowUp } from 'lucide-react';
 
 function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -25,12 +26,13 @@ function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
 
 export function ChamberlainFooter() {
   const scrollToTop = () => {
+    smoothScrollTo('top', 0, 650);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleScrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    smoothScrollTo(id, 112, 650);
   };
 
   return (
@@ -85,10 +87,7 @@ export function ChamberlainFooter() {
               <li>
                 <a
                   href="#blends"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('blends');
-                  }}
+                  onClick={(e) => handleNavClick(e, 'blends')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
                   Öne Çıkan Kahveler
@@ -97,10 +96,7 @@ export function ChamberlainFooter() {
               <li>
                 <a
                   href="#menu"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('menu');
-                  }}
+                  onClick={(e) => handleNavClick(e, 'menu')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
                   Menü
@@ -109,22 +105,16 @@ export function ChamberlainFooter() {
               <li>
                 <a
                   href="#karakterler"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('karakterler');
-                  }}
+                  onClick={(e) => handleNavClick(e, 'karakterler')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Felsefemiz & Hikaye
+                  Mahalle Kültürü
                 </a>
               </li>
               <li>
                 <a
                   href="#konum"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleScrollTo('konum');
-                  }}
+                  onClick={(e) => handleNavClick(e, 'konum')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
                   Konum & Yol Tarifi

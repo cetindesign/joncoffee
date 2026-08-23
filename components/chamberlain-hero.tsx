@@ -4,8 +4,8 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Coffee, MapPin, ArrowRight, Clock } from 'lucide-react';
-import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 export function ChamberlainHero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -18,10 +18,12 @@ export function ChamberlainHero() {
 
   const scrollToMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    const el = document.getElementById('menu');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    smoothScrollTo('menu', 112, 650);
+  };
+
+  const scrollToLocation = (e: React.MouseEvent) => {
+    e.preventDefault();
+    smoothScrollTo('konum', 112, 650);
   };
 
   return (
@@ -82,9 +84,8 @@ export function ChamberlainHero() {
             </a>
 
             <a
-              href={STORE_INFO.location.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#konum"
+              onClick={scrollToLocation}
               className="btn-chamberlain-secondary w-full sm:w-auto py-3.5 px-6 text-xs tracking-wider justify-center shadow-xs active:scale-97 cursor-pointer"
             >
               <MapPin className="w-4 h-4 text-[#0038a8]" />
@@ -92,7 +93,7 @@ export function ChamberlainHero() {
             </a>
           </div>
 
-          {/* Stacked Legible Micro Info (Alt Alta ve Okunaklı Parçalı Düzen) */}
+          {/* Stacked Legible Micro Info */}
           <div className="pt-2 flex flex-col items-center justify-center space-y-1 text-xs">
             <div className="flex items-center gap-1.5 font-bold text-[#0038a8]">
               <MapPin className="w-3.5 h-3.5 text-[#0038a8]" />

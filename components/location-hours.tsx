@@ -8,7 +8,7 @@ export function LocationHours() {
   const currentDayIndex = new Date().getDay();
 
   return (
-    <section id="konum" className="scroll-mt-20 sm:scroll-mt-24 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15">
+    <section id="konum" className="scroll-mt-28 sm:scroll-mt-32 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-[#0038a8]/15">
       <div className="max-w-7xl mx-auto space-y-10 sm:space-y-14">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-[#0038a8]/20">

@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { StatusBadge } from './status-badge';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 import { Menu, X, MapPin, ArrowRight } from 'lucide-react';
 
 const MARQUEE_ITEMS = [
@@ -33,12 +34,17 @@ export function ChamberlainHeader() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleScrollTo = (id: string) => {
+  const handleNavClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    smoothScrollTo(id, 112, 650);
+  };
+
+  const handleTopClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    smoothScrollTo('top', 0, 650);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -84,7 +90,7 @@ export function ChamberlainHeader() {
         {/* Brand Logo & Wordmark (Logo smoothly docks on scroll) */}
         <div className="flex items-center gap-8">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={handleTopClick}
             className="flex items-center text-left cursor-pointer group"
           >
             {/* Morphing Docked Logo: Hidden at top (scrollY=0), glides in on scroll */}
@@ -113,44 +119,32 @@ export function ChamberlainHeader() {
             </span>
           </button>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav Links with precise smooth scroll */}
           <nav className="hidden lg:flex items-center gap-7">
             <a
               href="#blends"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('blends');
-              }}
+              onClick={(e) => handleNavClick(e, 'blends')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Öne Çıkanlar
             </a>
             <a
               href="#menu"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('menu');
-              }}
+              onClick={(e) => handleNavClick(e, 'menu')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Menü
             </a>
             <a
               href="#karakterler"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('karakterler');
-              }}
+              onClick={(e) => handleNavClick(e, 'karakterler')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
-              Hikayemiz
+              Mahalle Kültürü
             </a>
             <a
               href="#konum"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('konum');
-              }}
+              onClick={(e) => handleNavClick(e, 'konum')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
               Konum & Saatler
@@ -163,22 +157,20 @@ export function ChamberlainHeader() {
           <div className="hidden lg:flex items-center gap-4">
             <StatusBadge showDetails />
             <a
-              href={STORE_INFO.location.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-chamberlain-primary py-2.5 px-5 text-xs"
+              href="#konum"
+              onClick={(e) => handleNavClick(e, 'konum')}
+              className="btn-chamberlain-primary py-2.5 px-5 text-xs cursor-pointer"
             >
               <MapPin className="w-3.5 h-3.5" />
-              <span>Yol Tarifi</span>
+              <span>Konum & Saatler</span>
             </a>
           </div>
 
           <a
-            href={STORE_INFO.location.googleMapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Konum ve Yol Tarifi"
-            className="lg:hidden p-2 -mr-2 text-[#0038a8] min-h-[44px] min-w-[44px] flex items-center justify-center"
+            href="#konum"
+            onClick={(e) => handleNavClick(e, 'konum')}
+            aria-label="Konum ve Çalışma Saatleri"
+            className="lg:hidden p-2 -mr-2 text-[#0038a8] min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
           >
             <MapPin className="w-5 h-5" />
           </a>
@@ -198,10 +190,7 @@ export function ChamberlainHeader() {
           <div className="flex flex-col gap-4 font-extrabold text-lg text-[#0038a8] font-display uppercase">
             <a
               href="#blends"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('blends');
-              }}
+              onClick={(e) => handleNavClick(e, 'blends')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Öne Çıkan Kahveler</span>
@@ -209,10 +198,7 @@ export function ChamberlainHeader() {
             </a>
             <a
               href="#menu"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('menu');
-              }}
+              onClick={(e) => handleNavClick(e, 'menu')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Menü</span>
@@ -220,37 +206,19 @@ export function ChamberlainHeader() {
             </a>
             <a
               href="#karakterler"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('karakterler');
-              }}
+              onClick={(e) => handleNavClick(e, 'karakterler')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Hikayemiz</span>
+              <span>Mahalle Kültürü</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
               href="#konum"
-              onClick={(e) => {
-                e.preventDefault();
-                handleScrollTo('konum');
-              }}
+              onClick={(e) => handleNavClick(e, 'konum')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
               <span>Konum & Çalışma Saatleri</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
-            </a>
-          </div>
-
-          <div className="pt-2 border-t border-[#0038a8]/15 space-y-2">
-            <a
-              href={STORE_INFO.location.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full btn-chamberlain-primary py-3.5 text-xs tracking-wider justify-center"
-            >
-              <MapPin className="w-4 h-4" />
-              <span>Google Haritalar&apos;da Aç</span>
             </a>
           </div>
         </div>

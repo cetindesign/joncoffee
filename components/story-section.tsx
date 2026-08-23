@@ -6,7 +6,7 @@ import { assetPath } from '@/lib/assets';
 
 export function StorySection() {
   return (
-    <section id="karakterler" className="scroll-mt-20 sm:scroll-mt-24 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#faf8f2] border-b border-[#0038a8]/15">
+    <section id="karakterler" className="scroll-mt-28 sm:scroll-mt-32 py-14 sm:py-20 px-4 sm:px-6 lg:px-8 bg-[#faf8f2] border-b border-[#0038a8]/15">
       <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
         {/* Section Header */}
         <div className="space-y-1 pb-3 border-b border-[#0038a8]/20">
