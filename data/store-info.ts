@@ -36,13 +36,13 @@ export const STORE_INFO = {
     { day: "Pazar", dayIndex: 0, open: "", close: "", isOpen: false },
   ] as StoreHours[],
   contact: {
-    phone: "+90 532 000 00 00",
+    phone: "+90 532 497 66 96",
     email: "merhaba@joncoffee.com",
-    whatsapp: "https://wa.me/905320000000",
+    whatsapp: "https://wa.me/905324976696",
   },
   socials: {
-    instagram: "https://instagram.com/joncoffee",
-    instagramHandle: "@joncoffee",
+    instagram: "https://www.instagram.com/joncoffeescompany.izmir/",
+    instagramHandle: "@joncoffeescompany.izmir",
   },
   features: [
     {

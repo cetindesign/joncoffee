@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { STORE_INFO } from '@/data/store-info';
 import { StatusBadge } from './status-badge';
-import { Compass, Copy, Check, MapPin } from 'lucide-react';
+import { Compass, Copy, Check, MapPin, Phone, MessageCircle } from 'lucide-react';
 
 export function LocationHours() {
   const currentDayIndex = new Date().getDay();
@@ -134,11 +134,32 @@ export function LocationHours() {
               })}
             </div>
 
-            {/* Note */}
-            <div className="pt-3 border-t border-[#0038a8]/15 space-y-1 text-xs text-gray-600 font-medium">
-              <p>&bull; Pazar günleri kapalıyız.</p>
-              <p>&bull; Pazartesi - Cumartesi arası 09:00 - 20:30 hizmet vermekteyiz.</p>
-              <p>&bull; Evcil hayvan dostu bahçemiz çalışma saatleri boyunca açıktır.</p>
+            {/* Note & Direct Contact */}
+            <div className="pt-4 border-t border-[#0038a8]/15 space-y-3">
+              <div className="space-y-1 text-xs text-gray-600 font-medium">
+                <p>&bull; Pazar günleri kapalıyız.</p>
+                <p>&bull; Pazartesi - Cumartesi arası 09:00 - 20:30 hizmet vermekteyiz.</p>
+                <p>&bull; Evcil hayvan dostu bahçemiz çalışma saatleri boyunca açıktır.</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <a
+                  href={STORE_INFO.contact.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-chamberlain-primary py-2 px-3 text-xs justify-center cursor-pointer"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={`tel:${STORE_INFO.contact.phone.replace(/\s+/g, '')}`}
+                  className="btn-chamberlain-secondary py-2 px-3 text-xs justify-center cursor-pointer"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#0038a8]" />
+                  <span>{STORE_INFO.contact.phone}</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>

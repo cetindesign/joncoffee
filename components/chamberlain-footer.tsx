@@ -122,16 +122,26 @@ export function ChamberlainFooter() {
             </ul>
           </div>
 
-          {/* Col 3: Çalışma Saatleri */}
+          {/* Col 3: Çalışma Saatleri & İletişim */}
           <div className="space-y-3">
             <h4 className="font-black text-xs uppercase tracking-widest text-white/80 font-display">
-              ★ ÇALIŞMA SAATLERİ
+              ★ ÇALIŞMA SAATLERİ & İLETİŞİM
             </h4>
             <div className="space-y-1 text-xs sm:text-sm text-white/90 font-medium">
               <p>Pzt - Cmt: 09:00 - 20:30</p>
               <p className="text-[#fab80b] font-bold">Pazar: Kapalı</p>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-white/70 pt-1 font-semibold">
+            <div className="pt-1 text-xs space-y-1">
+              <a
+                href={STORE_INFO.contact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-[#fab80b] transition-colors block font-semibold"
+              >
+                WhatsApp: {STORE_INFO.contact.phone}
+              </a>
+            </div>
+            <p className="text-[10px] sm:text-[11px] text-white/70 pt-0.5 font-semibold">
               Hatay Metrosu&apos;na 2 dk yürüyüş mesafesinde.
             </p>
           </div>
