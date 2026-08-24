@@ -20,10 +20,10 @@ export interface MenuCategory {
 
 export const MENU_CATEGORIES: MenuCategory[] = [
   {
-    id: 'ozeller',
-    title: 'Jön Özeller ✦',
-    subtitle: 'İmza lezzetler & tatlı dokunuşlar',
-    iconName: 'Star',
+    id: 'sicak-kahveler',
+    title: 'Sıcak Kahveler',
+    subtitle: 'Espresso bazlı ve taze demlemeler',
+    iconName: 'Coffee',
   },
   {
     id: 'soguk-kahveler',
@@ -32,10 +32,10 @@ export const MENU_CATEGORIES: MenuCategory[] = [
     iconName: 'IceCream',
   },
   {
-    id: 'sicak-kahveler',
-    title: 'Sıcak Kahveler',
-    subtitle: 'Espresso bazlı ve taze demlemeler',
-    iconName: 'Coffee',
+    id: 'ozeller',
+    title: 'Jön Özeller ✦',
+    subtitle: 'İmza lezzetler & tatlı dokunuşlar',
+    iconName: 'Star',
   },
   {
     id: 'milkshake',

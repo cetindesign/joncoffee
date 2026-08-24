@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 export function MenuSection() {
-  const [activeCategory, setActiveCategory] = useState('ozeller');
+  const [activeCategory, setActiveCategory] = useState('sicak-kahveler');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [copied, setCopied] = useState(false);
 
