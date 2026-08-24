@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { STORE_INFO } from '@/data/store-info';
 import { StatusBadge } from './status-badge';
-import { Compass, Copy, Check, MapPin, Phone, MessageCircle } from 'lucide-react';
+import { Compass, Copy, Check, MapPin, Phone } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
 
 export function LocationHours() {
   const currentDayIndex = new Date().getDay();
@@ -149,7 +150,7 @@ export function LocationHours() {
                   rel="noopener noreferrer"
                   className="btn-chamberlain-primary py-2 px-3 text-xs justify-center cursor-pointer"
                 >
-                  <MessageCircle className="w-3.5 h-3.5" />
+                  <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
                   <span>WhatsApp</span>
                 </a>
                 <a

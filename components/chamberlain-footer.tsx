@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 import { smoothScrollTo } from '@/lib/smooth-scroll';
+import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
 import { ArrowUp } from 'lucide-react';
 
 function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -136,9 +137,10 @@ export function ChamberlainFooter() {
                 href={STORE_INFO.contact.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white hover:text-[#fab80b] transition-colors block font-semibold"
+                className="inline-flex items-center gap-1.5 text-white hover:text-[#fab80b] transition-colors font-semibold"
               >
-                WhatsApp: {STORE_INFO.contact.phone}
+                <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
+                <span>WhatsApp: {STORE_INFO.contact.phone}</span>
               </a>
             </div>
             <p className="text-[10px] sm:text-[11px] text-white/70 pt-0.5 font-semibold">

@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { ArrowRight, ChevronLeft, ChevronRight, X, Sparkles, Check, Flame, MessageCircle } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, X, Sparkles, Check, Flame } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
 import { assetPath } from '@/lib/assets';
 import { STORE_INFO } from '@/data/store-info';
 
@@ -452,7 +453,7 @@ export function BlendCarousel() {
                 rel="noopener noreferrer"
                 className="btn-chamberlain-primary w-full py-3.5 sm:py-4 px-6 text-xs sm:text-sm justify-center cursor-pointer shadow-md"
               >
-                <MessageCircle className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4 shrink-0" />
                 <span>WhatsApp ile Paket Siparişi Ver</span>
               </a>
             </div>
