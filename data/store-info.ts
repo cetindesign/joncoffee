@@ -27,13 +27,13 @@ export const STORE_INFO = {
     },
   },
   hours: [
-    { day: "Pazar", dayIndex: 0, open: "", close: "", isOpen: false },
     { day: "Pazartesi", dayIndex: 1, open: "09:00", close: "20:30", isOpen: true },
     { day: "Salı", dayIndex: 2, open: "09:00", close: "20:30", isOpen: true },
     { day: "Çarşamba", dayIndex: 3, open: "09:00", close: "20:30", isOpen: true },
     { day: "Perşembe", dayIndex: 4, open: "09:00", close: "20:30", isOpen: true },
     { day: "Cuma", dayIndex: 5, open: "09:00", close: "20:30", isOpen: true },
     { day: "Cumartesi", dayIndex: 6, open: "09:00", close: "20:30", isOpen: true },
+    { day: "Pazar", dayIndex: 0, open: "", close: "", isOpen: false },
   ] as StoreHours[],
   contact: {
     phone: "+90 532 000 00 00",
