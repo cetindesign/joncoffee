@@ -399,11 +399,11 @@ export function BlendCarousel() {
             const bData = getBeanData(selectedBean);
             return (
               <div
-                className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto bg-[#faf8f2] rounded-t-3xl sm:rounded-3xl border-2 border-[#0038a8] shadow-2xl p-6 sm:p-8 space-y-6 animate-in slide-in-from-bottom-4 duration-300 select-none"
+                className="relative w-full max-w-xl max-h-[88vh] overflow-y-auto bg-[#faf8f2] rounded-t-3xl sm:rounded-3xl border-2 border-[#0038a8] shadow-2xl p-6 sm:p-8 space-y-6 animate-in slide-in-from-bottom-4 duration-300 select-none scrollbar-none"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Modal Header */}
-                <div className="flex items-start justify-between gap-4 border-b border-[#0038a8]/20 pb-4">
+                {/* Sticky Modal Header */}
+                <div className="sticky -top-6 sm:-top-8 -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 px-6 sm:px-8 pt-6 sm:pt-8 pb-4 bg-[#faf8f2]/95 backdrop-blur-md border-b border-[#0038a8]/20 z-30 flex items-start justify-between gap-4">
                   <div className="space-y-1">
                     <span className="text-[10px] font-black uppercase tracking-widest text-[#0038a8] bg-[#0038a8]/10 px-2.5 py-0.5 rounded-full font-display">
                       {selectedBean.badge}
@@ -418,7 +418,7 @@ export function BlendCarousel() {
 
                   <button
                     onClick={closeBeanModal}
-                    className="w-9 h-9 rounded-full bg-white border border-[#0038a8]/20 flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer shrink-0"
+                    className="w-9 h-9 rounded-full bg-white border border-[#0038a8]/20 flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer shrink-0 shadow-xs active:scale-95"
                     aria-label={locale === 'tr' ? 'Kapat' : 'Close'}
                   >
                     <X className="w-5 h-5" />

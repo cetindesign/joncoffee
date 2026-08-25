@@ -293,9 +293,10 @@ export function MenuSection() {
                   exit={{ y: '100%' }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   onClick={(e) => e.stopPropagation()}
-                  className="bg-[#faf8f2] w-full max-w-lg rounded-t-3xl sm:rounded-3xl border-2 border-[#0038a8] shadow-2xl p-6 sm:p-8 space-y-5 select-none"
+                  className="bg-[#faf8f2] w-full max-w-lg max-h-[88vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl border-2 border-[#0038a8] shadow-2xl p-6 sm:p-8 space-y-5 select-none scrollbar-none"
                 >
-                  <div className="flex items-start justify-between gap-4 border-b border-[#0038a8]/20 pb-4">
+                  {/* Sticky Modal Header */}
+                  <div className="sticky -top-6 sm:-top-8 -mx-6 sm:-mx-8 -mt-6 sm:-mt-8 px-6 sm:px-8 pt-6 sm:pt-8 pb-4 bg-[#faf8f2]/95 backdrop-blur-md border-b border-[#0038a8]/20 z-30 flex items-start justify-between gap-4">
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-widest text-[#0038a8]/70 font-display">
                         {t.menu.modalBadge}
@@ -306,7 +307,7 @@ export function MenuSection() {
                     </div>
                     <button
                       onClick={() => handleSelectItem(null)}
-                      className="w-8 h-8 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer"
+                      className="w-9 h-9 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer shrink-0 shadow-xs active:scale-95"
                       aria-label={t.menu.close}
                     >
                       <X className="w-4 h-4" />
