@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { ArrowRight, ChevronLeft, ChevronRight, X, Sparkles, Check, Flame } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, X, Sparkles, Check, Flame, Share2 } from 'lucide-react';
 import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
 import { assetPath } from '@/lib/assets';
 import { STORE_INFO } from '@/data/store-info';
@@ -140,7 +140,33 @@ export const RETAIL_BEANS: RetailBeanProduct[] = [
 export function BlendCarousel() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [selectedBean, setSelectedBean] = useState<RetailBeanProduct | null>(null);
+  const [copied, setCopied] = useState(false);
   const { t, locale } = useLanguage();
+
+  const handleShare = async (bean: RetailBeanProduct) => {
+    const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?bean=${bean.id}` : '';
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: `Jön Coffee - ${bean.name}`,
+          text: `${bean.name} (${bean.weight}) - Jön Coffee Co.`,
+          url,
+        });
+        return;
+      } catch {
+        // Fallback
+      }
+    }
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {
+        // Fallback
+      }
+    }
+  };
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
@@ -490,7 +516,7 @@ export function BlendCarousel() {
                 </div>
 
                 {/* Action Bar */}
-                <div className="pt-2 space-y-2">
+                <div className="flex flex-col gap-2.5 pt-2">
                   <a
                     href={`https://wa.me/${STORE_INFO.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
                       locale === 'tr'
@@ -499,7 +525,7 @@ export function BlendCarousel() {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-chamberlain-primary w-full py-3.5 sm:py-4 px-6 text-xs sm:text-sm justify-center cursor-pointer shadow-md"
+                    className="btn-chamberlain-primary w-full min-h-[48px] py-3.5 px-6 text-xs sm:text-sm font-extrabold justify-center cursor-pointer shadow-md active:scale-98 transition-transform"
                   >
                     <WhatsAppIcon className="w-4 h-4 shrink-0" />
                     <span>{t.blends.orderWhatsApp}</span>
@@ -508,6 +534,23 @@ export function BlendCarousel() {
                   <p className="text-[11px] text-gray-500 text-center font-medium">
                     {t.blends.pickupNote}
                   </p>
+
+                  <button
+                    onClick={() => handleShare(selectedBean)}
+                    className="btn-chamberlain-secondary w-full min-h-[42px] py-2.5 px-4 text-xs font-bold tracking-wider justify-center cursor-pointer active:scale-98 transition-transform"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        <span className="text-emerald-700">{t.menu.copied}</span>
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="w-3.5 h-3.5 text-[#0038a8]" />
+                        <span>{t.menu.shareWithFriend}</span>
+                      </>
+                    )}
+                  </button>
                 </div>
               </div>
             );

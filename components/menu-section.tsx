@@ -353,7 +353,7 @@ export function MenuSection() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-chamberlain-primary w-full py-3.5 sm:py-4 px-6 text-xs sm:text-sm justify-center cursor-pointer shadow-md"
+                      className="btn-chamberlain-primary w-full min-h-[48px] py-3.5 px-6 text-xs sm:text-sm font-extrabold justify-center cursor-pointer shadow-md active:scale-98 transition-transform"
                     >
                       <WhatsAppIcon className="w-4 h-4 shrink-0" />
                       <span>{t.menu.orderWhatsApp}</span>
@@ -363,31 +363,22 @@ export function MenuSection() {
                       {t.menu.pickupNote}
                     </p>
 
-                    <div className="grid grid-cols-2 gap-2 pt-1">
-                      <button
-                        onClick={() => handleShare(selectedItem)}
-                        className="btn-chamberlain-secondary py-2.5 px-3 text-xs tracking-wider justify-center min-h-[40px] cursor-pointer"
-                      >
-                        {copied ? (
-                          <>
-                            <Check className="w-3.5 h-3.5 text-emerald-600" />
-                            <span className="text-emerald-700">{t.menu.copied}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Share2 className="w-3.5 h-3.5 text-[#0038a8]" />
-                            <span>{t.menu.shareWithFriend}</span>
-                          </>
-                        )}
-                      </button>
-
-                      <button
-                        onClick={() => handleSelectItem(null)}
-                        className="btn-chamberlain-secondary py-2.5 px-3 text-xs tracking-wider justify-center min-h-[40px] cursor-pointer"
-                      >
-                        {t.menu.close}
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => handleShare(selectedItem)}
+                      className="btn-chamberlain-secondary w-full min-h-[42px] py-2.5 px-4 text-xs font-bold tracking-wider justify-center cursor-pointer active:scale-98 transition-transform"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-600" />
+                          <span className="text-emerald-700">{t.menu.copied}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Share2 className="w-3.5 h-3.5 text-[#0038a8]" />
+                          <span>{t.menu.shareWithFriend}</span>
+                        </>
+                      )}
+                    </button>
                   </div>
                 </motion.div>
               );
