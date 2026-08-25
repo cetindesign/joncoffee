@@ -6,10 +6,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Coffee, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { assetPath } from '@/lib/assets';
 import { smoothScrollTo } from '@/lib/smooth-scroll';
+import { useLanguage } from '@/context/language-context';
 
 export function ChamberlainHero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
+  const { t, locale } = useLanguage();
 
   // Scroll ascension
   const emblemY = useTransform(scrollY, [0, 240], [0, -60]);
@@ -61,7 +63,9 @@ export function ChamberlainHero() {
           </h1>
 
           <p className="text-[clamp(0.7rem,1.8vw,0.875rem)] font-bold text-gray-600 tracking-wide uppercase font-display">
-            İzmir Hatay &bull; Günlük Taze Kavrum & Nitelikli Demlemeler
+            {locale === 'tr'
+              ? 'İzmir Hatay • Günlük Taze Kavrum & Nitelikli Demlemeler'
+              : 'Izmir Hatay • Weekly Fresh Roasts & Specialty Brews'}
           </p>
         </motion.div>
 
@@ -79,7 +83,7 @@ export function ChamberlainHero() {
               className="btn-chamberlain-primary w-full sm:w-auto py-3.5 px-8 text-xs tracking-wider justify-center shadow-md active:scale-97 cursor-pointer group"
             >
               <Coffee className="w-4 h-4" />
-              <span>Menüyü İncele</span>
+              <span>{t.hero.btnMenu}</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </a>
 
@@ -89,7 +93,7 @@ export function ChamberlainHero() {
               className="btn-chamberlain-secondary w-full sm:w-auto py-3.5 px-6 text-xs tracking-wider justify-center shadow-xs active:scale-97 cursor-pointer"
             >
               <MapPin className="w-4 h-4 text-[#0038a8]" />
-              <span>Yol Tarifi</span>
+              <span>{t.hero.btnDirections}</span>
             </a>
           </div>
 
@@ -97,16 +101,25 @@ export function ChamberlainHero() {
           <div className="pt-2 flex flex-col items-center justify-center space-y-1 text-xs">
             <div className="flex items-center gap-1.5 font-bold text-[#0038a8]">
               <MapPin className="w-3.5 h-3.5 text-[#0038a8]" />
-              <span>Hatay Metrosu&apos;na 2 dk yürüme mesafesinde</span>
+              <span>
+                {locale === 'tr'
+                  ? "Hatay Metrosu'na 2 dk yürüme mesafesinde"
+                  : '2 min walk from Hatay Metro Station'}
+              </span>
             </div>
 
             <div className="flex items-center gap-2 text-[11px] sm:text-xs text-gray-600 font-medium">
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3 text-gray-400" />
-                <span>Pzt - Cmt: <strong className="text-[#0038a8]">09:00 - 20:30</strong></span>
+                <span>
+                  {locale === 'tr' ? 'Pzt - Cmt:' : 'Mon - Sat:'}{' '}
+                  <strong className="text-[#0038a8]">09:00 - 20:30</strong>
+                </span>
               </span>
               <span>&bull;</span>
-              <span className="text-amber-800 font-bold">Pazar: Kapalı</span>
+              <span className="text-amber-800 font-bold">
+                {locale === 'tr' ? 'Pazar: Kapalı' : 'Sunday: Closed'}
+              </span>
             </div>
           </div>
         </motion.div>

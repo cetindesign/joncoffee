@@ -3,9 +3,10 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { assetPath } from '@/lib/assets';
+import { useLanguage } from '@/context/language-context';
 import { ChevronLeft, ChevronRight, Sparkles, Coffee, Navigation } from 'lucide-react';
 
-const COMMITMENTS = [
+const COMMITMENTS_TR = [
   {
     tag: 'NİTELİKLİ SEÇKİ',
     icon: Coffee,
@@ -35,9 +36,42 @@ const COMMITMENTS = [
   },
 ];
 
+const COMMITMENTS_EN = [
+  {
+    tag: 'SPECIALTY SELECTION',
+    icon: Coffee,
+    heroMetric: '86+ SCAA',
+    heroSub: 'SPECIALTY COFFEE GRADE',
+    title: '100% SPECIALTY GRADE ARABICA',
+    desc: 'Single origin beans scoring 86+ on the Specialty Coffee Association cupping protocol, precision-calibrated espresso, and 16-hour slow cold brew.',
+    chips: ['SCA Certified', 'Weekly Fresh Roast', '16H Cold Brew'],
+  },
+  {
+    tag: 'LIVING SPACE',
+    icon: Sparkles,
+    heroMetric: '100% PET',
+    heroSub: 'FRIENDLY GARDEN & WORKSPACE',
+    title: 'PET FRIENDLY OPEN GARDEN & WORKSPACE',
+    desc: 'An open green garden to unwind with your pets, seamless high-speed Wi-Fi, and power-equipped tables designed for remote workers.',
+    chips: ['Pet-Friendly Garden', 'High-Speed Wi-Fi', 'Power Outlets'],
+  },
+  {
+    tag: 'CENTRAL LOCATION',
+    icon: Navigation,
+    heroMetric: '120 METERS',
+    heroSub: 'FLAT WALK FROM HATAY METRO',
+    title: '2 MIN FLAT WALK FROM HATAY METRO',
+    desc: 'Parallel to Inönü Street, an effortless 120-meter flat walk from the metro station exit in the heart of the neighborhood.',
+    chips: ['Flat Walk', '120m Distance', 'Hatay Station'],
+  },
+];
+
 export function StorySection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { t, locale } = useLanguage();
+
+  const commitments = locale === 'en' ? COMMITMENTS_EN : COMMITMENTS_TR;
 
   const handleScroll = () => {
     if (!scrollRef.current) return;
@@ -74,12 +108,12 @@ export function StorySection() {
   };
 
   const nextSlide = () => {
-    const next = activeIndex < COMMITMENTS.length - 1 ? activeIndex + 1 : 0;
+    const next = activeIndex < commitments.length - 1 ? activeIndex + 1 : 0;
     scrollToIndex(next);
   };
 
   const prevSlide = () => {
-    const prev = activeIndex > 0 ? activeIndex - 1 : COMMITMENTS.length - 1;
+    const prev = activeIndex > 0 ? activeIndex - 1 : commitments.length - 1;
     scrollToIndex(prev);
   };
 
@@ -89,10 +123,12 @@ export function StorySection() {
         {/* Section Header */}
         <div className="space-y-1 pb-3 border-b border-[#0038a8]/20">
           <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
-            ★ MAHALLE KÜLTÜRÜ ★
+            {t.story.eyebrow}
           </span>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#0038a8] tracking-tight font-display uppercase">
-            İZMİR HATAY&apos;IN YENİ NESİL KAHVE DURAĞI
+            {locale === 'tr'
+              ? "İZMİR HATAY'IN YENİ NESİL KAHVE DURAĞI"
+              : "IZMIR HATAY'S NEW GENERATION COFFEE STOP"}
           </h2>
         </div>
 
@@ -113,11 +149,11 @@ export function StorySection() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#0038a8]/70 leading-none font-display">
-                  İzmir Hatay &bull; Açık Bahçe
+                  {locale === 'tr' ? 'İzmir Hatay • Açık Bahçe' : 'Izmir Hatay • Open Garden'}
                 </span>
                 <span className="text-xs font-black text-[#0038a8] uppercase font-display tracking-tight leading-snug pt-0.5 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
-                  Evcil Hayvan Dostu
+                  {locale === 'tr' ? 'Evcil Hayvan Dostu' : 'Pet Friendly'}
                 </span>
               </div>
             </div>
@@ -126,7 +162,9 @@ export function StorySection() {
           {/* Right: Specialty Craft Passport Slider (7 cols) */}
           <div className="lg:col-span-7 space-y-5">
             <p className="text-sm sm:text-base text-gray-700 font-medium leading-relaxed">
-              Jön Coffee Co., iyi kahveyi samimi mahalle kültürüyle buluşturan bağımsız bir 3. nesil kahvecidir. Gösterişten uzak, kaliteye ve detaylara odaklı bir deneyim sunarız.
+              {locale === 'tr'
+                ? 'Jön Coffee Co., iyi kahveyi samimi mahalle kültürüyle buluşturan bağımsız bir 3. nesil kahvecidir. Gösterişten uzak, kaliteye ve detaylara odaklı bir deneyim sunarız.'
+                : 'Jön Coffee Co. is an independent specialty coffee shop uniting exceptional specialty coffee with warm neighborhood hospitality.'}
             </p>
 
             {/* Horizontal Swipeable Track */}
@@ -137,14 +175,14 @@ export function StorySection() {
                 className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none gap-4 pb-1 scroll-smooth"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
-                {COMMITMENTS.map((item, idx) => {
+                {commitments.map((item, idx) => {
                   const Icon = item.icon;
                   return (
                     <div
                       key={idx}
                       className="relative w-full shrink-0 snap-center p-6 sm:p-8 rounded-3xl bg-[#faf7ee] border-2 border-[#0038a8] shadow-xs space-y-4 select-none overflow-hidden"
                     >
-                      {/* Top Header Row (without numbers) */}
+                      {/* Top Header Row */}
                       <div className="flex items-center justify-between gap-2 border-b border-[#0038a8]/15 pb-3">
                         <div className="flex items-center gap-2">
                           <div className="w-7 h-7 rounded-lg bg-[#0038a8] text-white flex items-center justify-center shrink-0">
@@ -156,7 +194,7 @@ export function StorySection() {
                         </div>
 
                         <span className="text-[10px] font-black text-[#0038a8]/60 uppercase tracking-widest font-display">
-                          ★ JÖN STANDART
+                          ★ JÖN STANDARD
                         </span>
                       </div>
 
@@ -202,11 +240,11 @@ export function StorySection() {
             <div className="flex items-center justify-between pt-1">
               {/* Segmented Dots */}
               <div className="flex items-center gap-2 flex-1 max-w-[220px]">
-                {COMMITMENTS.map((_, idx) => (
+                {commitments.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => scrollToIndex(idx)}
-                    aria-label={`Kart ${idx + 1}`}
+                    aria-label={`Slide ${idx + 1}`}
                     className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                       activeIndex === idx
                         ? 'flex-1 bg-[#0038a8]'
@@ -219,20 +257,20 @@ export function StorySection() {
               {/* Counter & Prev / Next Chevrons */}
               <div className="flex items-center gap-3 pl-4">
                 <span className="font-mono text-xs font-bold text-[#0038a8]/75 tracking-wider">
-                  0{activeIndex + 1} / 0{COMMITMENTS.length}
+                  0{activeIndex + 1} / 0{commitments.length}
                 </span>
 
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={prevSlide}
-                    aria-label="Önceki kart"
+                    aria-label={t.story.controlsPrev}
                     className="w-8 h-8 rounded-full border-2 border-[#0038a8] flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white active:scale-95 transition-all cursor-pointer"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
                   <button
                     onClick={nextSlide}
-                    aria-label="Sonraki kart"
+                    aria-label={t.story.controlsNext}
                     className="w-8 h-8 rounded-full border-2 border-[#0038a8] flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white active:scale-95 transition-all cursor-pointer"
                   >
                     <ChevronRight className="w-4 h-4" />

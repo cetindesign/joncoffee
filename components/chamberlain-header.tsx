@@ -4,24 +4,16 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { StatusBadge } from './status-badge';
-import { STORE_INFO } from '@/data/store-info';
+import { LanguageToggle } from './language-toggle';
+import { useLanguage } from '@/context/language-context';
 import { assetPath } from '@/lib/assets';
 import { smoothScrollTo } from '@/lib/smooth-scroll';
-import { Menu, X, MapPin, ArrowRight } from 'lucide-react';
-
-const MARQUEE_ITEMS = [
-  '★ %100 SPECIALTY GRADE ARABICA',
-  '★ İZMİR HATAY METROYA 2 DK',
-  '★ AYNI İYİ KAHVE, YEPYENİ HİSLER',
-  '★ %100 PET FRIENDLY',
-  '★ HAFTALIK TAZE KAVRUM',
-  '★ 16 SAAT SOĞUK DEMLEME COLD BREW',
-  '★ JÖN SUNRISE İMZA REÇETE',
-];
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 export function ChamberlainHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t, locale } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +45,7 @@ export function ChamberlainHeader() {
         <div className="animate-continuous-marquee flex items-center gap-8 text-[11px] sm:text-xs font-black tracking-widest uppercase font-display">
           {/* Loop 1 */}
           <div className="flex items-center gap-8 shrink-0">
-            {MARQUEE_ITEMS.map((item, idx) => (
+            {t.marquee.map((item, idx) => (
               <span key={idx} className="flex items-center gap-3 shrink-0">
                 <span>{item}</span>
                 <span className="text-[#fab80b]">★</span>
@@ -63,7 +55,7 @@ export function ChamberlainHeader() {
 
           {/* Loop 2 (Seamless clone) */}
           <div className="flex items-center gap-8 shrink-0" aria-hidden="true">
-            {MARQUEE_ITEMS.map((item, idx) => (
+            {t.marquee.map((item, idx) => (
               <span key={`clone-${idx}`} className="flex items-center gap-3 shrink-0">
                 <span>{item}</span>
                 <span className="text-[#fab80b]">★</span>
@@ -80,7 +72,7 @@ export function ChamberlainHeader() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 -ml-2 text-[#0038a8] focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
-            aria-label="Menüyü aç"
+            aria-label={mobileMenuOpen ? t.nav.closeMobileMenu : t.nav.openMobileMenu}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -125,62 +117,52 @@ export function ChamberlainHeader() {
               onClick={(e) => handleNavClick(e, 'menu')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
-              Menü
+              {t.nav.menu}
             </a>
             <a
               href="#blends"
               onClick={(e) => handleNavClick(e, 'blends')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
-              Paket Kahveler
+              {t.nav.blends}
             </a>
             <a
               href="#karakterler"
               onClick={(e) => handleNavClick(e, 'karakterler')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
-              Mahalle Kültürü
+              {t.nav.story}
             </a>
             <a
               href="#konum"
               onClick={(e) => handleNavClick(e, 'konum')}
               className="text-xs sm:text-sm font-extrabold text-[#0038a8] hover:opacity-75 tracking-wider uppercase transition-opacity cursor-pointer font-display"
             >
-              Konum & Saatler
+              {t.nav.location}
             </a>
           </nav>
         </div>
 
-        {/* Right Action */}
+        {/* Right Action: Language Switcher & Status Badge */}
         <div className="flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-3.5">
             <StatusBadge showDetails />
-            <a
-              href="#konum"
-              onClick={(e) => handleNavClick(e, 'konum')}
-              className="btn-chamberlain-primary py-2.5 px-5 text-xs cursor-pointer"
-            >
-              <MapPin className="w-3.5 h-3.5" />
-              <span>Konum & Saatler</span>
-            </a>
+            <LanguageToggle />
           </div>
 
-          <a
-            href="#konum"
-            onClick={(e) => handleNavClick(e, 'konum')}
-            aria-label="Konum ve Çalışma Saatleri"
-            className="lg:hidden p-2 -mr-2 text-[#0038a8] min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
-          >
-            <MapPin className="w-5 h-5" />
-          </a>
+          {/* Mobile Right: Language Switcher */}
+          <div className="lg:hidden">
+            <LanguageToggle variant="mobile-header" />
+          </div>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#faf8f2] border-t border-[#0038a8]/20 px-6 py-6 space-y-6 shadow-2xl animate-in slide-in-from-top-2 duration-200">
-          <div className="flex items-center justify-start pb-3 border-b border-[#0038a8]/15">
+          <div className="flex items-center justify-between pb-3 border-b border-[#0038a8]/15">
             <StatusBadge showDetails />
+            <LanguageToggle />
           </div>
 
           <div className="flex flex-col gap-4 font-extrabold text-lg text-[#0038a8] font-display uppercase">
@@ -189,7 +171,7 @@ export function ChamberlainHeader() {
               onClick={(e) => handleNavClick(e, 'menu')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Menü</span>
+              <span>{t.nav.menu}</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
@@ -197,7 +179,7 @@ export function ChamberlainHeader() {
               onClick={(e) => handleNavClick(e, 'blends')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Paket Kahveler (250g)</span>
+              <span>{t.nav.blends}</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
@@ -205,7 +187,7 @@ export function ChamberlainHeader() {
               onClick={(e) => handleNavClick(e, 'karakterler')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Mahalle Kültürü</span>
+              <span>{t.nav.story}</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
             <a
@@ -213,9 +195,13 @@ export function ChamberlainHeader() {
               onClick={(e) => handleNavClick(e, 'konum')}
               className="py-1 flex items-center justify-between cursor-pointer"
             >
-              <span>Konum & Çalışma Saatleri</span>
+              <span>{t.nav.location}</span>
               <ArrowRight className="w-4 h-4 text-[#0038a8]/50" />
             </a>
+          </div>
+
+          <div className="pt-4 border-t border-[#0038a8]/15 text-xs text-gray-600 font-medium">
+            <p>İzmir Hatay &bull; {locale === 'tr' ? 'Metronun yanı başında.' : 'Right next to metro.'}</p>
           </div>
         </div>
       )}

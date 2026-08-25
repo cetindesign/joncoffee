@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { STORE_INFO } from '@/data/store-info';
 import { assetPath } from '@/lib/assets';
 import { smoothScrollTo } from '@/lib/smooth-scroll';
+import { useLanguage } from '@/context/language-context';
 import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
 import { ArrowUp } from 'lucide-react';
 
@@ -26,27 +27,29 @@ function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
 }
 
 export function ChamberlainFooter() {
-  const scrollToTop = () => {
-    smoothScrollTo('top');
-  };
+  const { t, locale } = useLanguage();
 
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     smoothScrollTo(id);
   };
 
+  const scrollToTop = () => {
+    smoothScrollTo('top');
+  };
+
   return (
-    <footer className="bg-[#0038a8] text-white pt-12 sm:pt-20 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-10 sm:space-y-16">
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
-          {/* Brand Info */}
-          <div className="lg:col-span-2 space-y-4">
+    <footer className="bg-[#0038a8] text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 select-none">
+      <div className="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+        {/* Top: 3-Column Info Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 pb-12 border-b border-white/20">
+          {/* Col 1: Brand & Bio */}
+          <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 border-2 border-white">
+              <div className="relative w-9 h-9 shrink-0 rounded-full overflow-hidden border border-white/30 bg-white/10 p-0.5">
                 <Image
                   src={assetPath('/assets/jon-badge-circle.png')}
-                  alt="Jön Coffee Logo"
+                  alt="Jön Coffees Co."
                   fill
                   className="object-contain"
                 />
@@ -62,7 +65,7 @@ export function ChamberlainFooter() {
             </div>
 
             <p className="text-xs sm:text-sm text-white/85 leading-relaxed max-w-sm font-medium">
-              %100 nitelikli Arabica çekirdekler, günlük taze kavrumlar ve samimi mahalle kahveciliği deneyimi.
+              {t.footer.brandDesc}
             </p>
 
             <div>
@@ -73,7 +76,7 @@ export function ChamberlainFooter() {
                 className="inline-flex items-center gap-2 text-xs font-bold text-white hover:text-[#fab80b] transition-colors"
               >
                 <InstagramIcon className="w-4 h-4" />
-                <span>{STORE_INFO.socials.instagramHandle} Takip Et</span>
+                <span>{STORE_INFO.socials.instagramHandle} {t.footer.followInstagram}</span>
               </a>
             </div>
           </div>
@@ -81,7 +84,7 @@ export function ChamberlainFooter() {
           {/* Col 2: Hızlı Erişim */}
           <div className="space-y-3">
             <h4 className="font-black text-xs uppercase tracking-widest text-white/80 font-display">
-              ★ KEŞFET
+              {t.footer.exploreTitle}
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-white/90 font-medium">
               <li>
@@ -90,7 +93,7 @@ export function ChamberlainFooter() {
                   onClick={(e) => handleNavClick(e, 'menu')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Menü
+                  {t.nav.menu}
                 </a>
               </li>
               <li>
@@ -99,7 +102,7 @@ export function ChamberlainFooter() {
                   onClick={(e) => handleNavClick(e, 'blends')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Paket Kahveler
+                  {t.nav.blends}
                 </a>
               </li>
               <li>
@@ -108,7 +111,7 @@ export function ChamberlainFooter() {
                   onClick={(e) => handleNavClick(e, 'karakterler')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Mahalle Kültürü
+                  {t.nav.story}
                 </a>
               </li>
               <li>
@@ -117,7 +120,7 @@ export function ChamberlainFooter() {
                   onClick={(e) => handleNavClick(e, 'konum')}
                   className="hover:text-[#fab80b] transition-colors cursor-pointer"
                 >
-                  Konum & Yol Tarifi
+                  {t.nav.location}
                 </a>
               </li>
             </ul>
@@ -126,11 +129,11 @@ export function ChamberlainFooter() {
           {/* Col 3: Çalışma Saatleri & İletişim */}
           <div className="space-y-3">
             <h4 className="font-black text-xs uppercase tracking-widest text-white/80 font-display">
-              ★ ÇALIŞMA SAATLERİ & İLETİŞİM
+              {t.footer.hoursTitle}
             </h4>
             <div className="space-y-1 text-xs sm:text-sm text-white/90 font-medium">
-              <p>Pzt - Cmt: 09:00 - 20:30</p>
-              <p className="text-[#fab80b] font-bold">Pazar: Kapalı</p>
+              <p>{t.footer.hoursText}</p>
+              <p className="text-[#fab80b] font-bold">{t.footer.sundayText}</p>
             </div>
             <div className="pt-1 text-xs space-y-1">
               <a
@@ -144,26 +147,26 @@ export function ChamberlainFooter() {
               </a>
             </div>
             <p className="text-[10px] sm:text-[11px] text-white/70 pt-0.5 font-semibold">
-              Hatay Metrosu&apos;na 2 dk yürüyüş mesafesinde.
+              {t.footer.metroFootnote}
             </p>
           </div>
         </div>
 
         {/* Bottom Strip */}
         <div className="pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/75">
-          <p className="text-center sm:text-left">&copy; {new Date().getFullYear()} Jön Coffees Co. Tüm Hakları Saklıdır. İzmir / Hatay.</p>
+          <p className="text-center sm:text-left">&copy; {new Date().getFullYear()} {t.footer.rightsReserved}</p>
 
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-1.5 text-white font-semibold">
               <span>🇹🇷</span>
-              <span>Türkiye (TRY ₺)</span>
+              <span>{t.footer.countryCurrency}</span>
             </div>
 
             <button
               onClick={scrollToTop}
               className="flex items-center gap-1 text-white hover:text-[#fab80b] transition-colors font-bold cursor-pointer uppercase tracking-wider text-xs font-display"
             >
-              <span>Yukarı</span>
+              <span>{t.footer.backToTop}</span>
               <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>

@@ -2,17 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import { STORE_INFO } from '@/data/store-info';
+import { useLanguage } from '@/context/language-context';
 import { Clock } from 'lucide-react';
 
 export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) {
+  const { locale } = useLanguage();
   const [status, setStatus] = useState<{
     isOpen: boolean;
     text: string;
     subtext: string;
   }>({
     isOpen: true,
-    text: 'Açık',
-    subtext: 'Bugün 20:30’a kadar',
+    text: locale === 'tr' ? 'Açık' : 'Open',
+    subtext: locale === 'tr' ? 'Bugün 20:30’a kadar' : 'Until 20:30 today',
   });
 
   useEffect(() => {
@@ -28,10 +30,13 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
       if (!todayConfig || !todayConfig.isOpen) {
         // Sunday or closed day -> Opens Monday 09:00
         const nextOpenDay = STORE_INFO.hours.find((h) => h.isOpen);
+        const openTime = nextOpenDay?.open || '09:00';
         setStatus({
           isOpen: false,
-          text: 'Kapalı',
-          subtext: `${day === 0 ? 'Pazartesi' : 'Yarın'} ${nextOpenDay?.open || '09:00'}`,
+          text: locale === 'tr' ? 'Kapalı' : 'Closed',
+          subtext: locale === 'tr'
+            ? `${day === 0 ? 'Pazartesi' : 'Yarın'} ${openTime}`
+            : `${day === 0 ? 'Mon' : 'Tomorrow'} ${openTime}`,
         });
         return;
       }
@@ -49,19 +54,19 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
       if (isOpenNow) {
         setStatus({
           isOpen: true,
-          text: 'Açık',
-          subtext: `${todayConfig.close}'a kadar`,
+          text: locale === 'tr' ? 'Açık' : 'Open',
+          subtext: locale === 'tr' ? `${todayConfig.close}'a kadar` : `Until ${todayConfig.close}`,
         });
       } else {
         const nextDayIndex = (day + 1) % 7;
         const nextDayConfig = STORE_INFO.hours.find((h) => h.dayIndex === nextDayIndex);
         const opensWhen = nextDayConfig?.isOpen
-          ? `Yarın ${nextDayConfig.open}`
-          : 'Pazartesi 09:00';
+          ? locale === 'tr' ? `Yarın ${nextDayConfig.open}` : `Tomorrow ${nextDayConfig.open}`
+          : locale === 'tr' ? 'Pazartesi 09:00' : 'Mon 09:00';
 
         setStatus({
           isOpen: false,
-          text: 'Kapalı',
+          text: locale === 'tr' ? 'Kapalı' : 'Closed',
           subtext: opensWhen,
         });
       }
@@ -70,7 +75,7 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
     checkOpenStatus();
     const timer = setInterval(checkOpenStatus, 60000);
     return () => clearInterval(timer);
-  }, []);
+  }, [locale]);
 
   return (
     <div className="inline-flex items-center gap-2 text-xs font-semibold select-none">
@@ -86,9 +91,9 @@ export function StatusBadge({ showDetails = false }: { showDetails?: boolean }) 
           }`}
         />
       </span>
-      <span className="font-bold text-[#102341] tracking-wide">{status.text}</span>
+      <span className="font-bold text-[#0038a8] tracking-wide">{status.text}</span>
       {showDetails && (
-        <span className="text-gray-500 font-medium flex items-center gap-1">
+        <span className="text-gray-600 font-medium flex items-center gap-1">
           <span>&bull;</span>
           <Clock className="w-3 h-3 text-gray-400" />
           <span>{status.subtext}</span>

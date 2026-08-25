@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Bricolage_Grotesque } from "next/font/google";
 import { MENU_ITEMS } from "@/data/menu";
 import { STORE_INFO } from "@/data/store-info";
+import { LanguageProvider } from "@/context/language-context";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -192,7 +193,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-[#faf8f2] text-[#0038a8] font-sans selection:bg-[#0038a8] selection:text-white antialiased">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

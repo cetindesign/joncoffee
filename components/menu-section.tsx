@@ -9,6 +9,10 @@ import {
   MenuItem,
 } from '@/data/menu';
 import {
+  MENU_ITEMS_EN,
+} from '@/data/translations';
+import { useLanguage } from '@/context/language-context';
+import {
   Star,
   X,
   ChevronRight,
@@ -20,6 +24,7 @@ export function MenuSection() {
   const [activeCategory, setActiveCategory] = useState('sicak-kahveler');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [copied, setCopied] = useState(false);
+  const { t, locale } = useLanguage();
 
   const handleSelectItem = useCallback((item: MenuItem | null) => {
     setSelectedItem(item);
@@ -93,11 +98,27 @@ export function MenuSection() {
     };
   }, [selectedItem]);
 
+  const getItemData = (item: MenuItem) => {
+    if (locale === 'en' && MENU_ITEMS_EN[item.id]) {
+      return {
+        name: MENU_ITEMS_EN[item.id].name,
+        description: MENU_ITEMS_EN[item.id].description,
+        badge: MENU_ITEMS_EN[item.id].badge || item.badge,
+      };
+    }
+    return {
+      name: item.name,
+      description: item.description,
+      badge: item.badge,
+    };
+  };
+
   const handleShare = async (item: MenuItem) => {
+    const itemData = getItemData(item);
     const shareUrl = `${window.location.origin}${window.location.pathname}?item=${item.id}#menu`;
     const shareData = {
-      title: `${item.name} | Jön Coffee İzmir`,
-      text: `${item.name} - ${item.description}`,
+      title: `${itemData.name} | Jön Coffee İzmir`,
+      text: `${itemData.name} - ${itemData.description}`,
       url: shareUrl,
     };
 
@@ -128,10 +149,10 @@ export function MenuSection() {
         {/* Header */}
         <div className="pb-4 border-b border-[#0038a8]/20 space-y-1">
           <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#0038a8]/60 font-display">
-            ★ Seçki & Reçeteler
+            {t.menu.eyebrow}
           </span>
           <h2 className="text-2xl sm:text-4xl font-black text-[#0038a8] tracking-tight font-display uppercase">
-            MENÜ
+            {t.menu.title}
           </h2>
         </div>
 
@@ -139,6 +160,9 @@ export function MenuSection() {
         <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none">
           {MENU_CATEGORIES.map((cat) => {
             const isActive = activeCategory === cat.id;
+            const catTranslation = t.menuCategories[cat.id as keyof typeof t.menuCategories];
+            const catTitle = catTranslation ? catTranslation.title : cat.title;
+
             return (
               <button
                 key={cat.id}
@@ -149,7 +173,7 @@ export function MenuSection() {
                     : 'bg-white text-[#0038a8] border border-[#0038a8]/30 hover:border-[#0038a8]'
                 }`}
               >
-                ★ {cat.title} ★
+                ★ {catTitle} ★
               </button>
             );
           })}
@@ -159,64 +183,68 @@ export function MenuSection() {
         <div className="min-h-[440px]">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeCategory}
+              key={activeCategory + locale}
               initial={{ opacity: 0, y: 3 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -3 }}
               transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
               className="divide-y divide-[#0038a8]/15"
             >
-              {filteredItems.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => handleSelectItem(item)}
-                  className="group py-4 sm:py-5 flex items-start sm:items-center justify-between gap-4 cursor-pointer hover:bg-[#0038a8]/5 -mx-3 px-3 rounded-xl transition-colors select-none"
-                >
-                  <div className="space-y-1 max-w-xl flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h3 className="font-extrabold text-base sm:text-lg text-[#0038a8] font-display group-hover:opacity-85 transition-opacity">
-                        {item.name}
-                      </h3>
+              {filteredItems.map((item) => {
+                const itemData = getItemData(item);
 
-                      {/* Dot Leader */}
-                      <span className="hidden md:inline-block text-[#0038a8]/25 font-mono text-xs tracking-widest select-none">
-                        ........................................
-                      </span>
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => handleSelectItem(item)}
+                    className="group py-4 sm:py-5 flex items-start sm:items-center justify-between gap-4 cursor-pointer hover:bg-[#0038a8]/5 -mx-3 px-3 rounded-xl transition-colors select-none"
+                  >
+                    <div className="space-y-1 max-w-xl flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="font-extrabold text-base sm:text-lg text-[#0038a8] font-display group-hover:opacity-85 transition-opacity">
+                          {itemData.name}
+                        </h3>
 
-                      {item.badge ? (
-                        <span className="bg-[#0038a8] text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider font-display">
-                          ★ {item.badge}
+                        {/* Dot Leader */}
+                        <span className="hidden md:inline-block text-[#0038a8]/25 font-mono text-xs tracking-widest select-none">
+                          ........................................
                         </span>
-                      ) : item.isPopular ? (
-                        <span className="bg-[#fab80b] text-[#0038a8] text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 uppercase tracking-wider font-display">
-                          <Star className="w-2.5 h-2.5 fill-[#0038a8] text-[#0038a8]" /> Popüler
-                        </span>
-                      ) : null}
+
+                        {itemData.badge ? (
+                          <span className="bg-[#0038a8] text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider font-display">
+                            ★ {itemData.badge}
+                          </span>
+                        ) : item.isPopular ? (
+                          <span className="bg-[#fab80b] text-[#0038a8] text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 uppercase tracking-wider font-display">
+                            <Star className="w-2.5 h-2.5 fill-[#0038a8] text-[#0038a8]" /> {t.menu.popular}
+                          </span>
+                        ) : null}
+                      </div>
+
+                      <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
+                        {itemData.description}
+                      </p>
+
+                      <div className="flex flex-wrap items-center gap-2 pt-0.5 text-[11px] text-[#0038a8]/80 font-bold">
+                        <span>{item.isCold ? t.menu.coldServing : t.menu.hotServing}</span>
+                        {item.calories && (
+                          <>
+                            <span>&bull;</span>
+                            <span>{item.calories}</span>
+                          </>
+                        )}
+                      </div>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-gray-600 font-medium leading-relaxed">
-                      {item.description}
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-2 pt-0.5 text-[11px] text-[#0038a8]/80 font-bold">
-                      <span>{item.isCold ? '❄️ Buzlu / Soğuk' : '☕ Sıcak Servis'}</span>
-                      {item.calories && (
-                        <>
-                          <span>&bull;</span>
-                          <span>{item.calories}</span>
-                        </>
-                      )}
+                    <div className="shrink-0 flex items-center gap-1.5 text-xs font-black text-[#0038a8] group-hover:translate-x-1 transition-all pt-1 sm:pt-0 font-display uppercase">
+                      <span className="hidden sm:inline">{t.menu.recipeDetail}</span>
+                      <div className="w-7 h-7 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center shadow-2xs group-hover:border-[#0038a8]">
+                        <ChevronRight className="w-4 h-4 text-[#0038a8]" />
+                      </div>
                     </div>
                   </div>
-
-                  <div className="shrink-0 flex items-center gap-1.5 text-xs font-black text-[#0038a8] group-hover:translate-x-1 transition-all pt-1 sm:pt-0 font-display uppercase">
-                    <span className="hidden sm:inline">Reçete</span>
-                    <div className="w-7 h-7 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center shadow-2xs group-hover:border-[#0038a8]">
-                      <ChevronRight className="w-4 h-4 text-[#0038a8]" />
-                    </div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -228,20 +256,20 @@ export function MenuSection() {
               <div className="w-5 h-5 rounded-full bg-white text-[#0038a8] flex items-center justify-center font-black text-[11px]">
                 !
               </div>
-              <span>ALERJEN UYARISI</span>
+              <span>{t.menu.allergenTitle}</span>
             </div>
             <p className="text-white/85 text-[11px] sm:text-xs">
-              {ALLERGEN_INFO.content} Detaylı alerjen bilgisi için lütfen personelimizden bilgi alınız.
+              {t.menu.allergenContent}
             </p>
           </div>
 
           <div className="space-y-1.5 md:border-l md:border-white/20 md:pl-6">
             <div className="flex items-center gap-2 text-white font-black uppercase tracking-wider text-xs font-display">
               <span className="text-white">★</span>
-              <span>KALORİ & BESİN DEĞERLERİ</span>
+              <span>{t.menu.nutritionTitle}</span>
             </div>
             <p className="text-white/85 text-[11px] sm:text-xs">
-              Kalori değerleri standart porsiyonlar (laktozsuz/tam yağlı süt ve şekersiz) baz alınarak hesaplanmıştır. Şurup ve eklemeler besin değerlerini değiştirebilir.
+              {t.menu.nutritionContent}
             </p>
           </div>
         </div>
@@ -254,89 +282,94 @@ export function MenuSection() {
             className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/40 backdrop-blur-xs"
             onClick={() => handleSelectItem(null)}
           >
-            <motion.div
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '100%' }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-[#faf8f2] w-full max-w-lg rounded-t-3xl sm:rounded-3xl border-2 border-[#0038a8] shadow-2xl p-6 sm:p-8 space-y-5 select-none"
-            >
-              <div className="flex items-start justify-between gap-4 border-b border-[#0038a8]/20 pb-4">
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#0038a8]/70 font-display">
-                    ★ Jön Reçete Detayı
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-black text-[#0038a8] uppercase font-display tracking-tight">
-                    {selectedItem.name}
-                  </h3>
-                </div>
-                <button
-                  onClick={() => handleSelectItem(null)}
-                  className="w-8 h-8 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer"
-                  aria-label="Kapat"
+            {(() => {
+              const itemData = getItemData(selectedItem);
+              return (
+                <motion.div
+                  initial={{ y: '100%' }}
+                  animate={{ y: 0 }}
+                  exit={{ y: '100%' }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="bg-[#faf8f2] w-full max-w-lg rounded-t-3xl sm:rounded-3xl border-2 border-[#0038a8] shadow-2xl p-6 sm:p-8 space-y-5 select-none"
                 >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
+                  <div className="flex items-start justify-between gap-4 border-b border-[#0038a8]/20 pb-4">
+                    <div>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-[#0038a8]/70 font-display">
+                        {t.menu.modalBadge}
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-black text-[#0038a8] uppercase font-display tracking-tight">
+                        {itemData.name}
+                      </h3>
+                    </div>
+                    <button
+                      onClick={() => handleSelectItem(null)}
+                      className="w-8 h-8 rounded-full bg-white border border-[#0038a8]/30 flex items-center justify-center text-[#0038a8] hover:bg-[#0038a8] hover:text-white transition-colors cursor-pointer"
+                      aria-label={t.menu.close}
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
 
-              <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">
-                {selectedItem.description}
-              </p>
+                  <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">
+                    {itemData.description}
+                  </p>
 
-              {/* Recipe Specifications */}
-              <div className="space-y-2.5 p-4 rounded-2xl bg-white border border-[#0038a8]/15 text-xs">
-                <div className="flex justify-between">
-                  <span className="font-extrabold text-[#0038a8]">Kalori:</span>
-                  <span className="font-semibold text-gray-700">{selectedItem.calories || 'Standart'}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-extrabold text-[#0038a8]">Süt Seçenekleri:</span>
-                  <span className="font-semibold text-gray-700">Laktozsuz, Yulaf, Badem</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-extrabold text-[#0038a8]">Servis Şekli:</span>
-                  <span className="font-semibold text-gray-700">{selectedItem.isCold ? 'Buzlu Soğuk' : 'Sıcak / Gel-Al'}</span>
-                </div>
-              </div>
+                  {/* Recipe Specifications */}
+                  <div className="space-y-2.5 p-4 rounded-2xl bg-white border border-[#0038a8]/15 text-xs">
+                    <div className="flex justify-between">
+                      <span className="font-extrabold text-[#0038a8]">{t.menu.calories}</span>
+                      <span className="font-semibold text-gray-700">{selectedItem.calories || (locale === 'tr' ? 'Standart' : 'Standard')}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-extrabold text-[#0038a8]">{t.menu.milkOptions}</span>
+                      <span className="font-semibold text-gray-700">{t.menu.milkOptionsValue}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-extrabold text-[#0038a8]">{t.menu.servingType}</span>
+                      <span className="font-semibold text-gray-700">{selectedItem.isCold ? t.menu.servingCold : t.menu.servingHot}</span>
+                    </div>
+                  </div>
 
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {selectedItem.tags?.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-0.5 rounded-full bg-[#0038a8]/10 text-[#0038a8] text-[10px] font-bold border border-[#0038a8]/15"
-                  >
-                    ★ {t}
-                  </span>
-                ))}
-              </div>
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {selectedItem.tags?.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-0.5 rounded-full bg-[#0038a8]/10 text-[#0038a8] text-[10px] font-bold border border-[#0038a8]/15"
+                      >
+                        ★ {tag}
+                      </span>
+                    ))}
+                  </div>
 
-              <div className="flex flex-col gap-2.5 pt-2">
-                <button
-                  onClick={() => handleShare(selectedItem)}
-                  className="btn-chamberlain-secondary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-4 h-4 text-emerald-600" />
-                      <span className="text-emerald-700">Kopyalandı!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Share2 className="w-4 h-4 text-[#0038a8]" />
-                      <span>Arkadaşına Gönder</span>
-                    </>
-                  )}
-                </button>
+                  <div className="flex flex-col gap-2.5 pt-2">
+                    <button
+                      onClick={() => handleShare(selectedItem)}
+                      className="btn-chamberlain-secondary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-4 h-4 text-emerald-600" />
+                          <span className="text-emerald-700">{t.menu.copied}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Share2 className="w-4 h-4 text-[#0038a8]" />
+                          <span>{t.menu.shareWithFriend}</span>
+                        </>
+                      )}
+                    </button>
 
-                <button
-                  onClick={() => handleSelectItem(null)}
-                  className="btn-chamberlain-primary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
-                >
-                  Kapat
-                </button>
-              </div>
-            </motion.div>
+                    <button
+                      onClick={() => handleSelectItem(null)}
+                      className="btn-chamberlain-primary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
+                    >
+                      {t.menu.close}
+                    </button>
+                  </div>
+                </motion.div>
+              );
+            })()}
           </div>
         )}
       </AnimatePresence>

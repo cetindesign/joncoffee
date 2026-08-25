@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { STORE_INFO } from '@/data/store-info';
 import { smoothScrollTo } from '@/lib/smooth-scroll';
+import { useLanguage } from '@/context/language-context';
 import { Coffee, MapPin } from 'lucide-react';
 
 export function FloatingAction() {
   const [visible, setVisible] = useState(false);
   const [showMenuButton, setShowMenuButton] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +62,7 @@ export function FloatingAction() {
                   className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-white text-xs font-black text-[#0038a8] border border-[#0038a8]/20 active:scale-95 transition-transform duration-200 select-none cursor-pointer font-display uppercase tracking-wider overflow-hidden whitespace-nowrap"
                 >
                   <Coffee className="w-4 h-4 text-[#0038a8] shrink-0" />
-                  <span>Menü</span>
+                  <span>{t.floating.menu}</span>
                 </motion.a>
               )}
             </AnimatePresence>
@@ -72,7 +74,7 @@ export function FloatingAction() {
               className="flex-1 flex items-center justify-center gap-1.5 min-h-[44px] py-2.5 px-4 rounded-full bg-[#0038a8] text-white text-xs font-black active:scale-95 transition-transform duration-200 shadow-xs select-none font-display uppercase tracking-wider text-center"
             >
               <MapPin className="w-4 h-4 shrink-0" />
-              <span>Yol Tarifi</span>
+              <span>{t.floating.directions}</span>
             </a>
           </div>
         </motion.div>
