@@ -12,6 +12,8 @@ import {
   MENU_ITEMS_EN,
 } from '@/data/translations';
 import { useLanguage } from '@/context/language-context';
+import { WhatsAppIcon } from '@/components/icons/whatsapp-icon';
+import { STORE_INFO } from '@/data/store-info';
 import {
   Star,
   X,
@@ -343,29 +345,49 @@ export function MenuSection() {
                   </div>
 
                   <div className="flex flex-col gap-2.5 pt-2">
-                    <button
-                      onClick={() => handleShare(selectedItem)}
-                      className="btn-chamberlain-secondary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
+                    <a
+                      href={`https://wa.me/${STORE_INFO.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+                        locale === 'tr'
+                          ? `Merhaba Jön Coffee, gelip dükkandan teslim almak üzere "${itemData.name}" hazırlatmak istiyorum.`
+                          : `Hello Jön Coffee, I would like to order "${itemData.name}" for in-store pickup.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-chamberlain-primary w-full py-3.5 sm:py-4 px-6 text-xs sm:text-sm justify-center cursor-pointer shadow-md"
                     >
-                      {copied ? (
-                        <>
-                          <Check className="w-4 h-4 text-emerald-600" />
-                          <span className="text-emerald-700">{t.menu.copied}</span>
-                        </>
-                      ) : (
-                        <>
-                          <Share2 className="w-4 h-4 text-[#0038a8]" />
-                          <span>{t.menu.shareWithFriend}</span>
-                        </>
-                      )}
-                    </button>
+                      <WhatsAppIcon className="w-4 h-4 shrink-0" />
+                      <span>{t.menu.orderWhatsApp}</span>
+                    </a>
 
-                    <button
-                      onClick={() => handleSelectItem(null)}
-                      className="btn-chamberlain-primary w-full py-3.5 text-xs tracking-wider justify-center min-h-[44px] cursor-pointer"
-                    >
-                      {t.menu.close}
-                    </button>
+                    <p className="text-[11px] text-gray-500 text-center font-medium">
+                      {t.menu.pickupNote}
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-2 pt-1">
+                      <button
+                        onClick={() => handleShare(selectedItem)}
+                        className="btn-chamberlain-secondary py-2.5 px-3 text-xs tracking-wider justify-center min-h-[40px] cursor-pointer"
+                      >
+                        {copied ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-600" />
+                            <span className="text-emerald-700">{t.menu.copied}</span>
+                          </>
+                        ) : (
+                          <>
+                            <Share2 className="w-3.5 h-3.5 text-[#0038a8]" />
+                            <span>{t.menu.shareWithFriend}</span>
+                          </>
+                        )}
+                      </button>
+
+                      <button
+                        onClick={() => handleSelectItem(null)}
+                        className="btn-chamberlain-secondary py-2.5 px-3 text-xs tracking-wider justify-center min-h-[40px] cursor-pointer"
+                      >
+                        {t.menu.close}
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               );

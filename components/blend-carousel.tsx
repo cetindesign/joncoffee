@@ -490,12 +490,12 @@ export function BlendCarousel() {
                 </div>
 
                 {/* Action Bar */}
-                <div className="pt-2">
+                <div className="pt-2 space-y-2">
                   <a
                     href={`https://wa.me/${STORE_INFO.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
                       locale === 'tr'
-                        ? `Merhaba Jön Coffee, paket kahvelerinizden "${selectedBean.name} (${selectedBean.weight})" siparişi vermek istiyorum.`
-                        : `Hello Jön Coffee, I would like to order packaged beans: "${selectedBean.name} (${selectedBean.weight})".`
+                        ? `Merhaba Jön Coffee, gelip dükkandan teslim almak üzere paket kahvelerinizden "${selectedBean.name} (${selectedBean.weight})" ayırtmak istiyorum.`
+                        : `Hello Jön Coffee, I would like to reserve packaged beans "${selectedBean.name} (${selectedBean.weight})" for in-store pickup.`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -504,6 +504,10 @@ export function BlendCarousel() {
                     <WhatsAppIcon className="w-4 h-4 shrink-0" />
                     <span>{t.blends.orderWhatsApp}</span>
                   </a>
+
+                  <p className="text-[11px] text-gray-500 text-center font-medium">
+                    {t.blends.pickupNote}
+                  </p>
                 </div>
               </div>
             );

@@ -47,6 +47,8 @@ export interface TranslationDictionary {
     coldServing: string;
     hotServing: string;
     popular: string;
+    orderWhatsApp: string;
+    pickupNote: string;
     allergenTitle: string;
     allergenContent: string;
     nutritionTitle: string;
@@ -62,6 +64,7 @@ export interface TranslationDictionary {
     flavorNotes: string;
     brewGuide: string;
     orderWhatsApp: string;
+    pickupNote: string;
     passportTitle: string;
     grindOptions: string;
     ratio: string;
@@ -170,6 +173,8 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       coldServing: '❄️ Buzlu / Soğuk',
       hotServing: '☕ Sıcak Servis',
       popular: 'Popüler',
+      orderWhatsApp: 'WhatsApp ile Gel-Al',
+      pickupNote: 'Dükkandan teslim • Sıra beklemeden hazır',
       allergenTitle: 'ALERJEN UYARISI',
       allergenContent:
         'Ürünlerimiz süt ve süt ürünleri, kuruyemiş, gluten ve soya içeren besinlerle aynı ortamda hazırlanmaktadır. Detaylı alerjen bilgisi için lütfen personelimizden bilgi alınız.',
@@ -208,7 +213,8 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       originAltitude: 'Menşei & Rakım',
       flavorNotes: 'Tadım Notları',
       brewGuide: 'Tavsiye Edilen Demleme',
-      orderWhatsApp: 'WhatsApp ile Paket Siparişi Ver',
+      orderWhatsApp: 'WhatsApp ile Gel-Al',
+      pickupNote: 'Dükkandan teslim • Sıra beklemeden hazır',
       passportTitle: '★ Jön Çekirdek Pasaportu',
       grindOptions: 'Öğütüm Seçenekleri (Siparişte Belirtebilirsiniz):',
       ratio: 'Oran:',
@@ -315,6 +321,8 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       coldServing: '❄️ Iced / Cold',
       hotServing: '☕ Hot Brew',
       popular: 'Popular',
+      orderWhatsApp: 'Pick Up via WhatsApp',
+      pickupNote: 'In-store pickup • Ready when you arrive',
       allergenTitle: 'ALLERGEN NOTICE',
       allergenContent:
         'Our products are prepared in an environment handling dairy, nuts, gluten, and soy. Please consult our baristas for detailed allergen information.',
@@ -353,7 +361,8 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       originAltitude: 'Origin & Altitude',
       flavorNotes: 'Tasting Notes',
       brewGuide: 'Recommended Brew',
-      orderWhatsApp: 'Order Packaged Coffee via WhatsApp',
+      orderWhatsApp: 'Pick Up via WhatsApp',
+      pickupNote: 'In-store pickup • Ready when you arrive',
       passportTitle: '★ Jön Bean Passport',
       grindOptions: 'Grind Options (Specify in your order):',
       ratio: 'Ratio:',
