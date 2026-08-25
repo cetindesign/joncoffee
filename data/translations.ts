@@ -398,7 +398,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
     },
     floating: {
       menu: 'Menu',
-      directions: 'Directions',
+      directions: 'Get Directions',
     },
     footer: {
       brandDesc: '100% specialty grade Arabica beans, weekly fresh roasts, and authentic neighborhood coffee hospitality.',
